@@ -35,4 +35,8 @@ public interface ActivitiesRepository extends JpaRepository<Activity, Long> {
     public Optional<List<Activity>> findActivitiesInRange(long small, long big);
 
     public Optional<Activity> findById(Long id);
+
+    public void deleteActivityByActivityID(String title);
+
+    public Optional<Activity> findByActivityID(String id);
 }

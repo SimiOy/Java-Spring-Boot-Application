@@ -3,6 +3,7 @@ package client.data;
 import commons.Lobby;
 import commons.Player;
 import commons.Question;
+import constants.GameType;
 import constants.JokerType;
 
 import java.util.HashSet;
@@ -22,6 +23,7 @@ public class ClientDataImpl implements ClientData {
     private Question clientQuestion;
     private Integer clientScore;
     private Integer questionCounter;
+    private GameType gameType;
     private Integer unansweredQuestionCounter = 0;
     private Boolean isHost = false; //remembers who the host of the lobby is
     private HashSet<JokerType> usedJokers = new HashSet<>();
@@ -121,5 +123,13 @@ public class ClientDataImpl implements ClientData {
     @Override
     public Lobby getLastLobby() {
         return lastLobby;
+    }
+
+    public GameType getGameType(){
+        return gameType;
+    }
+
+    public void setGameType(GameType gameType){
+        this.gameType = gameType;
     }
 }

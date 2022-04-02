@@ -8,13 +8,17 @@ import client.scenes.questions.EnergyAlternativeQuestionCtrl;
 import client.scenes.questions.EstimationQuestionCtrl;
 import client.scenes.questions.GameMCQCtrl;
 import client.scenes.questions.GuessConsumptionCtrl;
-import commons.LeaderboardEntry;
-import commons.Player;
 import commons.Question;
 import constants.QuestionTypes;
 import constants.ResponseCodes;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 import org.springframework.messaging.simp.stomp.StompSession;
 
 import javax.inject.Inject;
@@ -43,6 +47,13 @@ public class ClientUtilsImpl implements ClientUtils {
     private double coefficient;
 
     private Timer timer;
+
+    //--- labels used to update countDown timer before lobby starts
+    private static final Integer STARTTIME = 3;
+    private Timeline timeline;
+    private Text labelToUpdate;
+    private Integer timeSeconds = STARTTIME;
+    //---
 
     private Object currentSceneCtrl;
 
@@ -261,6 +272,55 @@ public class ClientUtilsImpl implements ClientUtils {
         },0,200);
     }
 
+    /**
+     * Methods that makes use of JavaFX Timeline, to sync
+     * the timer between multiple clients
+     * Big thanks to: https://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/
+     * (Where I found this easier fix w/o using multiple threads)
+     */
+    public void startSyncCountdown()
+    {
+        if(labelToUpdate != null)
+        {
+            if (timeline != null) {
+                timeline.stop();
+            }
+            timeSeconds = STARTTIME;
+
+            // update timerLabel
+            labelToUpdate.setText(timeSeconds.toString());
+            timeline = new Timeline();
+            timeline.setCycleCount(STARTTIME);
+            timeline.getKeyFrames().add(
+                    new KeyFrame(Duration.seconds(1),
+                            new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    timeSeconds --;
+                                    //update the timer label
+                                    labelToUpdate.setText(timeSeconds.toString());
+                                    if(timeSeconds < 0)
+                                        timeline.stop();
+                                }
+                            })
+            );
+            timeline.playFromStart();
+        }
+        else
+        {
+            System.out.println("The passed label was found to be null.");
+        }
+    }
+
+    /**
+     * Method used to pass a label around
+     * @param labelToUpdate - the label to be updated
+     */
+    public void assignCountdownLabel(Text labelToUpdate)
+    {
+        this.labelToUpdate = labelToUpdate;
+    }
+
     public void killTimer()
     {
         if(timer == null) return;
@@ -287,8 +347,6 @@ public class ClientUtilsImpl implements ClientUtils {
     public void getQuestion() {
 
         if (clientData.getQuestionCounter() >= game.getQuestionsToEndGame()){
-            Player temp = clientData.getClientPlayer();
-            server.persistScore(new LeaderboardEntry(temp.getScore(), temp.getName(), temp.getAvatarCode()));
             game.endGame();
         }
         else {
@@ -384,6 +442,36 @@ public class ClientUtilsImpl implements ClientUtils {
         guessConsumptionCtrl.setMessageTxt1("");
         guessConsumptionCtrl.setMessageTxt2("");
         guessConsumptionCtrl.setMessageTxt3("");
+    }
+
+    /**
+     * Turns emotes and halfTime joker off when given true and turns them on when given false
+     * @param bool
+     */
+    public void swapEmoteJokerUsability(boolean bool){
+        //swaps usability of emotes
+        gameMCQCtrl.getEmotesMenu().setDisable(bool);
+        gameMCQCtrl.getEmotesMenu().setVisible(!bool);
+        estimationQuestionCtrl.getEmotesMenu().setDisable(bool);
+        estimationQuestionCtrl.getEmotesMenu().setVisible(!bool);
+        energyAlternativeQuestionCtrl.getEmotesMenu().setDisable(bool);
+        energyAlternativeQuestionCtrl.getEmotesMenu().setVisible(!bool);
+        guessConsumptionCtrl.getEmotesMenu().setDisable(bool);
+        guessConsumptionCtrl.getEmotesMenu().setVisible(!bool);
+
+        //swaps usability of halftime joker
+        gameMCQCtrl.getHalfTimeJoker().setDisable(bool);
+        gameMCQCtrl.getHalfTimeJoker().setVisible(!bool);
+        gameMCQCtrl.getHalfTimeText().setVisible(!bool);
+        estimationQuestionCtrl.getHalfTimeJoker().setDisable(bool);
+        estimationQuestionCtrl.getHalfTimeJoker().setVisible(!bool);
+        estimationQuestionCtrl.getHalfTimeText().setVisible(!bool);
+        energyAlternativeQuestionCtrl.getHalfTimeJoker().setDisable(bool);
+        energyAlternativeQuestionCtrl.getHalfTimeJoker().setVisible(!bool);
+        energyAlternativeQuestionCtrl.getHalfTimeText().setVisible(!bool);
+        guessConsumptionCtrl.getHalfTimeJoker().setDisable(bool);
+        guessConsumptionCtrl.getHalfTimeJoker().setVisible(!bool);
+        guessConsumptionCtrl.getHalfTimeText().setVisible(!bool);
     }
 
     public double getCoefficient() {

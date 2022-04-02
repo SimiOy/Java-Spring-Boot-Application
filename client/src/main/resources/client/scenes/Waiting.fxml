@@ -31,7 +31,7 @@
            </TableColumn>
         </columns>
       </TableView>
-      <Text layoutX="565.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-section" text="Currently Waiting..." wrappingWidth="240">
+      <Text fx:id="countDownLabel" layoutX="565.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-section" text="Currently Waiting..." wrappingWidth="240">
          <font>
             <Font size="19.0" />
          </font>

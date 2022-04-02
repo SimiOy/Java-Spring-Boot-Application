@@ -2,6 +2,7 @@ package client.utils;
 
 import constants.QuestionTypes;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.text.Text;
 
 public interface ClientUtils {
 
@@ -12,6 +13,10 @@ public interface ClientUtils {
     void halfTime();
 
     void getQuestion();
+
+    void startSyncCountdown();
+
+    void assignCountdownLabel(Text labelToUpdate);
 
     void prepareQuestion();
 
@@ -34,4 +39,6 @@ public interface ClientUtils {
     void updateMessages(String str, String lobbyToken);
 
     void resetMessages();
+
+    void swapEmoteJokerUsability(boolean bool);
 }

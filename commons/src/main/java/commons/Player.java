@@ -66,6 +66,18 @@ public class Player {
         this.usedPowerups = new ArrayList<>();
     }
 
+    /**
+     * Used only for method 'turnIntoPlayer' in GameOverCtrl
+     * @param name
+     * @param score
+     * @param avatarCode
+     */
+    public Player(String name, Integer score, String avatarCode){
+        this.name = name;
+        this.score = score;
+        this.avatarCode = avatarCode;
+    }
+
     public long getId() {
         return id;
     }

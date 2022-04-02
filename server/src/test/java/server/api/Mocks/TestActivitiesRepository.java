@@ -17,6 +17,15 @@ public class TestActivitiesRepository implements ActivitiesRepository {
 
     List<Activity> activities = new ArrayList<Activity>();
 
+    @Override
+    public void deleteActivityByActivityID(String title) {
+
+    }
+
+    @Override
+    public Optional<Activity> findByActivityID(String id) {
+        return Optional.empty();
+    }
 
     public List<Activity> findByEnergyConsumptionDesc(long energyConsumption){
         ArrayList<Activity> ret = new ArrayList<Activity>();

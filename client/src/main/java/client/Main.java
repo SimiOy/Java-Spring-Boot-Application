@@ -19,6 +19,7 @@ import client.scenes.GameOverCtrl;
 import client.scenes.KickPopUpCtrl;
 import client.scenes.MainCtrl;
 import client.scenes.UsernamePopUpCtrl;
+import client.scenes.admin.*;
 import client.scenes.leaderboards.LeaderboardCtrl;
 import client.scenes.leaderboards.TempLeaderboardCtrl;
 import client.scenes.menus.GameModeSelectionCtrl;
@@ -63,6 +64,11 @@ public class Main extends Application {
         var multiPlayerMenu = FXML.load(MultiplayerMenuCtrl.class, "client", "scenes", "MultiplayerMenu.fxml");
         var usernamePopUp = FXML.load(UsernamePopUpCtrl.class, "client", "scenes", "UsernamePopUp.fxml");
         var kickedPopUp = FXML.load(KickPopUpCtrl.class, "client", "scenes", "KickedPopUp.fxml");
+        var adminHome = FXML.load(AdminHomeCtrl.class, "client", "scenes", "HomeAdmin.fxml");
+        var activityAdmin = FXML.load(ActivityAdminCtrl.class, "client", "scenes", "ActivityAdmin.fxml");
+        var editActivity = FXML.load(EditActivitiesCtrl.class, "client", "scenes", "EditActivity.fxml");
+        var questionAdmin = FXML.load(QuestionAdminCtrl.class, "client", "scenes", "QuestionAdmin.fxml");
+        var editQuestion = FXML.load(EditQuestionsCtrl.class, "client", "scenes", "EditQuestion.fxml");
 
         // Stylesheets are loaded using reflection
         home.getValue().getStylesheets()
@@ -82,6 +88,7 @@ public class Main extends Application {
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage, home, leaderboard, gameModeSelection, multiPlayerMenu,
                             estimationQuestion, gameMCQ, alternativeQuestion, guessMultipleChoiceQuestion, gameOver,
-                waiting, tempLeaderboard, usernamePopUp, kickedPopUp);
+                waiting, tempLeaderboard, usernamePopUp, kickedPopUp, adminHome,
+                editActivity, activityAdmin, questionAdmin, editQuestion);
     }
 }

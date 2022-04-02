@@ -61,9 +61,9 @@
         </items>
       </MenuButton>
       <Circle fx:id="joker1" fill="DODGERBLUE" layoutX="494.0" layoutY="628.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="joker3" fill="DODGERBLUE" layoutX="754.0" layoutY="628.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="754.0" layoutY="628.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="449.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
-      <Text layoutX="705.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
+      <Text fx:id="halfTimeText" layoutX="705.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
       <Pane layoutX="506.0" layoutY="215.0" prefHeight="170.0" prefWidth="220.0" style="-fx-background-color: ffffff;">
          <children>
             <ImageView fx:id="bigImageView" fitHeight="160.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />

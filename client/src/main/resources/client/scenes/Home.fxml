@@ -17,12 +17,12 @@
         <TextField fx:id="name" alignment="CENTER" layoutX="565.0" layoutY="334.0" prefHeight="26.0" prefWidth="166.0" promptText="Username" />
         <Button focusTraversable="false" layoutX="586.0" layoutY="455.0" mnemonicParsing="false" onAction="#play" prefHeight="26.0" prefWidth="123.0" styleClass="button1" text="Play" />
         <Label layoutX="590.0" layoutY="86.4" styleClass="header-section" text="Quizzz" AnchorPane.topAnchor="86.4" />
-      <TextField fx:id="serverTextField" layoutX="511.0" layoutY="407.0" prefHeight="26.0" prefWidth="123.0" promptText="Server" text="localhost" />
-      <TextField fx:id="portTextField" layoutX="689.0" layoutY="407.0" prefHeight="26.0" prefWidth="58.0" promptText="Port" text="8080" />
-      <Text fx:id="incorrectServerText" fill="#ff4141" layoutX="494.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="291.9999877929688">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Text>
+        <TextField fx:id="serverTextField" layoutX="511.0" layoutY="407.0" prefHeight="26.0" prefWidth="123.0" promptText="Server" text="localhost" />
+        <TextField fx:id="portTextField" layoutX="689.0" layoutY="407.0" prefHeight="26.0" prefWidth="58.0" promptText="Port" text="8080" />
+         <Text fx:id="incorrectServerText" fill="#ff4141" layoutX="494.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="291.9999877929688">
+            <font>
+                <Font size="19.0" />
+            </font>
+         </Text>
     </children>
 </AnchorPane>

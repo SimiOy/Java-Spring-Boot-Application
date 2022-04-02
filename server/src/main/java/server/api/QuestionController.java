@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
+import server.database.QuestionRepository;
 import server.gameLogic.QuestionProvider;
 
 import java.util.HashMap;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/question")
@@ -16,6 +20,9 @@ public class QuestionController {
 
     @Autowired
     private QuestionProvider questionProvider;
+
+    @Autowired
+    private QuestionRepository repository;
 
     private HashMap<String, Integer> lobbyToDifficultyMap;
 
@@ -35,6 +42,31 @@ public class QuestionController {
         //this step is already done in other configs
         if(lobbyToDifficultyMap == null) lobbyToDifficultyMap = new HashMap<>();
         lobbyToDifficultyMap.put(lobbyCode,difficulty);
+    }
+
+    @GetMapping("/getAll")
+    @ResponseBody
+    public List<Question> getAll()
+    {
+        return repository.findAll();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteQuestion(@PathVariable("id") Long id) {
+        Optional<Question> question = repository.findById(id);
+        if (question.isEmpty()) {
+            return "Question not found";
+        }
+
+        repository.deleteById(id);
+        return "Success";
+    }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public Question addQuestion(@RequestBody Question question){
+        repository.save(question);
+        return question;
     }
 
     /**

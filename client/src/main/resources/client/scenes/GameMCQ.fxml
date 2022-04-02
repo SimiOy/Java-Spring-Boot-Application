@@ -55,10 +55,10 @@
       <ProgressBar fx:id="pb" layoutX="500.0" layoutY="84.0" prefHeight="20.0" prefWidth="320.0" progress="0.0" />
       <Circle fx:id="joker1" fill="DODGERBLUE" layoutX="537.0" layoutY="630.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="joker2" fill="DODGERBLUE" layoutX="667.0" layoutY="630.0" onMouseClicked="#eliminateRandomWrongAnswer" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="joker3" fill="DODGERBLUE" layoutX="797.0" layoutY="630.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="797.0" layoutY="630.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="492.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
       <Text layoutX="609.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminate an answer❌" />
-      <Text layoutX="748.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
+      <Text fx:id="halfTimeText" layoutX="748.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
       <Text layoutX="464.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰" wrappingWidth="33.0">
          <font>
             <Font size="23.0" />
@@ -71,5 +71,8 @@
          <items>
          </items>
       </MenuButton>
+      <Text fx:id="actualWH1" layoutX="359.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" />
+      <Text fx:id="actualWH2" layoutX="669.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" />
+      <Text fx:id="actualWH3" layoutX="969.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" />
    </children>
 </AnchorPane>

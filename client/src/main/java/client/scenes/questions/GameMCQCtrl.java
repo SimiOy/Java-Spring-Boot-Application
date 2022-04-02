@@ -11,6 +11,7 @@ import client.utils.ServerUtils;
 import commons.Activity;
 import commons.Question;
 import commons.WebsocketMessage;
+import constants.GameType;
 import constants.JokerType;
 import constants.ResponseCodes;
 import javafx.application.Platform;
@@ -49,7 +50,7 @@ public class GameMCQCtrl implements JokerPowerUps {
     private Text nQuestionsTxt;
 
     @FXML
-    private Text questionTxt;
+    private Text questionTxt, actualWH1, actualWH2, actualWH3;
 
     final ToggleGroup radioGroup = new ToggleGroup(); 
 
@@ -64,7 +65,9 @@ public class GameMCQCtrl implements JokerPowerUps {
     @FXML
     private Circle joker2;
     @FXML
-    private Circle joker3;
+    private Circle halfTimeJoker;
+    @FXML
+    private Text halfTimeText;
 
     private int correctAnswer;
 
@@ -114,7 +117,7 @@ public class GameMCQCtrl implements JokerPowerUps {
         scoreTxt.setText("Score:" + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
         doublePoints = false;
-        joker3.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
+        halfTimeJoker.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
         joker1.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
         joker2.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
 
@@ -123,7 +126,7 @@ public class GameMCQCtrl implements JokerPowerUps {
         if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS))
             joker2.setFill(rgb(30,144,255));
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
-            joker3.setFill(rgb(30,144,255));
+            halfTimeJoker.setFill(rgb(30,144,255));
 
         answer1.setToggleGroup(radioGroup);
         answer2.setToggleGroup(radioGroup);
@@ -136,6 +139,10 @@ public class GameMCQCtrl implements JokerPowerUps {
         answer1.setStyle(" -fx-background-color: transparent; ");
         answer2.setStyle(" -fx-background-color: transparent; ");
         answer3.setStyle(" -fx-background-color: transparent; ");
+
+        actualWH1.setVisible(false);
+        actualWH2.setVisible(false);
+        actualWH3.setVisible(false);
 
 
         if(answer1.isSelected()) answer1.setSelected(false);
@@ -177,6 +184,10 @@ public class GameMCQCtrl implements JokerPowerUps {
         a.setText(list.get(0).getTitle());
         b.setText(list.get(1).getTitle());
         c.setText(list.get(2).getTitle());
+
+        actualWH1.setText(list.get(0).getEnergyConsumption().toString());
+        actualWH2.setText(list.get(1).getEnergyConsumption().toString());
+        actualWH3.setText(list.get(2).getEnergyConsumption().toString());
     }
 
     private void setImages(ImageView a, ImageView b, ImageView c, Question question) {
@@ -208,7 +219,8 @@ public class GameMCQCtrl implements JokerPowerUps {
 
                     Thread.sleep(2000);
 
-                    if(clientData.getQuestionCounter() == game.getQuestionsToDisplayLeaderboard()){
+                    if(clientData.getQuestionCounter() == game.getQuestionsToDisplayLeaderboard() &&
+                    clientData.getGameType() == GameType.MULTIPLAYER){
                         Platform.runLater(() -> mainCtrl.showTempLeaderboard());
                         Thread.sleep(5000);
                     }
@@ -241,6 +253,10 @@ public class GameMCQCtrl implements JokerPowerUps {
                     new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
                             clientData.getClientLobby().token, clientData.getClientPointer()));
         }
+
+        actualWH1.setVisible(true);
+        actualWH2.setVisible(true);
+        actualWH3.setVisible(true);
 
         switch (correctAnswer)
         {
@@ -278,6 +294,7 @@ public class GameMCQCtrl implements JokerPowerUps {
             clientData.incrementUnansweredQuestionCounter();
             if(clientData.getUnansweredQuestionCounter() >= 5){
                 leaveGame();
+                mainCtrl.showKickPopUp();
             }
         }
         scoreTxt.setText("Score:" + clientData.getClientScore());
@@ -349,6 +366,10 @@ public class GameMCQCtrl implements JokerPowerUps {
         return messageTxt3;
     }
 
+    public MenuButton getEmotesMenu() {
+        return emotesMenu;
+    }
+
     /**
      * Sets the label text to the given string and when said string is not empty,
      * a background colour is also added to make the message stand out more.
@@ -415,12 +436,20 @@ public class GameMCQCtrl implements JokerPowerUps {
     @Override
     public void halfTimeForOthers() {
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)) {
-            joker3.setDisable(true);
-            joker3.setFill(rgb(235,235,228));
+            halfTimeJoker.setDisable(true);
+            halfTimeJoker.setFill(rgb(235,235,228));
             clientData.addJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             jokerUtils.sendJoker();
         }
+    }
+
+    public Circle getHalfTimeJoker() {
+        return halfTimeJoker;
+    }
+
+    public Text getHalfTimeText() {
+        return halfTimeText;
     }
 }

@@ -59,6 +59,8 @@ public class WaitingCtrl implements Initializable{
     @FXML
     private Text tip;
     @FXML
+    private Text countDownLabel;
+    @FXML
     private Text lobbyCode;
     @FXML
     private Button startGameButton;
@@ -126,6 +128,7 @@ public class WaitingCtrl implements Initializable{
                                 && a.getLobbyToken().equals(clientData.getClientLobby().token)) {
                     killTimer();
                     System.out.println("ishost:" + clientData.getIsHost());
+                    client.assignCountdownLabel(countDownLabel);
                     clientData.setLobby(server.getLobbyByToken(a.getNewToken()));
                     if (clientData.getIsHost())
                         server.send("/app/nextQuestion",
@@ -154,6 +157,7 @@ public class WaitingCtrl implements Initializable{
             tip.setText("Share this lobby code to play with your friends! \n" + token);
         }
         lobbyCode.setText("Lobby code: " + token);
+        countDownLabel.setText("Currently waiting...");
 
         //enable admin UI
         if(clientData.getClientLobby().getHostId() != null

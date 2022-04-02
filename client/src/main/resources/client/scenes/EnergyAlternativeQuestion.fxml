@@ -59,8 +59,8 @@
       <Text layoutX="492.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
       <Circle fx:id="joker2" fill="DODGERBLUE" layoutX="667.0" layoutY="630.0" onMouseClicked="#eliminateRandomWrongAnswer" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="614.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminate an answer❌" />
-      <Circle fx:id="joker3" fill="DODGERBLUE" layoutX="797.0" layoutY="630.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="742.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
+      <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="797.0" layoutY="630.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="halfTimeText" layoutX="742.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
       <Text fx:id="insteadOfText" layoutX="510.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instead of ..." textAlignment="CENTER">
          <font>
             <Font size="29.0" />
@@ -81,5 +81,8 @@
          <items>
          </items>
       </MenuButton>
+      <Text fx:id="actualWH1" layoutX="348.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" />
+      <Text fx:id="actualWH3" layoutX="969.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" />
+      <Text fx:id="actualWH2" layoutX="664.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" />
    </children>
 </AnchorPane>

@@ -23,8 +23,8 @@ DeleteDatabaseEntries {
             @Override
             public void run(ApplicationArguments args) throws Exception {
                 qRepository.deleteAll();
-                pRepository.deleteAll();
                 lRepository.deleteAll();
+                pRepository.deleteAll();
             }
         };
     }

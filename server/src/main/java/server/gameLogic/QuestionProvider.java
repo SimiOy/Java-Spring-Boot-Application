@@ -96,13 +96,27 @@ public class QuestionProvider {
             set = new HashSet<>();
         }
         set.add(question);
-        System.out.println("Attempted to update questiojns....");
+        System.out.println("Attempted to update questions....");
         lobbyToQuestionsUsed.put(lastLobby, set);
     }
 
 
     public void updatePointer() {
-        newPointer = Math.abs(random.nextInt((int) (questionRepository.count()+1) * 21) + 1);
+        long questionPool = questionRepository.count();
+        double probabilityOfReusingExisingQuestion = clamp(1 + (49729.0 / (questionPool + 1)),0,100);
+        Random random = new Random();
+        if(random.nextDouble() * 100 <= probabilityOfReusingExisingQuestion)
+        {
+            //pointer points to new question
+            newPointer = questionPool + 1;
+            System.out.println("Generating new question, with probability: " + probabilityOfReusingExisingQuestion);
+        }
+        else
+        {
+            //reuse a question
+            newPointer = random.nextInt((int) questionPool);
+        }
+
         System.out.println("[OLD POINTER] " + pointer + ", " + "[NEW POINTER]" + newPointer);
         if (pointer == newPointer) newPointer++;
     }
@@ -255,4 +269,16 @@ public class QuestionProvider {
         lobbyToQuestionsUsed.remove(lobbyId);
         System.out.println("DELETED ALL QUESTIONS OF LOBBY " + lobbyId);
     }
+
+    /**
+     * Method that clamps a value between two other values
+     * @param val - value to clamp
+     * @param min - minimum value
+     * @param max - maximum value
+     * @return
+     */
+    private double clamp(double val, double min, double max) {
+        return Math.max(min, Math.min(max, val));
+    }
+
 }

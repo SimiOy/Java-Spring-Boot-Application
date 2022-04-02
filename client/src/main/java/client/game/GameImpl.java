@@ -5,10 +5,12 @@ import client.emotes.Emotes;
 import client.scenes.MainCtrl;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
+import commons.LeaderboardEntry;
 import commons.Lobby;
 import commons.Player;
 import commons.WebsocketMessage;
 import constants.ConnectionStatusCodes;
+import constants.GameType;
 import constants.ResponseCodes;
 import javafx.application.Platform;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -108,6 +110,8 @@ public class GameImpl implements Game{
         //default value
         setQuestionsToEndGame(2);
         clientData.setAsHost(true);
+        clientData.setGameType(GameType.SINGLEPLAYER);
+        client.swapEmoteJokerUsability(true);
         server.addMeToLobby(clientData.getClientLobby().getToken(),clientData.getClientPlayer());
 
         //add delay until game starts
@@ -121,6 +125,7 @@ public class GameImpl implements Game{
                             new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
                                     clientData.getClientLobby().getToken(), clientData.getClientPointer()));
 
+                    client.startSyncCountdown();
                     Thread.sleep(3000);
 
                     Platform.runLater(() -> client.getQuestion());
@@ -173,12 +178,15 @@ public class GameImpl implements Game{
         System.out.println("game initiated");
         clientData.setClientScore(0);
         clientData.setQuestionCounter(0);
+        clientData.setGameType(GameType.MULTIPLAYER);
+        client.swapEmoteJokerUsability(false);
         //add delay until game starts
         multiplayerThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
-                    Thread.sleep(300);
+                    client.startSyncCountdown();
+                    Thread.sleep(3000);
 
                     Platform.runLater(() -> client.getQuestion());
 
@@ -232,6 +240,7 @@ public class GameImpl implements Game{
         clientData.setAsHost(false);
         //set client lobby to exited
         clientData.setLobby(null);
+        clientData.setGameType(null);
 
         mainCtrl.showGameModeSelection();
     }
@@ -239,6 +248,11 @@ public class GameImpl implements Game{
     public void endGame()
     {
         System.out.println("Game ended");
+        //if we've come to the end of a singleplayergame the player's avatarCode, score and name are stored in the repo
+        if(clientData.getGameType() == GameType.SINGLEPLAYER){
+            Player temp = clientData.getClientPlayer();
+            server.persistScore(new LeaderboardEntry(temp.getScore(), temp.getName(), temp.getAvatarCode()));
+        }
         server.send("/app/lobbyEnd", new WebsocketMessage(ResponseCodes.END_GAME,
                 clientData.getClientLobby().getToken()));
         client.unsubscribeFromMessages();
@@ -247,6 +261,8 @@ public class GameImpl implements Game{
         killGameThreads();
         //uses the current lobby to load images, scores and names for the players
         mainCtrl.showGameOver();
+        //only done after loading the leaderboard, because it's still needed there to determine which one to display
+        clientData.setGameType(null);
     }
 
     public Integer getQuestionsToEndGame(){

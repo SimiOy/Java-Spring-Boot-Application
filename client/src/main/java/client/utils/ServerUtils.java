@@ -101,6 +101,22 @@ public class ServerUtils {
                 .post(Entity.entity(lobby, APPLICATION_JSON), Lobby.class);
     }
 
+    public Activity addActivity(Activity activity1) {
+        return ClientBuilder.newClient(new ClientConfig()) //
+                .target(SERVER).path("/api/activity/add") //
+                .request(APPLICATION_JSON) //
+                .accept(APPLICATION_JSON) //
+                .post(Entity.entity(activity1, APPLICATION_JSON), Activity.class);
+    }
+
+    public Question addQuestion(Question question) {
+        return ClientBuilder.newClient(new ClientConfig()) //
+                .target(SERVER).path("/api/question/add") //
+                .request(APPLICATION_JSON) //
+                .accept(APPLICATION_JSON) //
+                .post(Entity.entity(question, APPLICATION_JSON), Question.class);
+    }
+
     public List<Lobby> getAllLobbies() {
         return ClientBuilder.newClient(new ClientConfig()) //
                 .target(SERVER).path("/api/lobby/getAllLobbies") //
@@ -160,6 +176,40 @@ public class ServerUtils {
                 .request(APPLICATION_JSON) //
                 .accept(APPLICATION_JSON) //
                 .get(new GenericType<Question>(){}); 
+    }
+
+    public List<Activity> getAllActivities() {
+        return ClientBuilder.newClient(new ClientConfig()) //
+                .target(SERVER).path("/api/activity/getAll")
+                .request(APPLICATION_JSON) //
+                .accept(APPLICATION_JSON) //
+                .get(new GenericType<List<Activity>>() {});
+    }
+
+    public String deleteActivity(String activityID) {
+        return ClientBuilder.newClient(new ClientConfig()) //
+                .target(SERVER).path("/api/activity/delete/" + activityID) //
+                //.queryParam("activityID", activityID)
+                .request(APPLICATION_JSON) //
+                .accept(APPLICATION_JSON) //
+                .get(new GenericType<String>() {});
+    }
+
+    public List<Question> getAllQuestions() {
+        return ClientBuilder.newClient(new ClientConfig()) //
+                .target(SERVER).path("/api/question/getAll")
+                .request(APPLICATION_JSON) //
+                .accept(APPLICATION_JSON) //
+                .get(new GenericType<List<Question>>() {});
+    }
+
+    public String deleteQuestion(Long id) {
+        return ClientBuilder.newClient(new ClientConfig()) //
+                .target(SERVER).path("/api/question/delete/" + id) //
+                //.queryParam("activityID", activityID)
+                .request(APPLICATION_JSON) //
+                .accept(APPLICATION_JSON) //
+                .get(new GenericType<String>() {});
     }
 
     public ConnectionStatusCodes startLobby(String token) {
@@ -283,7 +333,7 @@ public class ServerUtils {
 
     public Lobby addMeToLobby(String token, Player player){
         ClientBuilder.newClient(new ClientConfig()) //
-                .target(SERVER).path("api/lobby/addMeToLobby") //
+                .target(SERVER).path("/api/lobby/addMeToLobby") //
                 .queryParam("token", token)//
                 .request(APPLICATION_JSON) //
                 .accept(APPLICATION_JSON)

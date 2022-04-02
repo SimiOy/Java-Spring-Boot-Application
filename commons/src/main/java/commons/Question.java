@@ -62,6 +62,10 @@ public class Question {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public QuestionTypes getType() {
         return type;
     }
