@@ -207,6 +207,12 @@ public class LobbyController {
             }
 
             repository.save(currentLobby);
+
+            //kill redundant lobby
+            if(!message.getLobbyToken().equals("COMMON") && currentLobby.getPlayersInLobby().size() == 0) {
+                System.out.println("Deleting lobby with: " + currentLobby.getToken());
+                deleteLobby(currentLobby.id);
+            }
         }
 
         return new WebsocketMessage(ResponseCodes.LEAVE_LOBBY, message.getLobbyToken());
