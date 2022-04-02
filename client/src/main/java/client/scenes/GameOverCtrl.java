@@ -8,7 +8,6 @@ import client.utils.ServerUtils;
 import com.google.inject.Inject;
 import com.talanlabs.avatargenerator.Avatar;
 import com.talanlabs.avatargenerator.eightbit.EightBitAvatar;
-import commons.Lobby;
 import commons.Player;
 import commons.WebsocketMessage;
 import constants.ResponseCodes;
