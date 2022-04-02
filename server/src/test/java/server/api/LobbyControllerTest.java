@@ -50,7 +50,7 @@ class LobbyControllerTest {
 
     @BeforeEach
     void setup(){
-        publicLobby = new Lobby("public");
+        publicLobby = new Lobby("public", false);
         privateLobby = new Lobby("private", 1);
         lobbyController.clear();
         repo = new TestLobbyRepository();
