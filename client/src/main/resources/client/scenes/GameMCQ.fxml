@@ -12,21 +12,39 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.questions.GameMCQCtrl">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.questions.GameMCQCtrl">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
-      <Pane layoutX="600.0" layoutY="365.0" prefHeight="110.0" prefWidth="145.0" style="-fx-background-color: ffffff;">
+      <Circle fill="WHITE" layoutX="467.0" layoutY="100.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
+      <AnchorPane layoutX="1141.0" layoutY="620.0" prefHeight="74.0" prefWidth="117.0" style="-fx-background-color: white;" styleClass="roundedEdge">
          <children>
-            <ImageView fx:id="imageView2" fitHeight="100.0" fitWidth="135.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="nQuestionsTxt" layoutX="53.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" wrappingWidth="48.39996337890625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="432.0" layoutY="593.0" prefHeight="100.0" prefWidth="481.0" style="-fx-background-color: white;" styleClass="roundedEdge">
+         <children>
+            <ImageView fx:id="hourglassImageView" fitHeight="82.0" fitWidth="81.0" layoutX="64.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="doubleImageView" fitHeight="82.0" fitWidth="81.0" layoutX="329.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="insightImageView" fitHeight="82.0" fitWidth="81.0" layoutX="200.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="77.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hourglass" />
+            <Text layoutX="223.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insight" />
+            <Text fx:id="halfTimeText" layoutX="351.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="double" />
+         </children></AnchorPane>
+      <Pane layoutX="557.0" layoutY="316.0" prefHeight="145.0" prefWidth="205.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
+         <children>
+            <ImageView fx:id="imageView2" fitHeight="106.0" fitWidth="168.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
          </children></Pane>
-      <Pane layoutX="290.0" layoutY="365.0" prefHeight="110.0" prefWidth="145.0" style="-fx-background-color: ffffff;">
+      <Pane layoutX="247.0" layoutY="316.0" prefHeight="145.0" prefWidth="205.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
          <children>
-            <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="135.0" layoutX="6.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView1" fitHeight="113.0" fitWidth="154.0" layoutX="26.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane layoutX="900.0" layoutY="365.0" prefHeight="110.0" prefWidth="145.0" style="-fx-background-color: ffffff;">
+      <Pane layoutX="857.0" layoutY="316.0" prefHeight="145.0" prefWidth="205.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
          <children>
-            <ImageView fx:id="imageView3" fitHeight="100.0" fitWidth="135.0" layoutX="6.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView3" fitHeight="113.0" fitWidth="176.0" layoutX="13.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
       <Button focusTraversable="false" layoutX="21.0" layoutY="650.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="43.0" prefWidth="110.0" text="Leave Game">
@@ -34,32 +52,19 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Text fx:id="nQuestionsTxt" layoutX="1208.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" wrappingWidth="48.39996337890625">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <RadioButton fx:id="answer1" focusTraversable="false" layoutX="348.0" layoutY="473.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="130.0" text="Answer 1" textAlignment="CENTER" wrapText="true" />
-      <RadioButton fx:id="answer2" focusTraversable="false" layoutX="594.0" layoutY="473.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="130.0" text="Answer 2" textAlignment="CENTER" wrapText="true" />
-      <RadioButton fx:id="answer3" focusTraversable="false" layoutX="831.0" layoutY="473.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="130.0" text="Answer 3" textAlignment="CENTER" wrapText="true" />
-      <Text fx:id="questionTxt" layoutX="500.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some question?" textAlignment="CENTER">
+      <RadioButton fx:id="answer1" focusTraversable="false" layoutX="345.0" layoutY="447.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="142.0" text="Answer 1" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <RadioButton fx:id="answer2" focusTraversable="false" layoutX="595.0" layoutY="442.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="148.0" text="Answer 2" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <RadioButton fx:id="answer3" focusTraversable="false" layoutX="831.0" layoutY="442.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="148.0" text="Answer 3" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <Text fx:id="questionTxt" fill="WHITE" layoutX="500.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some question?" textAlignment="CENTER">
          <font>
             <Font size="29.0" />
          </font>
       </Text>
-      <Text fx:id="scoreTxt" layoutX="21.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="63.5999755859375">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <ProgressBar fx:id="pb" layoutX="500.0" layoutY="84.0" prefHeight="20.0" prefWidth="320.0" progress="0.0" />
-      <Circle fx:id="joker1" fill="DODGERBLUE" layoutX="537.0" layoutY="630.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="joker2" fill="DODGERBLUE" layoutX="667.0" layoutY="630.0" onMouseClicked="#eliminateRandomWrongAnswer" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="797.0" layoutY="630.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="492.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
-      <Text layoutX="609.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminate an answer❌" />
-      <Text fx:id="halfTimeText" layoutX="748.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
-      <Text layoutX="464.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰" wrappingWidth="33.0">
+      <ProgressBar fx:id="pb" layoutX="500.0" layoutY="84.0" prefHeight="31.0" prefWidth="320.0" progress="0.0" styleClass="roundedEdge" />
+      <Circle fx:id="joker1" fill="DODGERBLUE" layoutX="365.0" layoutY="643.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="joker2" fill="DODGERBLUE" layoutX="292.0" layoutY="620.0" onMouseClicked="#eliminateRandomWrongAnswer" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="1032.0" layoutY="604.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="454.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰" wrappingWidth="26.0">
          <font>
             <Font size="23.0" />
          </font>
@@ -67,12 +72,21 @@
       <Label fx:id="messageTxt1" layoutX="14.0" layoutY="282.0" />
       <Label fx:id="messageTxt2" layoutX="14.0" layoutY="229.0" />
       <Label fx:id="messageTxt3" layoutX="14.0" layoutY="179.0" />
-      <MenuButton fx:id="emotesMenu" layoutX="1172.0" layoutY="40.0" mnemonicParsing="false" text="emotes">
+      <MenuButton fx:id="emotesMenu" layoutX="1172.0" layoutY="40.0" mnemonicParsing="false" styleClass="button" text="emotes">
          <items>
          </items>
       </MenuButton>
-      <Text fx:id="actualWH1" layoutX="359.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" />
-      <Text fx:id="actualWH2" layoutX="669.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" />
-      <Text fx:id="actualWH3" layoutX="969.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" />
+      <Text fx:id="actualWH1" fill="WHITE" layoutX="358.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" />
+      <Text fx:id="actualWH2" fill="WHITE" layoutX="664.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" />
+      <Text fx:id="actualWH3" fill="WHITE" layoutX="962.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" />
+      <AnchorPane layoutX="95.0" layoutY="66.0" prefHeight="67.0" prefWidth="160.0" style="-fx-background-color: white;" styleClass="roundedEdge">
+         <children>
+            <Text fx:id="scoreTxt" layoutX="16.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="63.5999755859375">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

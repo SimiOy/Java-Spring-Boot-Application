@@ -88,6 +88,13 @@ public class GameMCQCtrl implements JokerPowerUps {
     @FXML
     private ImageView imageView3;
 
+    @FXML
+    private ImageView hourglassImageView;
+    @FXML
+    private ImageView insightImageView;
+    @FXML
+    private ImageView doubleImageView;
+
     @Inject
     public GameMCQCtrl(ServerUtils server, ClientUtils client, MainCtrl mainCtrl, ClientData clientData,
                        JokerUtils jokerUtils, Emotes emotes, Game game) {
@@ -110,6 +117,9 @@ public class GameMCQCtrl implements JokerPowerUps {
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
+        hourglassImageView.setImage(new Image("images/hourglass.png"));
+        insightImageView.setImage(new Image("images/insight.png"));
+        doubleImageView.setImage(new Image("images/double.png"));
     }
 
     public void resetUI(Question question)
