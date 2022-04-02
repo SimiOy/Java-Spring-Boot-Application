@@ -3,10 +3,12 @@ package client.scenes;
 import client.avatar.AvatarSupplier;
 import client.data.ClientData;
 import client.game.Game;
+import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
 import com.talanlabs.avatargenerator.Avatar;
 import com.talanlabs.avatargenerator.eightbit.EightBitAvatar;
+import commons.Lobby;
 import commons.Player;
 import commons.WebsocketMessage;
 import constants.ResponseCodes;
@@ -33,6 +35,7 @@ import java.util.concurrent.Executors;
 
 public class GameOverCtrl {
 
+    private final ClientUtils client;
     private final ServerUtils server;
     private final MainCtrl mainCtrl;
     private final ClientData clientData;
@@ -54,17 +57,21 @@ public class GameOverCtrl {
     private TableColumn<Player, Integer> scoreColumn;
 
     @Inject
-    public GameOverCtrl(ServerUtils server, MainCtrl mainCtrl, ClientData clientData, Game game) {
+    public GameOverCtrl(ServerUtils server, MainCtrl mainCtrl, ClientData clientData, Game game, ClientUtils client) {
         this.mainCtrl = mainCtrl;
         this.server = server;
         this.clientData = clientData;
         this.game = game;
+        this.client = client;
     }
 
     public void playAgain() {
         thread.interrupt();
+
+        removePlayerFromLobby();
+
         game.restartLobby(clientData.getLastLobby());
-        mainCtrl.showGameModeSelection();
+        System.out.println("Restarted the game!");
     }
 
     public void leaveGame() {
@@ -88,7 +95,7 @@ public class GameOverCtrl {
                     //without this sleepthe client that connects last will be
                     // missing information on the final table
                     Thread.sleep(2000);
-                    removePlayerFromLobby();
+//                    removePlayerFromLobby();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

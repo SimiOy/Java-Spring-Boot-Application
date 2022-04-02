@@ -28,4 +28,6 @@ public interface Game {
     Integer getQuestionsToDisplayLeaderboard();
 
     void restartLobby(Lobby lobby);
+
+    void killGameThreads();
 }

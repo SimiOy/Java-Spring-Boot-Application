@@ -24,6 +24,9 @@ public class GameImpl implements Game{
     private final MainCtrl mainCtrl;
     private  final Emotes emotes;
 
+    private Thread singleplayerThread;
+    private Thread multiplayerThread;
+
     private final String COMMON_CODE = "COMMON";
     private Integer questionsToEndGame = 20;
     private Integer questionsToDisplayLeaderboard = 10;
@@ -103,12 +106,12 @@ public class GameImpl implements Game{
         clientData.setClientScore(0);
         clientData.setQuestionCounter(0);
         //default value
-        setQuestionsToEndGame(20);
+        setQuestionsToEndGame(2);
         clientData.setAsHost(true);
         server.addMeToLobby(clientData.getClientLobby().getToken(),clientData.getClientPlayer());
 
         //add delay until game starts
-        Thread thread = new Thread(new Runnable() {
+        singleplayerThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -128,7 +131,7 @@ public class GameImpl implements Game{
                 }
             }
         });
-        thread.start();
+        singleplayerThread.start();
     }
 
     /**
@@ -171,7 +174,7 @@ public class GameImpl implements Game{
         clientData.setClientScore(0);
         clientData.setQuestionCounter(0);
         //add delay until game starts
-        Thread thread = new Thread(new Runnable() {
+        multiplayerThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -185,7 +188,7 @@ public class GameImpl implements Game{
                 }
             }
         });
-        thread.start();
+        multiplayerThread.start();
     }
 
     /**
@@ -241,6 +244,7 @@ public class GameImpl implements Game{
         client.unsubscribeFromMessages();
         client.killTimer();
         client.resetMessages();
+        killGameThreads();
         //uses the current lobby to load images, scores and names for the players
         mainCtrl.showGameOver();
     }
@@ -270,14 +274,29 @@ public class GameImpl implements Game{
      * @param lobby
      */
     public void restartLobby(Lobby lobby) {
+        client.registerQuestionCommunication();
+        client.registerLobbyCommunication();
+        client.registerMessageCommunication();
         if(lobby.getSingleplayer()){
             startSinglePlayer();
         }else{
-            /*if(lobby.getPublic()){
+            if(lobby.getPublic()){
+                System.out.println("Attempting to join public lobby");
+                instantiateCommonLobby();
                 joinPublicLobby();
             }else{
-                joinPrivateLobby(lobby.getToken());
-            }*/
+                //joinPrivateLobby(lobby.getToken());
+            }
+        }
+    }
+
+    @Override
+    public void killGameThreads() {
+        if(singleplayerThread != null){
+            singleplayerThread.interrupt();
+        }
+        if(multiplayerThread != null){
+            multiplayerThread.interrupt();
         }
     }
 }

@@ -147,7 +147,7 @@ public class WaitingCtrl implements Initializable{
         if(token.equals("COMMON")) {
             tip.setText("Theres only one correct answer per question, get the most right to win.");
             //default value for normal game
-            game.setQuestionsToEndGame(20);
+            game.setQuestionsToEndGame(2);
         }
         else
         {
