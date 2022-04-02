@@ -48,7 +48,7 @@ public class GameImpl implements Game{
 
         if(lobbies.size() == 0)
         {
-            Lobby mainLobby = new Lobby(COMMON_CODE);
+            Lobby mainLobby = new Lobby(COMMON_CODE, false);
             server.addLobby(mainLobby);
         }
         else
@@ -62,7 +62,7 @@ public class GameImpl implements Game{
 
             if(!commonLobbyExists)
             {
-                Lobby mainLobby = new Lobby(COMMON_CODE);
+                Lobby mainLobby = new Lobby(COMMON_CODE, false);
                 server.addLobby(mainLobby);
             }
         }
@@ -80,7 +80,6 @@ public class GameImpl implements Game{
         clientData.setAsHost(true);
 
         joinPrivateLobby(newLobby.getToken());
-
     }
 
     public boolean joinPrivateLobby(String token)
@@ -97,7 +96,7 @@ public class GameImpl implements Game{
                             clientData.getClientPlayer().getAvatarCode() +
                             RandomStringUtils.randomAlphabetic(5);
 
-        Lobby mainLobby = new Lobby(lobbyCode);
+        Lobby mainLobby = new Lobby(lobbyCode, true);
         server.addLobby(mainLobby);
         clientData.setLobby(mainLobby);
         clientData.setPointer(clientData.getClientPlayer().getId());
@@ -258,5 +257,27 @@ public class GameImpl implements Game{
     public Integer getQuestionsToDisplayLeaderboard()
     {
         return questionsToDisplayLeaderboard;
+    }
+
+    /**
+     * There's three cases:
+     * 1) Lobby was singleplayer, in which case start again
+     * 2) Lobby was a common lobby, in which case queue up the player in a common lobby
+     * with the same players of the old one
+     * 3) Lobby was a private lobby, in which case queue up the player in a private lobby
+     * with the same players of the old one
+     * TODO: figure out how to reset multiplayer lobbies
+     * @param lobby
+     */
+    public void restartLobby(Lobby lobby) {
+        if(lobby.getSingleplayer()){
+            startSinglePlayer();
+        }else{
+            /*if(lobby.getPublic()){
+                joinPublicLobby();
+            }else{
+                joinPrivateLobby(lobby.getToken());
+            }*/
+        }
     }
 }

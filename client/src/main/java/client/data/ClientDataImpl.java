@@ -17,6 +17,7 @@ public class ClientDataImpl implements ClientData {
 
     private Player clientPlayer;
     private Lobby clientLobby;
+    private Lobby lastLobby;
     private Long clientPointer;
     private Question clientQuestion;
     private Integer clientScore;
@@ -88,6 +89,9 @@ public class ClientDataImpl implements ClientData {
     public void setLobby(Lobby lobby)
     {
         clientLobby = lobby;
+        if(lobby != null){
+            lastLobby = clientLobby;
+        }
     }
 
     public Lobby getClientLobby(){return clientLobby;}
@@ -112,5 +116,10 @@ public class ClientDataImpl implements ClientData {
     @Override
     public void clearUnansweredQuestionCounter() {
         unansweredQuestionCounter=0;
+    }
+
+    @Override
+    public Lobby getLastLobby() {
+        return lastLobby;
     }
 }

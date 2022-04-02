@@ -52,4 +52,6 @@ public interface ClientData {
     void incrementUnansweredQuestionCounter();
 
     void clearUnansweredQuestionCounter();
+
+    Lobby getLastLobby();
 }

@@ -62,6 +62,8 @@ public class GameOverCtrl {
     }
 
     public void playAgain() {
+        thread.interrupt();
+        game.restartLobby(clientData.getLastLobby());
         mainCtrl.showGameModeSelection();
     }
 
