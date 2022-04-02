@@ -290,9 +290,9 @@ public class MainCtrl extends Application {
 
     public void showGameOver(){
         client.setCurrentSceneCtrl(gameOverCtrl);
+        gameOverCtrl.load();
         primaryStage.setTitle("GameOver");
         primaryStage.setScene(gameOver);
-        gameOverCtrl.load();
     }
 
     public void showMultiplayerMenu(){

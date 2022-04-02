@@ -71,7 +71,22 @@ public class GameOverCtrl {
     public void playAgain() {
         thread.interrupt();
 
-        removePlayerFromLobby();
+        //kill ongoing timers
+        client.killTimer();
+
+        server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost()));
+
+        //no more server polling for this client
+        client.unsubscribeFromMessages();
+
+        client.resetMessages();
+
+        clientData.clearUnansweredQuestionCounter();
+
+        System.out.println("Left the lobby");
+
+        clientData.setAsHost(false);
 
         game.restartLobby(clientData.getLastLobby());
         System.out.println("Restarted the game!");
@@ -79,12 +94,7 @@ public class GameOverCtrl {
 
     public void leaveGame() {
         thread.interrupt();
-        mainCtrl.showGameModeSelection();
-        //even though the remove player from lobby is called twice,
-        // it won't cause any changes if the player was already removed from the lobby
-        //this has to happen if the player decides to leave before the 2 seconds
-        //until calling the remove method are up
-        removePlayerFromLobby();
+        game.leaveLobby();
     }
 
     public void load() {
@@ -105,13 +115,6 @@ public class GameOverCtrl {
             }
         });
         thread.start();
-    }
-
-    private void removePlayerFromLobby()
-    {
-        server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
-                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost()));
-        System.out.println("Left the lobby");
     }
 
     private void loadLeaderboard()
