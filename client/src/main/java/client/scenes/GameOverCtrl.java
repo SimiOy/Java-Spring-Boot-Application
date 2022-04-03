@@ -70,24 +70,43 @@ public class GameOverCtrl {
 
     public void playAgain() {
         thread.interrupt();
+        if(clientData.getLastLobby().getSingleplayer() || clientData.getLastLobby().getPublic()) {
+            System.out.println("Attempting to restart public/single-player lobby");
+            //kill ongoing timers
+            client.killTimer();
 
-        //kill ongoing timers
-        client.killTimer();
+            if(clientData.getLastLobby().getSingleplayer()){
+                server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                        clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
+                        true));
+            }else{
+                server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                        clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
+                        false));
+            }
 
-        server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
-                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost()));
 
-        //no more server polling for this client
-        client.unsubscribeFromMessages();
+            //no more server polling for this client
+            client.unsubscribeFromMessages();
 
-        client.resetMessages();
+            client.resetMessages();
 
-        clientData.clearUnansweredQuestionCounter();
+            clientData.clearUnansweredQuestionCounter();
 
-        System.out.println("Left the lobby");
+            System.out.println("Left the lobby");
 
-        clientData.setAsHost(false);
-
+            clientData.setAsHost(false);
+        }else{
+            System.out.println("Attempting to restart private lobby");
+            server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                    clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
+                    false));
+            client.killTimer();
+            client.resetMessages();
+            clientData.setClientScore(0);
+            clientData.setQuestionCounter(0);
+            mainCtrl.showWaiting();
+        }
         game.restartLobby(clientData.getLastLobby());
         System.out.println("Restarted the game!");
     }

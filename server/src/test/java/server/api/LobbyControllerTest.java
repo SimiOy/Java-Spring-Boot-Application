@@ -188,7 +188,7 @@ class LobbyControllerTest {
         Lobby newLobby = new Lobby("private", 2);
         Player player = new Player();
         newLobby.addPlayerToLobby(player);
-        WebsocketMessage wsm = new WebsocketMessage(UPDATE_HOST, newLobby.getToken(), player, false);
+        WebsocketMessage wsm = new WebsocketMessage(UPDATE_HOST, newLobby.getToken(), player, false, true);
         repo.save(newLobby);
         assertNotEquals(sut.getLobbyByToken(sut.leaveLobby(wsm).getLobbyToken()), newLobby);
     }

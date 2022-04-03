@@ -209,7 +209,7 @@ public class LobbyController {
             repository.save(currentLobby);
 
             //kill redundant lobby
-            if(!message.getLobbyToken().equals("COMMON") && currentLobby.getPlayersInLobby().size() == 0) {
+            if(message.getKillLobby() && currentLobby.getPlayersInLobby().size() == 0) {
                 System.out.println("Deleting lobby with: " + currentLobby.getToken());
                 deleteLobby(currentLobby.id);
             }

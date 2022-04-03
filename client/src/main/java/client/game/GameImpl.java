@@ -226,7 +226,7 @@ public class GameImpl implements Game{
         client.killTimer();
 
         server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
-                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost()));
+                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(), true));
 
         //no more server polling for this client
         client.unsubscribeFromMessages();
@@ -297,11 +297,10 @@ public class GameImpl implements Game{
             startSinglePlayer();
         }else{
             if(lobby.getPublic()){
-                System.out.println("Attempting to join public lobby");
                 instantiateCommonLobby();
                 joinPublicLobby();
             }else{
-                //joinPrivateLobby(lobby.getToken());
+                joinPrivateLobby(lobby.getToken());
             }
         }
     }
