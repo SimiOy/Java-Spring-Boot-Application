@@ -108,7 +108,7 @@ public class GameImpl implements Game{
         clientData.setClientScore(0);
         clientData.setQuestionCounter(0);
         //default value
-        setQuestionsToEndGame(2);
+        setQuestionsToEndGame(20);
         clientData.setAsHost(true);
         clientData.setGameType(GameType.SINGLEPLAYER);
         client.swapEmoteJokerUsability(true);
