@@ -97,3 +97,19 @@
     -fx-background-insets: 0,1,2,3,0;
 }
 
+.image-button:hover{
+    -fx-opacity: 0.6;
+}
+
+.image-button:pressed{
+    -fx-opacity: 0.2;
+}
+
+.back-button:hover{
+    -fx-opacity: 0.5;
+}
+
+.back-button:pressed{
+    -fx-opacity: 0.2;
+}
+
