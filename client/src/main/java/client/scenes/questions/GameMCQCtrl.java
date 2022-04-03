@@ -256,9 +256,7 @@ public class GameMCQCtrl implements JokerPowerUps {
                         Thread.sleep(5000);
                     }
 
-                    //execute next question immediatly after sleep on current thread finishes execution
                     Platform.runLater(() -> client.getQuestion());
-                    //client.getQuestion();
                 }catch (InterruptedException e)
                 {
                     e.printStackTrace();
@@ -271,20 +269,15 @@ public class GameMCQCtrl implements JokerPowerUps {
 
     public void updateCorrectAnswer()
     {
-
         int pointsToAdd = doublePoints ? 1000 : 500;
         doublePoints = false;
 
         if(clientData.getIsHost())
         {
-            //if host prepare next question
-            //client.prepareQuestion();
-
             server.send("/app/nextQuestion",
                     new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
                             clientData.getClientLobby().token, clientData.getClientPointer()));
         }
-
         actualWH1.setVisible(true);
         actualWH2.setVisible(true);
         actualWH3.setVisible(true);
@@ -329,7 +322,6 @@ public class GameMCQCtrl implements JokerPowerUps {
             }
         }
         scoreTxt.setText("Score:" + clientData.getClientScore());
-
         clientData.getClientPlayer().score = clientData.getClientScore();
         server.send("/app/updateScore", new WebsocketMessage(ResponseCodes.SCORE_UPDATED,
                 clientData.getClientLobby().getToken(), clientData.getClientPlayer()));
@@ -370,17 +362,12 @@ public class GameMCQCtrl implements JokerPowerUps {
     public RadioButton getAnswer1() {
         return answer1;
     }
-
-
     public RadioButton getAnswer2() {
         return answer2;
     }
-
-
     public RadioButton getAnswer3() {
         return answer3;
     }
-
 
     /**
      * Returns the label corresponding to the position in the method name.
@@ -389,15 +376,12 @@ public class GameMCQCtrl implements JokerPowerUps {
     public Label getMessageTxt1() {
         return messageTxt1;
     }
-
     public Label getMessageTxt2() {
         return messageTxt2;
     }
-
     public Label getMessageTxt3() {
         return messageTxt3;
     }
-
     public MenuButton getEmotesMenu() {
         return emotesMenu;
     }
@@ -480,45 +464,31 @@ public class GameMCQCtrl implements JokerPowerUps {
     public Pane getHalfTimeJoker() {
         return halfTimeJoker;
     }
-
     public Text getHalfTimeText() {
         return halfTimeText;
     }
 
     /**
-     * The first image was selected, gray out the image container and restore revealed answer if any
+     * Methods that handle what happens when the client clicks one of the images
      */
     public void answerOneSelected(){
         answer1.fire();
-
         if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: gray");
         if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: white");
-
     }
 
-    /**
-     * The second image was selected, gray out the image container and restore revealed answer if any
-     */
     public void answerTwoSelected(){
         answer2.fire();
-
         if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: gray");
         if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: white");
-
-
     }
 
-    /**
-     * The third image was selected, gray out the image container and restore revealed answer if any
-     */
     public void answerThreeSelected(){
         answer3.fire();
-
         if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: gray");
-
     }
 }
