@@ -68,6 +68,11 @@ public class GameOverCtrl {
         this.client = client;
     }
 
+    /**
+     * If the game was a public multiplayer or single-player we delete the previous lobby and join a new one
+     * There is no need to recycle the lobby.
+     * If the game is a private multiplayer lobby then we must recycle the lobby so that the lobby code is the same
+     */
     public void playAgain() {
         thread.interrupt();
         if(clientData.getLastLobby().getSingleplayer() || clientData.getLastLobby().getPublic()) {
@@ -98,6 +103,7 @@ public class GameOverCtrl {
             clientData.setAsHost(false);
         }else{
             System.out.println("Attempting to restart private lobby");
+            game.endGame();
             server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
                     clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
                     false));
@@ -105,6 +111,7 @@ public class GameOverCtrl {
             client.resetMessages();
             clientData.setClientScore(0);
             clientData.setQuestionCounter(0);
+            clientData.clearUnansweredQuestionCounter();
             mainCtrl.showWaiting();
         }
         game.restartLobby(clientData.getLastLobby());
