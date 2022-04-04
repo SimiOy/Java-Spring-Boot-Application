@@ -26,7 +26,7 @@
                         <Image url="@../../images/hourglass.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="15.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hourglass" />
+                  <Text layoutX="11.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hourglass" />
                </children>
                <styleClass>
                   <String fx:value="roundedEdge" />
@@ -128,7 +128,7 @@
          <font>
             <Font size="20.0" />
          </font></Text>
-      <AnchorPane layoutX="95.0" layoutY="66.0" prefHeight="67.0" prefWidth="168.0" style="-fx-background-color: white;" styleClass="roundedEdge">
+      <AnchorPane layoutY="32.0" prefHeight="67.0" prefWidth="168.0" style="-fx-background-color: white;" styleClass="roundedEdge">
          <children>
             <Text fx:id="scoreTxt" layoutX="16.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
                <font>
