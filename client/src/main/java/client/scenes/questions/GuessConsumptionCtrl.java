@@ -20,7 +20,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import javax.inject.Inject;
@@ -28,7 +27,6 @@ import java.util.List;
 import java.util.Random;
 
 import static constants.QuestionTypes.GUESS_X;
-import static javafx.scene.paint.Color.rgb;
 
 public class GuessConsumptionCtrl implements JokerPowerUps {
 
