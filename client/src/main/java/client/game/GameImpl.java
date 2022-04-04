@@ -280,4 +280,8 @@ public class GameImpl implements Game{
     {
         return questionsToDisplayLeaderboard;
     }
+
+    public void setQuestionsToDisplayLeaderboard(Integer questionsToDisplayLeaderboard) {
+        this.questionsToDisplayLeaderboard = questionsToDisplayLeaderboard;
+    }
 }

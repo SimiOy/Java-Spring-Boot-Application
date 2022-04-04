@@ -24,4 +24,6 @@ public interface Game {
     void setQuestionsToEndGame(Integer value);
 
     Integer getQuestionsToDisplayLeaderboard();
+
+    void setQuestionsToDisplayLeaderboard(Integer value);
 }
