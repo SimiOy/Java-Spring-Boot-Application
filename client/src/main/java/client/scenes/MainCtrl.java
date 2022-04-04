@@ -297,6 +297,7 @@ public class MainCtrl extends Application {
 
     public void showMultiplayerMenu(){
         client.setCurrentSceneCtrl(multiplayerMenuCtrl);
+        multiplayerMenuCtrl.load();
         primaryStage.setTitle("MultiplayerMenu");
         primaryStage.setScene(multiplayerMenu);
     }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,26 +11,61 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #222222;" styleClass="image-button" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.menus.MultiplayerMenuCtrl">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.menus.MultiplayerMenuCtrl">
    <children>
       <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
-      <Button focusTraversable="false" layoutX="550.0" layoutY="250.0" mnemonicParsing="false" onAction="#joinPublicLobby" prefHeight="101.0" prefWidth="174.0" styleClass="button1" text="Join Public Lobby" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <TextField fx:id="lobbyCode" alignment="CENTER" layoutX="71.0" layoutY="620.0" promptText="Lobby Code" />
-      <Button focusTraversable="false" layoutX="89.0" layoutY="650.0" mnemonicParsing="false" onAction="#joinPrivateLobby" styleClass="button2" text="Join Private Lobby" />
-      <Button focusTraversable="false" layoutX="1050.0" layoutY="650.0" mnemonicParsing="false" onAction="#createPrivateLobby" styleClass="button3" text="Create Your Own Lobby" />
-      <Text fx:id="invalidLobbyPromt" fill="#fc0606" layoutX="71.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="149.0" />
-      <Pane layoutX="31.0" layoutY="33.0" onMouseClicked="#back" prefHeight="77.0" prefWidth="81.0">
+      <Pane layoutX="31.0" layoutY="33.0" onMouseClicked="#back" prefHeight="62.0" prefWidth="65.0" styleClass="image-button">
          <children>
-            <ImageView fitHeight="77.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="backButtonImageView" fitHeight="62.0" fitWidth="71.0" preserveRatio="true">
                <image>
                   <Image url="@../../images/back-button.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
+      <TabPane layoutX="403.0" layoutY="123.0" prefHeight="475.0" prefWidth="475.0" styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab styleClass="tab" text="Public Lobby">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="paneBG">
+                     <children>
+                        <Button focusTraversable="false" layoutX="120.0" layoutY="146.0" mnemonicParsing="false" onAction="#joinPublicLobby" prefHeight="137.0" prefWidth="236.0" styleClass="button1" text="Join Public Lobby" textAlignment="CENTER">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab styleClass="tab" text="Private Lobby">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="paneBG">
+                     <children>
+                        <Button focusTraversable="false" layoutX="126.0" layoutY="93.0" mnemonicParsing="false" onAction="#createPrivateLobby" prefHeight="49.0" prefWidth="224.0" styleClass="button1" text="Create Private Lobby" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Text fill="WHITE" layoutX="220.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="lobbyCode" alignment="CENTER" layoutX="134.0" layoutY="243.0" prefHeight="35.0" prefWidth="209.0" promptText="Lobby Code">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Button focusTraversable="false" layoutX="127.0" layoutY="303.0" mnemonicParsing="false" onAction="#joinPrivateLobby" prefHeight="51.0" prefWidth="223.0" styleClass="button1" text="Join Private Lobby" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Text fx:id="invalidLobbyPromt" fill="#fc0606" layoutX="164.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="149.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

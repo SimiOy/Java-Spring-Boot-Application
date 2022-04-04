@@ -4,30 +4,90 @@
     -fx-background-color: MintCream;
 }
 
-.button1 {
+.button {
+    -fx-padding:5px 10px;
+    -fx-margin: 5px 0;
+    -fx-border:5px 5px;
+    -fx-border-radius: 3px;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #000;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+}
+
+.button:hover{
+    -fx-padding:5px 10px;
+    -fx-margin: 5px 0;
+    -fx-border:5px 5px;
+    -fx-border-radius: 3px;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+}
+
+.button:pressed{
     -fx-padding:5px 10px;
     -fx-margin: 5px 0;
     -fx-border:5px 5px;
     -fx-border-radius: 3px;
     -fx-text-fill: #fff;
-    -fx-background-color: #00a6d6;
+    -fx-background-color: #222222;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
 }
 
-.button2 {
-    -fx-padding:5px 10px;
-    -fx-margin: 5px 0;
-    -fx-border:5px 5px;
-    -fx-border-radius: 3px;
+.tab{
+    -fx-pref-width: 220;
+    -fx-pref-height: 50;
+}
+
+.tab-header-area .tab{
+    -fx-background-radius: 20 20 20 20;
+    -fx-background-color: #000;
+}
+
+.tab-header-area .tab-label{
     -fx-text-fill: #fff;
-    -fx-background-color: #00a6d6;
+    -fx-alignment: CENTER;
 }
 
-.button3 {
-    -fx-padding:5px 10px;
-    -fx-margin: 5px 0;
-    -fx-border:5px 5px;
-    -fx-border-radius: 3px;
-    -fx-text-fill: #fff;
-    -fx-background-color: #00a6d6;
+.tab-header-area .tab:selected {
+    -fx-background-color: #1f1f1f;
 }
 
+.tab-header-background {
+    -fx-background-color: #131313;
+    -fx-background-radius: 20 20 0 0;
+}
+
+.tab-pane{
+    -fx-pref-width: 460;
+    -fx-padding: 0 -1 -1 -1;
+}
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-radius: 9 9 0 0, 8 8 0 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.image-button:hover{
+    -fx-opacity: 0.6;
+}
+
+.image-button:pressed{
+    -fx-opacity: 0.2;
+}
+
+.back-button:hover{
+    -fx-opacity: 0.5;
+}
+
+.back-button:pressed{
+    -fx-opacity: 0.2;
+}
+
+.paneBG {
+    -fx-background-color: #131313;
+    -fx-background-radius: 0 0 20 20;
+}

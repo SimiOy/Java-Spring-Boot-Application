@@ -4,9 +4,12 @@ import client.game.Game;
 import client.scenes.MainCtrl;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import javax.inject.Inject;
+
 
 public class MultiplayerMenuCtrl {
 
@@ -19,10 +22,18 @@ public class MultiplayerMenuCtrl {
     @FXML
     private Text invalidLobbyPromt;
 
+    @FXML
+    private ImageView backButtonImageView;
+
     @Inject
     public MultiplayerMenuCtrl(MainCtrl mainCtrl, Game game) {
         this.mainCtrl = mainCtrl;
         this.game = game;
+    }
+
+    public void load()
+    {
+        backButtonImageView.setImage(new Image("/images/back-button.png"));
     }
 
     public void back(){
