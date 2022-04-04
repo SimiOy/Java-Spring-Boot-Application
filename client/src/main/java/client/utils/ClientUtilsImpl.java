@@ -472,6 +472,9 @@ public class ClientUtilsImpl implements ClientUtils {
         guessConsumptionCtrl.getHalfTimeJoker().setDisable(bool);
         guessConsumptionCtrl.getHalfTimeJoker().setVisible(!bool);
         guessConsumptionCtrl.getHalfTimeText().setVisible(!bool);
+
+        //swaps visibility of communication Panel
+        estimationQuestionCtrl.getCommTab().setVisible(!bool);
     }
 
     public double getCoefficient() {

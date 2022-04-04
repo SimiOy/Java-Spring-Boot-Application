@@ -84,7 +84,10 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
 
     @FXML
     private MenuButton emotesMenu;
-    
+
+    @FXML
+    private Pane commTab;
+
     @FXML
     private Label messageTxt1;
     @FXML
@@ -385,5 +388,9 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
 
     public Text getHalfTimeText() {
         return halfTimeText;
+    }
+
+    public Pane getCommTab() {
+        return commTab;
     }
 }
