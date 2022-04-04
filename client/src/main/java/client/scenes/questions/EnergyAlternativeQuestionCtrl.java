@@ -11,16 +11,15 @@ import client.utils.ServerUtils;
 import commons.Activity;
 import commons.Question;
 import commons.WebsocketMessage;
+import constants.GameType;
 import constants.JokerType;
 import constants.ResponseCodes;
-import constants.GameType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import javax.inject.Inject;
@@ -29,7 +28,6 @@ import java.util.Optional;
 import java.util.Random;
 
 import static constants.QuestionTypes.ENERGY_ALTERNATIVE_QUESTION;
-import static javafx.scene.paint.Color.rgb;
 
 public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     private final ClientData clientData;
@@ -41,16 +39,12 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
 
     @FXML
     private Text scoreTxt;
-
     @FXML
     private Text nQuestionsTxt;
-
     @FXML
     private ProgressBar pb;
-
     @FXML
     private Label insteadOfText;
-
     @FXML
     private Text actualWH1, actualWH2, actualWH3;
 
@@ -271,9 +265,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
                         Thread.sleep(5000);
                     }
 
-                    //execute next question immediatly after sleep on current thread finishes execution
                     Platform.runLater(() -> client.getQuestion());
-                    //client.getQuestion();
                 }catch (InterruptedException e)
                 {
                     e.printStackTrace();
@@ -296,11 +288,9 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
                     new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
                             clientData.getClientLobby().getToken(), clientData.getClientPointer()));
         }
-
         actualWH1.setVisible(true);
         actualWH2.setVisible(true);
         actualWH3.setVisible(true);
-
         switch (correctAnswer)
         {
             case 0:
@@ -377,15 +367,12 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     public RadioButton getAnswer1() {
         return answer1;
     }
-
     public RadioButton getAnswer2() {
         return answer2;
     }
-
     public RadioButton getAnswer3() {
         return answer3;
     }
-
     /**
      * Returns the label corresponding to the position in the method name.
      * @return label corresponding to the position
@@ -393,15 +380,12 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     public Label getMessageTxt1() {
         return messageTxt1;
     }
-
     public Label getMessageTxt2() {
         return messageTxt2;
     }
-
     public Label getMessageTxt3() {
         return messageTxt3;
     }
-
     public MenuButton getEmotesMenu() {
         return emotesMenu;
     }
@@ -485,7 +469,6 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     public Pane getHalfTimeJoker() {
         return halfTimeJoker;
     }
-
     public Text getHalfTimeText() {
         return halfTimeText;
     }

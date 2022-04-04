@@ -91,6 +91,11 @@ public class Main extends Application {
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         alternativeQuestion.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        guessMultipleChoiceQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        guessMultipleChoiceQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage, home, leaderboard, gameModeSelection, multiPlayerMenu,
                             estimationQuestion, gameMCQ, alternativeQuestion, guessMultipleChoiceQuestion, gameOver,
