@@ -73,7 +73,8 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
 
     @FXML
     private MenuButton emotesMenu;
-
+    @FXML
+    private Pane commTab;
     @FXML
     private Label messageTxt1;
     @FXML
@@ -485,5 +486,9 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: gray");
+    }
+
+    public Pane getCommTab() {
+        return commTab;
     }
 }

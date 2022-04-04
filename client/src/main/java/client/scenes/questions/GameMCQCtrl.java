@@ -41,16 +41,12 @@ public class GameMCQCtrl implements JokerPowerUps {
 
     @FXML
     private ProgressBar pb;
-
     @FXML
     private Text scoreTxt;
-
     @FXML
     private Text nQuestionsTxt;
-
     @FXML
     private Label questionTxt;
-
     @FXML
     private Text actualWH1, actualWH2, actualWH3;
 
@@ -76,7 +72,8 @@ public class GameMCQCtrl implements JokerPowerUps {
 
     @FXML
     private MenuButton emotesMenu;
-
+    @FXML
+    private Pane commTab;
     @FXML
     private Label messageTxt1;
     @FXML
@@ -492,5 +489,9 @@ public class GameMCQCtrl implements JokerPowerUps {
         if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: gray");
+    }
+
+    public Pane getCommTab() {
+        return commTab;
     }
 }

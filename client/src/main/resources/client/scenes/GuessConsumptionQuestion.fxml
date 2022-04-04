@@ -154,11 +154,16 @@
                 </Text>
             </children>
         </AnchorPane>
-        <Pane layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
+        <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
             <children>
-                <Label fx:id="messageTxt1" layoutX="15.0" layoutY="165.0" />
+                <Label fx:id="messageTxt3" layoutX="15.0" layoutY="165.0" />
                 <Label fx:id="messageTxt2" layoutX="15.0" layoutY="95.0" />
-                <Label fx:id="messageTxt3" layoutX="15.0" layoutY="25.0" />
+                <Label fx:id="messageTxt1" layoutX="15.0" layoutY="25.0" />
+                <Label layoutX="23.0" layoutY="-7.0" prefHeight="43.0" prefWidth="88.0" text="MESSAGES" textAlignment="CENTER">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
             </children>
         </Pane>
         <StackPane fx:id="questionText" layoutX="250.0" layoutY="16.0" prefHeight="54.0" prefWidth="780.0">

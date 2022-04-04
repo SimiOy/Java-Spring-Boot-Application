@@ -72,7 +72,8 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
 
     @FXML
     private MenuButton emotesMenu;
-
+    @FXML
+    private Pane commTab;
     @FXML
     private Label messageTxt1;
     @FXML
@@ -82,13 +83,10 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
 
     @FXML
     private ImageView imageView1;
-
     @FXML
     private ImageView imageView2;
-
     @FXML
     private ImageView imageView3;
-
     @FXML
     private ImageView bigImageView;
 
@@ -331,7 +329,6 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
             }
         }
         scoreTxt.setText("Score:" + clientData.getClientScore());
-
         clientData.getClientPlayer().score = clientData.getClientScore();
         server.send("/app/updateScore", new WebsocketMessage(ResponseCodes.SCORE_UPDATED,
                 clientData.getClientLobby().getToken(), clientData.getClientPlayer()));
@@ -495,5 +492,9 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
         if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: gray");
+    }
+
+    public Pane getCommTab() {
+        return commTab;
     }
 }
