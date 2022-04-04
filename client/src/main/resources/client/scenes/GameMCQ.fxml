@@ -26,7 +26,7 @@
                         <Image url="@../../images/hourglass.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="11.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hourglass" />
+                  <Text fx:id="halfTimeText" layoutX="11.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hourglass" />
                </children>
                <styleClass>
                   <String fx:value="roundedEdge" />
@@ -54,7 +54,7 @@
                         <Image url="@../../images/double.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="halfTimeText" layoutX="17.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="double" />
+                  <Text layoutX="17.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="double" />
                </children>
                <styleClass>
                   <String fx:value="roundedEdge" />

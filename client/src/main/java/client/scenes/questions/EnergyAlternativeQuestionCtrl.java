@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -48,7 +49,10 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     private ProgressBar pb;
 
     @FXML
-    private Text insteadOfText, actualWH1, actualWH2, actualWH3;
+    private Label insteadOfText;
+
+    @FXML
+    private Text actualWH1, actualWH2, actualWH3;
 
     final ToggleGroup radioGroup = new ToggleGroup();
 
@@ -59,15 +63,16 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     @FXML
     private RadioButton answer3;
     @FXML
-    private Circle joker1;
+    private Pane joker1;
     @FXML
-    private Circle joker2;
+    private Pane joker2;
     @FXML
-    private Circle halfTimeJoker;
+    private Pane halfTimeJoker;
     @FXML
     private Text halfTimeText;
 
     private int correctAnswer;
+    private int revealedAnswer;
     protected boolean doublePoints = false;
     private JokerUtils jokerUtils;
 
@@ -90,7 +95,22 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     @FXML
     private ImageView imageView3;
 
-    @FXML ImageView bigImageView;
+    @FXML
+    private ImageView bigImageView;
+
+    @FXML
+    private ImageView hourglassImageView;
+    @FXML
+    private ImageView insightImageView;
+    @FXML
+    private ImageView doubleImageView;
+
+    @FXML
+    private Pane answerOneContainer;
+    @FXML
+    private Pane answerTwoContainer;
+    @FXML
+    private Pane answerThreeContainer;
 
     @Inject
     public EnergyAlternativeQuestionCtrl(ClientData clientData, ClientUtils  client, ServerUtils server,
@@ -110,6 +130,9 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
+        hourglassImageView.setImage(new Image("/images/hourglass.png"));
+        insightImageView.setImage(new Image("/images/insight.png"));
+        doubleImageView.setImage(new Image("/images/double.png"));
     }
 
     public void leaveGame(){
@@ -127,9 +150,19 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         scoreTxt.setText("Score:" + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
         doublePoints = false;
-        halfTimeJoker.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
-        joker1.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
-        joker2.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
+        if(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)){
+            halfTimeJoker.setStyle("-fx-background-color: gray");
+            halfTimeJoker.getStyleClass().remove("image-button");
+        }
+        if(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)){
+            joker1.setStyle("-fx-background-color: gray");
+            joker1.getStyleClass().remove("image-button");
+        }
+        if(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)){
+            joker2.setStyle("-fx-background-color: gray");
+            joker2.getStyleClass().remove("image-button");
+        }
+        revealedAnswer = -1;
 
         answer1.setToggleGroup(radioGroup);
         answer2.setToggleGroup(radioGroup);
@@ -143,25 +176,16 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         actualWH2.setVisible(false);
         actualWH3.setVisible(false);
 
-        if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS))
-            joker1.setFill(rgb(30,144,255));
-        else
-            joker1.setFill(rgb(235,235,228));
-
-        if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS))
-            joker2.setFill(rgb(30,144,255));
-        else
-            joker2.setFill(rgb(235,235,228));
-
-        if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
-            halfTimeJoker.setFill(rgb(30,144,255));
-        else
-            halfTimeJoker.setFill(rgb(235,235,228));
-
+        answerOneContainer.getStyleClass().add("image-button");
+        answerTwoContainer.getStyleClass().add("image-button");
+        answerThreeContainer.getStyleClass().add("image-button");
 
         answer1.setStyle(" -fx-background-color: transparent; ");
         answer2.setStyle(" -fx-background-color: transparent; ");
         answer3.setStyle(" -fx-background-color: transparent; ");
+        answerOneContainer.setStyle(" -fx-background-color: white; ");
+        answerTwoContainer.setStyle(" -fx-background-color: white; ");
+        answerThreeContainer.setStyle(" -fx-background-color: white; ");
 
         Optional<Activity> act = server.getActivityByID(question.getFoundActivities().get(0));
         String textMethod = question.getText();
@@ -213,9 +237,9 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         b.setText(list.get(2).getTitle());
         c.setText(list.get(3).getTitle());
 
-        actualWH1.setText(list.get(1).getEnergyConsumption().toString());
-        actualWH2.setText(list.get(2).getEnergyConsumption().toString());
-        actualWH3.setText(list.get(3).getEnergyConsumption().toString());
+        actualWH1.setText(list.get(0).getEnergyConsumption().toString() + " Wh");
+        actualWH2.setText(list.get(1).getEnergyConsumption().toString() + " Wh");
+        actualWH3.setText(list.get(2).getEnergyConsumption().toString() + " Wh");
     }
 
     private void setImages(ImageView a, ImageView b, ImageView c, Question question) {
@@ -284,27 +308,27 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
                     clientData.setClientScore(clientData.getClientScore() +
                             (int) (pointsToAdd* client.getCoefficient()));
                 }
-                answer1.setStyle(" -fx-background-color: green; ");
-                answer2.setStyle(" -fx-background-color: red; ");
-                answer3.setStyle(" -fx-background-color: red; ");
+                answerOneContainer.setStyle("-fx-background-color: green");
+                answerTwoContainer.setStyle("-fx-background-color: red");
+                answerThreeContainer.setStyle("-fx-background-color: red");
                 break;
             case 1:
                 if(answer2.equals(radioGroup.getSelectedToggle())){
                     clientData.setClientScore(clientData.getClientScore() +
                             (int) (pointsToAdd* client.getCoefficient()));
                 }
-                answer2.setStyle(" -fx-background-color: green; ");
-                answer1.setStyle(" -fx-background-color: red; ");
-                answer3.setStyle(" -fx-background-color: red; ");
+                answerTwoContainer.setStyle("-fx-background-color: green");
+                answerOneContainer.setStyle("-fx-background-color: red");
+                answerThreeContainer.setStyle("-fx-background-color: red");
                 break;
             case 2:
                 if(answer3.equals(radioGroup.getSelectedToggle())){
                     clientData.setClientScore(clientData.getClientScore() +
                             (int) (pointsToAdd* client.getCoefficient()));
                 }
-                answer3.setStyle(" -fx-background-color: green; ");
-                answer1.setStyle(" -fx-background-color: red; ");
-                answer2.setStyle(" -fx-background-color: red; ");
+                answerThreeContainer.setStyle("-fx-background-color: green");
+                answerOneContainer.setStyle("-fx-background-color: red");
+                answerTwoContainer.setStyle("-fx-background-color: red");
                 break;
             default:
                 break;
@@ -325,24 +349,25 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
 
     public void eliminateRandomWrongAnswer() {
         if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)) {
-            joker2.setDisable(true);
             clientData.addJoker(JokerType.ELIMINATE_ANSWERS);
-            joker2.setFill(rgb(235,235,228));
+            joker2.setStyle("-fx-background-color: gray");
+            joker2.setDisable(true);
             int indexToRemove = new Random().nextInt(3);
             if (indexToRemove == correctAnswer) {
                 indexToRemove++;
             }
+            revealedAnswer = indexToRemove % 3;
             switch (indexToRemove % 3) {
                 case 0:
-                    answer1.setStyle(" -fx-background-color: red; ");
+                    answerOneContainer.setStyle(" -fx-background-color: red; ");
                     System.out.println("Disabled first answer");
                     break;
                 case 1:
-                    answer2.setStyle(" -fx-background-color: red; ");
+                    answerTwoContainer.setStyle(" -fx-background-color: red; ");
                     System.out.println("Disabled second answer");
                     break;
                 case 2:
-                    answer3.setStyle(" -fx-background-color: red; ");
+                    answerThreeContainer.setStyle(" -fx-background-color: red; ");
                     System.out.println("Disabled third answer");
                     break;
             }
@@ -440,7 +465,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
             joker1.setDisable(true);
-            joker1.setFill(rgb(235,235,228));
+            joker1.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }
@@ -449,7 +474,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     public void halfTimeForOthers() {
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)) {
             halfTimeJoker.setDisable(true);
-            halfTimeJoker.setFill(rgb(235,235,228));
+            halfTimeJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
@@ -457,11 +482,35 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         }
     }
 
-    public Circle getHalfTimeJoker() {
+    public Pane getHalfTimeJoker() {
         return halfTimeJoker;
     }
 
     public Text getHalfTimeText() {
         return halfTimeText;
+    }
+
+    /**
+     * Methods that handle what happens when the client clicks one of the images
+     */
+    public void answerOneSelected(){
+        answer1.fire();
+        if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: gray");
+        if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: white");
+    }
+
+    public void answerTwoSelected(){
+        answer2.fire();
+        if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: gray");
+        if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: white");
+    }
+
+    public void answerThreeSelected(){
+        answer3.fire();
+        if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: gray");
     }
 }
