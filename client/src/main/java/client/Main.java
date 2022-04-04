@@ -87,6 +87,10 @@ public class Main extends Application {
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         gameMCQ.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        estimationQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        estimationQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage, home, leaderboard, gameModeSelection, multiPlayerMenu,

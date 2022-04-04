@@ -24,11 +24,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import static constants.QuestionTypes.ESTIMATION_QUESTION;
-import static javafx.scene.paint.Color.rgb;
 
 public class EstimationQuestionCtrl implements JokerPowerUps{
 
@@ -53,7 +52,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     private Text nQuestionsTxt;
 
     @FXML
-    private Text questionTxt;
+    private Label questionTxt;
 
     @FXML
     private Text activityText;
@@ -68,12 +67,17 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     private Button submit;
 
     @FXML
-    private Circle joker1;
+    private Pane joker1;
 
     @FXML
-    private Circle halfTimeJoker;
+    private Pane halfTimeJoker;
     @FXML
     private Text halfTimeText;
+
+    @FXML
+    private ImageView hourglassImageView;
+    @FXML
+    private ImageView doubleImageView;
 
     private Long submittedAnswer;
     private Long correctAnswer;
@@ -109,29 +113,26 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
+        hourglassImageView.setImage(new Image("/images/hourglass.png"));
+        doubleImageView.setImage(new Image("/images/double.png"));
     }
 
     public void resetUI(Question question)
     {
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
 
         doublePoints = false;
-        halfTimeJoker.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
-        joker1.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
+        if(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)){
+            halfTimeJoker.setStyle("-fx-background-color: gray");
+            halfTimeJoker.getStyleClass().remove("image-button");
+        }
+        if(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)){
+            joker1.setStyle("-fx-background-color: gray");
+            joker1.getStyleClass().remove("image-button");
+        }
 
         submit.setDisable(false);
-
-        if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS))
-            joker1.setFill(rgb(30,144,255));
-        else
-            joker1.setFill(rgb(235,235,228));
-
-        if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
-            halfTimeJoker.setFill(rgb(30,144,255));
-        else
-            halfTimeJoker.setFill(rgb(235,235,228));
-
 
         Activity polledActivity = server.getActivityByID(question.getFoundActivities().get(0)).get();
         correctAnswer = polledActivity.getEnergyConsumption();
@@ -262,7 +263,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         }
         doublePoints = false;
         clientData.setClientScore((int) (clientData.getClientScore() + pointsToAdd * progress));
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
 
         clientData.getClientPlayer().score = clientData.getClientScore();
         server.send("/app/updateScore", new WebsocketMessage(ResponseCodes.SCORE_UPDATED,
@@ -288,7 +289,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
             joker1.setDisable(true);
-            joker1.setFill(rgb(235,235,228));
+            joker1.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }
@@ -297,7 +298,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     public void halfTimeForOthers() {
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)) {
             halfTimeJoker.setDisable(true);
-            halfTimeJoker.setFill(rgb(235,235,228));
+            halfTimeJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
@@ -378,7 +379,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         }
     }
 
-    public Circle getHalfTimeJoker() {
+    public Pane getHalfTimeJoker() {
         return halfTimeJoker;
     }
 

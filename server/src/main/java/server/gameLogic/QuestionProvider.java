@@ -122,7 +122,8 @@ public class QuestionProvider {
     }
 
     public QuestionTypes getRandomQuestionType() {
-        switch (Math.abs(random.nextInt(1))) {
+        //switch (Math.abs(random.nextInt(1))) {
+        switch(1) {
             case 0:
                 return QuestionTypes.MULTIPLE_CHOICE_QUESTION;
             case 1:
