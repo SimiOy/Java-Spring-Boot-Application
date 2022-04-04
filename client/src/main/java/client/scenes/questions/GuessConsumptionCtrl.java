@@ -139,9 +139,7 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         scoreTxt.setText("Score:" + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/20");
         doublePoints = false;
-        halfTimeJoker.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
-        joker1.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
-        joker2.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
+        jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
 
         if(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)){
             halfTimeJoker.setStyle("-fx-background-color: gray");
@@ -456,6 +454,7 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             jokerUtils.sendJoker();
+            emotes.sendJokerUsed();
         }
     }
 

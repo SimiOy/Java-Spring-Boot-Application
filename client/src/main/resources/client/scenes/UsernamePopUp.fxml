@@ -4,12 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="178.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.UsernamePopUpCtrl">
+<AnchorPane prefHeight="178.0" prefWidth="392.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.UsernamePopUpCtrl">
    <children>
-      <Label focusTraversable="false" layoutX="13.0" layoutY="23.0" text="The username you entered is already in use by someone in this lobby." />
-      <Label focusTraversable="false" layoutX="119.0" layoutY="53.0" text="Please enter a new username:" />
+      <Label focusTraversable="false" layoutX="13.0" layoutY="23.0" text="The username you entered is already in use by someone in this lobby." textFill="WHITE" />
+      <Label focusTraversable="false" layoutX="119.0" layoutY="53.0" text="Please enter a new username:" textFill="WHITE" />
       <TextField fx:id="name" layoutX="121.0" layoutY="88.0" />
-      <Button layoutX="175.0" layoutY="126.0" mnemonicParsing="false" onAction="#done" text="Done" />
+      <Button layoutX="156.0" layoutY="127.0" mnemonicParsing="false" onAction="#done" prefHeight="26.0" prefWidth="79.0" text="Done">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -9,4 +9,8 @@ public interface Emotes {
     List<MenuItem> getEmotesList();
 
     void sendEmote(String emote);
+
+    void sendDisconnect();
+
+    void sendJokerUsed();
 }

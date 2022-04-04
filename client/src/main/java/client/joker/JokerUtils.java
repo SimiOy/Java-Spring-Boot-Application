@@ -8,8 +8,12 @@ import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import commons.WebsocketMessage;
 import constants.JokerType;
+import javafx.scene.shape.Circle;
+import org.springframework.messaging.simp.stomp.StompSession;
 
 import javax.inject.Inject;
+
+import static javafx.scene.paint.Color.rgb;
 
 /**
  * Class where the client interacts with the server through websockets
@@ -29,6 +33,8 @@ public class JokerUtils {
 
     private ServerUtils server;
 
+    private StompSession.Subscription jokersSubscription;
+
     @Inject
     public JokerUtils(ClientUtils client, ServerUtils server, ClientData clientData) {
         this.client = client;
@@ -40,13 +46,16 @@ public class JokerUtils {
      * After just joining a lobby, the client registers for joker updates
      */
     public void registerForJokerUpdates(){
-        server.registerForMessages("/topic/updateJoker", msg -> {
-            if(msg.getLobbyToken().equals(clientData.getClientLobby().token)){
-                lobbyJoker = msg.getJokerType();
-                System.out.println("received joker " + lobbyJoker);
-                handleJokerCases(msg.getSenderName());
-            }
-        });
+        if(jokersSubscription == null) {
+            jokersSubscription = server.registerForMessages("/topic/updateJoker", msg -> {
+                if (msg.getLobbyToken().equals(clientData.getClientLobby().token)) {
+                    lobbyJoker = msg.getJokerType();
+                    System.out.println("received joker " + lobbyJoker);
+                    handleJokerCases(msg.getSenderName());
+                }
+            });
+        }
+        clientData.resetJokers();
     }
 
     /**
@@ -100,6 +109,33 @@ public class JokerUtils {
         }else if(curController instanceof EnergyAlternativeQuestionCtrl){
             ((EnergyAlternativeQuestionCtrl) curController).eliminateRandomWrongAnswer();
         }
+    }
+
+    /** method to be called on all resetUI scenes, to reduce code duplication
+     * First and second parameter are always valid, the third one could be null
+     * for the EstimationQuestion scene, in which case we just return
+     */
+    public void resetJokerUI(Circle halfTime, Circle doublePoints, Circle eliminateAnswer)
+    {
+        halfTime.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
+        doublePoints.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
+
+        if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS))
+            doublePoints.setFill(rgb(30,144,255));
+        else
+            doublePoints.setFill(rgb(235,235,228));
+
+        if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
+            halfTime.setFill(rgb(30,144,255));
+        else
+            halfTime.setFill(rgb(235,235,228));
+
+        if(eliminateAnswer == null) return;
+        eliminateAnswer.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
+        if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS))
+            eliminateAnswer.setFill(rgb(30,144,255));
+        else
+            eliminateAnswer.setFill(rgb(235,235,228));
     }
 
     /**

@@ -135,7 +135,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
             joker1.getStyleClass().remove("image-button");
         }
 
-        submit.setDisable(false);
+        jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, null);
 
         Activity polledActivity = server.getActivityByID(question.getFoundActivities().get(0)).get();
         correctAnswer = polledActivity.getEnergyConsumption();
@@ -306,6 +306,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             jokerUtils.sendJoker();
+            emotes.sendJokerUsed();
         }
     }
     /**

@@ -2,6 +2,7 @@ package client.game;
 
 import client.data.ClientData;
 import client.emotes.Emotes;
+import client.joker.JokerUtils;
 import client.scenes.MainCtrl;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
@@ -21,6 +22,7 @@ class GameTest {
 
     private ServerUtils server;
     private ClientUtils client;
+    private JokerUtils jokerUtils;
     private ClientData clientData;
     private MainCtrl mainCtrl;
     private Game game;
@@ -32,10 +34,11 @@ class GameTest {
         client = mock(ClientUtils.class);
         clientData = mock(ClientData.class);
         mainCtrl = mock(MainCtrl.class);
+        emotes = mock(Emotes.class);
         defineMethodsForServer();
         defineMethodsForClientData();
 
-        game = new GameImpl(server, client, clientData, mainCtrl, emotes);
+        game = new GameImpl(server, client, clientData, mainCtrl, emotes, jokerUtils);
     }
 
     /**

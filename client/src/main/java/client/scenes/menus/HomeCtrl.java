@@ -8,14 +8,17 @@ import client.utils.ServerUtils;
 import commons.Player;
 import exceptions.InvalidServerException;
 import jakarta.ws.rs.WebApplicationException;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 
 import javax.inject.Inject;
+import javafx.util.Duration;
 
 public class HomeCtrl {
 
@@ -40,6 +43,18 @@ public class HomeCtrl {
     @FXML
     private Text incorrectServerText;
 
+    @FXML
+    private ImageView bgImage;
+
+    @FXML
+    private ImageView playButtonImage;
+
+    @FXML
+    private ImageView nextAvatar;
+
+    @FXML
+    private ImageView previousAvatar;
+
     @Inject
     public HomeCtrl(ServerUtils server, MainCtrl mainCtrl, ClientData clientData, AvatarManager avatarGenerator,
                     ClientUtils clientUtils) {
@@ -59,6 +74,22 @@ public class HomeCtrl {
         avatarGenerator.setNameAndAvatarImage(name, avatarImage);
         avatarGenerator.initAvatar();
         avatarGenerator.setAvatarImage();
+        bgImage.setImage(new Image("images/home_screen.png"));
+        bgImage.setPreserveRatio(false);
+        playButtonImage.setImage(new Image("images/play.png"));
+        nextAvatar.setImage(new Image("images/right-arrow.png"));
+        previousAvatar.setImage(new Image("images/left-arrow.png"));
+        FadeTransition ft = new FadeTransition();
+        ft.setNode(bgImage);
+        ft.setDuration(new Duration(1700));
+        ft.setFromValue(1.0);
+        ft.setToValue(0.4);
+        ft.setCycleCount(6);
+        ft.setOnFinished(a -> {
+            ft.playFromStart();
+        });
+        ft.setAutoReverse(true);
+        ft.play();
     }
 
     /**

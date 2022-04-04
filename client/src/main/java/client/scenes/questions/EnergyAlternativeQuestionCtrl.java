@@ -156,6 +156,8 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         }
         revealedAnswer = -1;
 
+        jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
+
         answer1.setToggleGroup(radioGroup);
         answer2.setToggleGroup(radioGroup);
         answer3.setToggleGroup(radioGroup);
@@ -460,6 +462,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             jokerUtils.sendJoker();
+            emotes.sendJokerUsed();
         }
     }
 
