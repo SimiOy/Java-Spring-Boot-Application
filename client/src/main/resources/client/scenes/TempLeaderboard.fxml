@@ -9,42 +9,42 @@
 <?import javafx.scene.text.Font?>
 <?import client.utils.FormattedTableCellFactory?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.leaderboards.TempLeaderboardCtrl">
-   <children>
-       <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
-       <Button focusTraversable="false" layoutX="21.0" layoutY="650.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="45.0" prefWidth="50.0" text="Leave Game" wrapText="true" />
-       <Label layoutX="595.0" layoutY="64.0" text="Leaderboard">
-           <font>
-               <Font size="16.0" />
-           </font>
-       </Label>
-       <TableView fx:id="table" layoutX="350.0" layoutY="110.0" prefHeight="450.0" prefWidth="600.0">
-        <columns>
-            <TableColumn fx:id="rank" prefWidth="120" text="#Rank">
-                <cellFactory>
-                    <FormattedTableCellFactory alignment="center">
-                    </FormattedTableCellFactory>
-                </cellFactory>
-            </TableColumn>
-            <TableColumn fx:id="avatarColumn" prefWidth="160" text="Avatar" >
-                <cellFactory>
-                    <FormattedTableCellFactory alignment="center">
-                    </FormattedTableCellFactory>
-                </cellFactory>
-            </TableColumn>
-            <TableColumn fx:id="nameColumn" prefWidth="180" text="Username" >
-                <cellFactory>
-                    <FormattedTableCellFactory alignment="center">
-                    </FormattedTableCellFactory>
-                </cellFactory>
-            </TableColumn>
-            <TableColumn fx:id="scoreColumn" prefWidth="140" text="Score" >
-                <cellFactory>
-                    <FormattedTableCellFactory alignment="center">
-                    </FormattedTableCellFactory>
-                </cellFactory>
-            </TableColumn>
-        </columns>
-      </TableView>
-   </children>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.leaderboards.TempLeaderboardCtrl">
+    <children>
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
+        <Button focusTraversable="false" layoutX="39.0" layoutY="613.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="59.0" prefWidth="222.0" text="LEAVE GAME">
+            <font>
+                <Font size="25.0" />
+            </font></Button>
+        <Text fill="white" layoutX="595.0" layoutY="64.0" text="Leaderboard" styleClass="text"/>
+        <TableView fx:id="table" layoutX="350.0" layoutY="110.0" prefHeight="450.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="rank" prefWidth="120" text="#Rank">
+                    <cellFactory>
+                        <FormattedTableCellFactory alignment="center">
+                        </FormattedTableCellFactory>
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn fx:id="avatarColumn" prefWidth="160" text="Avatar" >
+                    <cellFactory>
+                        <FormattedTableCellFactory alignment="center">
+                        </FormattedTableCellFactory>
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn fx:id="nameColumn" prefWidth="180" text="Username" >
+                    <cellFactory>
+                        <FormattedTableCellFactory alignment="center">
+                        </FormattedTableCellFactory>
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn fx:id="scoreColumn" prefWidth="140" text="Score" >
+                    <cellFactory>
+                        <FormattedTableCellFactory alignment="center">
+                        </FormattedTableCellFactory>
+                    </cellFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>

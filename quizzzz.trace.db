@@ -1,0 +1,18 @@
+2022-04-03 17:41:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "LIST_OF_PLAYERS VARBINARY(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000a77040000000a7372000e6a61... (262)"; SQL statement:
+update lobby set host_id=?, is_public=?, is_started=?, list_of_players=?, token=? where id=? [22001-200]
+2022-04-03 17:41:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "LIST_OF_PLAYERS VARBINARY(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000a77040000000a7372000e6a61... (262)"; SQL statement:
+update lobby set host_id=?, is_public=?, is_started=?, list_of_players=?, token=? where id=? [22001-200]
+2022-04-03 17:52:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "LIST_OF_PLAYERS VARBINARY(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000a77040000000a7372000e6a61... (262)"; SQL statement:
+update lobby set host_id=?, is_public=?, is_started=?, list_of_players=?, token=? where id=? [22001-200]
+2022-04-03 17:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "LIST_OF_PLAYERS VARBINARY(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000a77040000000a7372000e6a61... (262)"; SQL statement:
+update lobby set host_id=?, is_public=?, is_started=?, list_of_players=?, token=? where id=? [22001-200]
+2022-04-03 18:05:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "LIST_OF_PLAYERS VARBINARY(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000a77040000000a7372000e6a61... (262)"; SQL statement:
+update lobby set host_id=?, is_public=?, is_started=?, list_of_players=?, token=? where id=? [22001-200]
+2022-04-03 18:05:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "LIST_OF_PLAYERS VARBINARY(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000a77040000000a7372000e6a61... (262)"; SQL statement:
+update lobby set host_id=?, is_public=?, is_started=?, list_of_players=?, token=? where id=? [22001-200]
