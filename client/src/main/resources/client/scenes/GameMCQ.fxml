@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -64,7 +65,7 @@
       <Circle fill="WHITE" layoutX="467.0" layoutY="100.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
       <AnchorPane layoutX="1141.0" layoutY="620.0" prefHeight="74.0" prefWidth="117.0" style="-fx-background-color: white;" styleClass="roundedEdge">
          <children>
-            <Text fx:id="nQuestionsTxt" layoutX="53.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" wrappingWidth="48.39996337890625">
+            <Text fx:id="nQuestionsTxt" layoutX="28.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" textAlignment="CENTER" wrappingWidth="61.99993896484375">
                <font>
                   <Font size="24.0" />
                </font>
@@ -105,20 +106,12 @@
       <RadioButton fx:id="answer1" focusTraversable="false" layoutX="345.0" layoutY="447.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="142.0" text="Answer 1" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
       <RadioButton fx:id="answer2" focusTraversable="false" layoutX="595.0" layoutY="442.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="148.0" text="Answer 2" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
       <RadioButton fx:id="answer3" focusTraversable="false" layoutX="831.0" layoutY="442.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="148.0" text="Answer 3" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-      <Text fx:id="questionTxt" fill="WHITE" layoutX="500.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some question?" textAlignment="CENTER">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Text>
       <ProgressBar fx:id="pb" layoutX="500.0" layoutY="84.0" prefHeight="31.0" prefWidth="320.0" progress="0.0" styleClass="roundedEdge" />
       <Text layoutX="454.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰" wrappingWidth="26.0">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Label fx:id="messageTxt1" layoutX="14.0" layoutY="282.0" />
-      <Label fx:id="messageTxt2" layoutX="14.0" layoutY="229.0" />
-      <Label fx:id="messageTxt3" layoutX="14.0" layoutY="179.0" />
       <MenuButton fx:id="emotesMenu" layoutX="1172.0" layoutY="40.0" mnemonicParsing="false" styleClass="button" text="emotes">
          <items>
          </items>
@@ -137,12 +130,28 @@
          </font></Text>
       <AnchorPane layoutX="95.0" layoutY="66.0" prefHeight="67.0" prefWidth="168.0" style="-fx-background-color: white;" styleClass="roundedEdge">
          <children>
-            <Text fx:id="scoreTxt" layoutX="16.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="63.5999755859375">
+            <Text fx:id="scoreTxt" layoutX="16.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
+      <Pane layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
+         <children>
+            <Label fx:id="messageTxt1" layoutX="15.0" layoutY="165.0" />
+            <Label fx:id="messageTxt2" layoutX="15.0" layoutY="95.0" />
+            <Label fx:id="messageTxt3" layoutX="15.0" layoutY="25.0" />
+         </children>
+      </Pane>
+      <StackPane layoutX="250.0" layoutY="16.0" prefHeight="54.0" prefWidth="780.0">
+         <children>
+            <Label fx:id="questionTxt" textFill="WHITE" StackPane.alignment="CENTER">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

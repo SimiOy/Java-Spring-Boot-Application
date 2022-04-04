@@ -49,7 +49,10 @@ public class GameMCQCtrl implements JokerPowerUps {
     private Text nQuestionsTxt;
 
     @FXML
-    private Text questionTxt, actualWH1, actualWH2, actualWH3;
+    private Label questionTxt;
+
+    @FXML
+    private Text actualWH1, actualWH2, actualWH3;
 
     final ToggleGroup radioGroup = new ToggleGroup(); 
 
@@ -131,7 +134,7 @@ public class GameMCQCtrl implements JokerPowerUps {
 
     public void resetUI(Question question)
     {
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
         doublePoints = false;
         if(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)){
@@ -321,7 +324,7 @@ public class GameMCQCtrl implements JokerPowerUps {
                 mainCtrl.showKickPopUp();
             }
         }
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
         clientData.getClientPlayer().score = clientData.getClientScore();
         server.send("/app/updateScore", new WebsocketMessage(ResponseCodes.SCORE_UPDATED,
                 clientData.getClientLobby().getToken(), clientData.getClientPlayer()));
@@ -392,7 +395,6 @@ public class GameMCQCtrl implements JokerPowerUps {
      * This background colour is removed however when the string is empty in order to reset.
      * @param message message to be displayed in the label corresponding to the method name
      */
-    //empty string check might be used later in order to make messages disappear after X time
     public void setMessageTxt1(String message) {
         messageTxt1.setText(message);
         if(!(message.equals(""))){
