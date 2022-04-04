@@ -42,6 +42,7 @@ public class WaitingCtrl implements Initializable{
     private final ServerUtils server;
     private final ClientUtils client;
     private final ClientData clientData;
+    private final JokerUtils jokerUtils;
     private final Game game;
 
     private final MainCtrl mainCtrl;
@@ -85,8 +86,6 @@ public class WaitingCtrl implements Initializable{
 
     private StompSession.Subscription lobbyStartSubscription;
 
-    private JokerUtils jokerUtils;
-
     @Inject
     public WaitingCtrl(ServerUtils server, MainCtrl mainCtrl, ClientUtils client, ClientData clientData,
                        JokerUtils jokerUtils, Game game) {
@@ -102,7 +101,6 @@ public class WaitingCtrl implements Initializable{
      * Method that sets up how the scene should look like when switched to
      */
     public void load(){
-        clientData.resetJokers();
         clientData.setQuestionCounter(0);
 
         resetUI();

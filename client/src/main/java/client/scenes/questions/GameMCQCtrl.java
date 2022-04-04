@@ -11,6 +11,7 @@ import client.utils.ServerUtils;
 import commons.Activity;
 import commons.Question;
 import commons.WebsocketMessage;
+import constants.GameType;
 import constants.JokerType;
 import constants.ResponseCodes;
 import javafx.application.Platform;
@@ -60,11 +61,13 @@ public class GameMCQCtrl implements JokerPowerUps {
     @FXML
     private RadioButton answer3;
     @FXML
-    private Circle joker1;
+    private Circle doublePointsJoker;
     @FXML
-    private Circle joker2;
+    private Circle eliminateAnswerJoker;
     @FXML
-    private Circle joker3;
+    private Circle halfTimeJoker;
+    @FXML
+    private Text halfTimeText;
 
     private int correctAnswer;
 
@@ -114,16 +117,8 @@ public class GameMCQCtrl implements JokerPowerUps {
         scoreTxt.setText("Score:" + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
         doublePoints = false;
-        joker3.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
-        joker1.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
-        joker2.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
 
-        if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS))
-            joker1.setFill(rgb(30,144,255));
-        if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS))
-            joker2.setFill(rgb(30,144,255));
-        if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
-            joker3.setFill(rgb(30,144,255));
+        jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
 
         answer1.setToggleGroup(radioGroup);
         answer2.setToggleGroup(radioGroup);
@@ -153,21 +148,26 @@ public class GameMCQCtrl implements JokerPowerUps {
         Random random = new Random();
         correctAnswer = random.nextInt(3);
 
+        List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
+
         switch (correctAnswer)
         {
             case 0:
                 //correct answer is first one
-                randomizeFields(answer1,answer2,answer3,question);
+                randomizeFields(answer1,answer2,answer3, list);
+                setWHText(actualWH1, actualWH2, actualWH3, list);
                 setImages(imageView1, imageView2, imageView3, question);
                 break;
             case 1:
                 //correct answer is second one
-                randomizeFields(answer2,answer1,answer3,question);
+                randomizeFields(answer2,answer1,answer3,list);
+                setWHText(actualWH2, actualWH1, actualWH3, list);
                 setImages(imageView2, imageView1, imageView3, question);
                 break;
             case 2:
                 //correct answer is third one
-                randomizeFields(answer3,answer1,answer2,question);
+                randomizeFields(answer3,answer1,answer2,list);
+                setWHText(actualWH3, actualWH1, actualWH2, list);
                 setImages(imageView3, imageView1, imageView2, question);
                 break;
             default:
@@ -175,16 +175,18 @@ public class GameMCQCtrl implements JokerPowerUps {
         }
     }
 
-    public void randomizeFields(RadioButton a, RadioButton b, RadioButton c, Question question)
+    public void randomizeFields(RadioButton a, RadioButton b, RadioButton c, List<Activity> list)
     {
-        List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
         a.setText(list.get(0).getTitle());
         b.setText(list.get(1).getTitle());
         c.setText(list.get(2).getTitle());
+    }
 
-        actualWH1.setText(list.get(0).getEnergyConsumption().toString());
-        actualWH2.setText(list.get(1).getEnergyConsumption().toString());
-        actualWH3.setText(list.get(2).getEnergyConsumption().toString());
+    private void setWHText(Text a, Text b, Text c, List<Activity> list)
+    {
+        a.setText(list.get(0).getEnergyConsumption().toString());
+        b.setText(list.get(1).getEnergyConsumption().toString());
+        c.setText(list.get(2).getEnergyConsumption().toString());
     }
 
     private void setImages(ImageView a, ImageView b, ImageView c, Question question) {
@@ -216,7 +218,8 @@ public class GameMCQCtrl implements JokerPowerUps {
 
                     Thread.sleep(2000);
 
-                    if(clientData.getQuestionCounter() == game.getQuestionsToDisplayLeaderboard()){
+                    if(clientData.getQuestionCounter() == game.getQuestionsToDisplayLeaderboard() &&
+                    clientData.getGameType() == GameType.MULTIPLAYER){
                         Platform.runLater(() -> mainCtrl.showTempLeaderboard());
                         Thread.sleep(5000);
                     }
@@ -308,8 +311,8 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void eliminateRandomWrongAnswer(){
         if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)) {
             clientData.addJoker(JokerType.ELIMINATE_ANSWERS);
-            joker2.setFill(rgb(235,235,228));
-            joker2.setDisable(true);
+            eliminateAnswerJoker.setFill(rgb(235,235,228));
+            eliminateAnswerJoker.setDisable(true);
             int indexToRemove = new Random().nextInt(3);
             if (indexToRemove == correctAnswer) {
                 indexToRemove++;
@@ -360,6 +363,10 @@ public class GameMCQCtrl implements JokerPowerUps {
 
     public Label getMessageTxt3() {
         return messageTxt3;
+    }
+
+    public MenuButton getEmotesMenu() {
+        return emotesMenu;
     }
 
     /**
@@ -419,8 +426,8 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void doublePoints() {
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
-            joker1.setDisable(true);
-            joker1.setFill(rgb(235,235,228));
+            doublePointsJoker.setDisable(true);
+            doublePointsJoker.setFill(rgb(235,235,228));
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }
@@ -428,12 +435,21 @@ public class GameMCQCtrl implements JokerPowerUps {
     @Override
     public void halfTimeForOthers() {
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)) {
-            joker3.setDisable(true);
-            joker3.setFill(rgb(235,235,228));
+            halfTimeJoker.setDisable(true);
+            halfTimeJoker.setFill(rgb(235,235,228));
             clientData.addJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             jokerUtils.sendJoker();
+            emotes.sendJokerUsed();
         }
+    }
+
+    public Circle getHalfTimeJoker() {
+        return halfTimeJoker;
+    }
+
+    public Text getHalfTimeText() {
+        return halfTimeText;
     }
 }

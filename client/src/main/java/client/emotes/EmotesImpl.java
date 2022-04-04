@@ -44,4 +44,16 @@ public class EmotesImpl implements Emotes {
                 clientData.getClientPlayer().getName() + ": " + emote,
                 clientData.getClientLobby().getToken()));
     }
+
+    public void sendDisconnect() {
+        server.send("/app/updateMessages", new WebsocketMessage(
+                clientData.getClientPlayer().getName() + " left the game",
+                clientData.getClientLobby().getToken()));
+    }
+
+    public void sendJokerUsed() {
+        server.send("/app/updateMessages", new WebsocketMessage(
+                clientData.getClientPlayer().getName() + " halved the time!",
+                clientData.getClientLobby().getToken()));
+    }
 }

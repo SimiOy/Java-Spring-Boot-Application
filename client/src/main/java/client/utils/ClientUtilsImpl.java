@@ -8,8 +8,6 @@ import client.scenes.questions.EnergyAlternativeQuestionCtrl;
 import client.scenes.questions.EstimationQuestionCtrl;
 import client.scenes.questions.GameMCQCtrl;
 import client.scenes.questions.GuessConsumptionCtrl;
-import commons.LeaderboardEntry;
-import commons.Player;
 import commons.Question;
 import constants.QuestionTypes;
 import constants.ResponseCodes;
@@ -349,8 +347,6 @@ public class ClientUtilsImpl implements ClientUtils {
     public void getQuestion() {
 
         if (clientData.getQuestionCounter() >= game.getQuestionsToEndGame()){
-            Player temp = clientData.getClientPlayer();
-            server.persistScore(new LeaderboardEntry(temp.getScore(), temp.getName(), temp.getAvatarCode()));
             game.endGame();
         }
         else {
@@ -412,7 +408,8 @@ public class ClientUtilsImpl implements ClientUtils {
      */
     public void updateMessages(String text, String lobbyToken){
         Platform.runLater(() -> {
-            if(!lobbyToken.equals(clientData.getClientLobby().getToken())){
+            if(clientData.getClientLobby() == null ||
+                    !lobbyToken.equals(clientData.getClientLobby().getToken())){
                 return;
             }
             gameMCQCtrl.setMessageTxt3(gameMCQCtrl.getMessageTxt2().getText());
@@ -446,6 +443,36 @@ public class ClientUtilsImpl implements ClientUtils {
         guessConsumptionCtrl.setMessageTxt1("");
         guessConsumptionCtrl.setMessageTxt2("");
         guessConsumptionCtrl.setMessageTxt3("");
+    }
+
+    /**
+     * Turns emotes and halfTime joker off when given true and turns them on when given false
+     * @param bool
+     */
+    public void swapEmoteJokerUsability(boolean bool){
+        //swaps usability of emotes
+        gameMCQCtrl.getEmotesMenu().setDisable(bool);
+        gameMCQCtrl.getEmotesMenu().setVisible(!bool);
+        estimationQuestionCtrl.getEmotesMenu().setDisable(bool);
+        estimationQuestionCtrl.getEmotesMenu().setVisible(!bool);
+        energyAlternativeQuestionCtrl.getEmotesMenu().setDisable(bool);
+        energyAlternativeQuestionCtrl.getEmotesMenu().setVisible(!bool);
+        guessConsumptionCtrl.getEmotesMenu().setDisable(bool);
+        guessConsumptionCtrl.getEmotesMenu().setVisible(!bool);
+
+        //swaps usability of halftime joker
+        gameMCQCtrl.getHalfTimeJoker().setDisable(bool);
+        gameMCQCtrl.getHalfTimeJoker().setVisible(!bool);
+        gameMCQCtrl.getHalfTimeText().setVisible(!bool);
+        estimationQuestionCtrl.getHalfTimeJoker().setDisable(bool);
+        estimationQuestionCtrl.getHalfTimeJoker().setVisible(!bool);
+        estimationQuestionCtrl.getHalfTimeText().setVisible(!bool);
+        energyAlternativeQuestionCtrl.getHalfTimeJoker().setDisable(bool);
+        energyAlternativeQuestionCtrl.getHalfTimeJoker().setVisible(!bool);
+        energyAlternativeQuestionCtrl.getHalfTimeText().setVisible(!bool);
+        guessConsumptionCtrl.getHalfTimeJoker().setDisable(bool);
+        guessConsumptionCtrl.getHalfTimeJoker().setVisible(!bool);
+        guessConsumptionCtrl.getHalfTimeText().setVisible(!bool);
     }
 
     public double getCoefficient() {

@@ -3,6 +3,7 @@ package client.data;
 import commons.Lobby;
 import commons.Player;
 import commons.Question;
+import constants.GameType;
 import constants.JokerType;
 
 import java.util.HashSet;
@@ -52,4 +53,8 @@ public interface ClientData {
     void incrementUnansweredQuestionCounter();
 
     void clearUnansweredQuestionCounter();
+
+    GameType getGameType();
+
+    void setGameType(GameType gameType);
 }
