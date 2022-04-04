@@ -79,6 +79,8 @@ public class Main extends Application {
                 .add(getClass().getResource("scenes/stylesheets/Leaderboard.css").toExternalForm());
         multiPlayerMenu.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/MultiplayerMenu.css").toExternalForm());
+        multiPlayerMenu.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         tempLeaderboard.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/TempLeaderboard.css").toExternalForm());
         waiting.getValue().getStylesheets()
