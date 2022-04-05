@@ -2,21 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="649.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="649.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.JokerPopUpCtrl">
    <children>
       <Pane layoutX="109.0" layoutY="28.0" prefHeight="115.0" prefWidth="430.0" style="-fx-background-color: white;" styleClass="powerup_pane">
          <children>
-            <ImageView fitHeight="71.0" fitWidth="67.0" layoutX="36.0" layoutY="14.0" preserveRatio="true">
+            <ImageView fx:id="hourglass" fitHeight="71.0" fitWidth="67.0" layoutX="36.0" layoutY="14.0" preserveRatio="true">
             </ImageView>
-            <ImageView fitHeight="82.0" fitWidth="67.0" layoutX="182.0" layoutY="14.0" preserveRatio="true">
+            <ImageView fx:id="insight" fitHeight="82.0" fitWidth="67.0" layoutX="182.0" layoutY="14.0" preserveRatio="true">
             </ImageView>
-            <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="319.0" layoutY="14.0" preserveRatio="true">
+            <ImageView fx:id="doublepts" fitHeight="67.0" fitWidth="67.0" layoutX="319.0" layoutY="14.0" preserveRatio="true">
             </ImageView>
             <Label layoutX="41.0" layoutY="81.0" text="Hourglass">
                <font>
@@ -48,7 +47,7 @@
          <children>
             <Label prefHeight="103.0" prefWidth="138.0" text="The double grants you the power to earn 2x points if your answer is correct." textAlignment="CENTER" wrapText="true" />
          </children></Pane>
-      <Button layoutX="255.0" layoutY="279.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="138.0" text="Okay">
+      <Button layoutX="255.0" layoutY="279.0" mnemonicParsing="false" onAction="#close" prefHeight="48.0" prefWidth="138.0" text="Okay">
          <font>
             <Font size="23.0" />
          </font>
