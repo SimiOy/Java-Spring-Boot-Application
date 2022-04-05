@@ -121,6 +121,7 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void load() {
         if(client.isInLobby()) {
             setUpEmoteMenu();
+            nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
@@ -132,7 +133,7 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void resetUI(Question question)
     {
         scoreTxt.setText("Score: " + clientData.getClientScore());
-        nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
+
         doublePoints = false;
         jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
 
