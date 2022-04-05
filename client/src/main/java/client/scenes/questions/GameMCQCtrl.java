@@ -59,9 +59,9 @@ public class GameMCQCtrl implements JokerPowerUps {
     @FXML
     private RadioButton answer3;
     @FXML
-    private Pane joker1;
+    private Pane doublePointsJoker;
     @FXML
-    private Pane joker2;
+    private Pane eliminateAnswerJoker;
     @FXML
     private Pane halfTimeJoker;
     @FXML
@@ -134,18 +134,7 @@ public class GameMCQCtrl implements JokerPowerUps {
         scoreTxt.setText("Score: " + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
         doublePoints = false;
-        if(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)){
-            halfTimeJoker.setStyle("-fx-background-color: gray");
-            halfTimeJoker.getStyleClass().remove("image-button");
-        }
-        if(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)){
-            joker1.setStyle("-fx-background-color: gray");
-            joker1.getStyleClass().remove("image-button");
-        }
-        if(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)){
-            joker2.setStyle("-fx-background-color: gray");
-            joker2.getStyleClass().remove("image-button");
-        }
+        jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
 
         revealedAnswer = -1;
 
@@ -335,8 +324,8 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void eliminateRandomWrongAnswer(){
         if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)) {
             clientData.addJoker(JokerType.ELIMINATE_ANSWERS);
-            joker2.setStyle("-fx-background-color: gray");
-            joker2.setDisable(true);
+            eliminateAnswerJoker.setStyle("-fx-background-color: gray");
+            eliminateAnswerJoker.setDisable(true);
             int indexToRemove = new Random().nextInt(3);
             if (indexToRemove == correctAnswer) {
                 indexToRemove++;
@@ -442,8 +431,8 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void doublePoints() {
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
-            joker1.setDisable(true);
-            joker1.setStyle("-fx-background-color: gray");
+            doublePointsJoker.setDisable(true);
+            doublePointsJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }

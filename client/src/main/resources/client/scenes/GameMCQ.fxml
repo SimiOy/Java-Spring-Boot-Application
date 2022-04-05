@@ -33,7 +33,7 @@
                   <String fx:value="image-button" />
                </styleClass>
             </Pane>
-            <Pane fx:id="joker2" layoutX="205.0" layoutY="6.0" onMouseClicked="#eliminateRandomWrongAnswer" prefHeight="84.0" prefWidth="72.0" style="-fx-background-color: #ccffff;">
+            <Pane fx:id="eliminateAnswerJoker" layoutX="205.0" layoutY="6.0" onMouseClicked="#eliminateRandomWrongAnswer" prefHeight="84.0" prefWidth="72.0" style="-fx-background-color: #ccffff;">
                <children>
                   <ImageView fx:id="insightImageView" fitHeight="67.0" fitWidth="51.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +47,7 @@
                   <String fx:value="image-button" />
                </styleClass>
             </Pane>
-            <Pane fx:id="joker1" layoutX="334.0" layoutY="6.0" onMouseClicked="#doublePoints" prefHeight="84.0" prefWidth="72.0" style="-fx-background-color: #ccffff;">
+            <Pane fx:id="doublePointsJoker" layoutX="334.0" layoutY="6.0" onMouseClicked="#doublePoints" prefHeight="84.0" prefWidth="72.0" style="-fx-background-color: #ccffff;">
                <children>
                   <ImageView fx:id="doubleImageView" fitHeight="38.0" fitWidth="38.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
