@@ -61,11 +61,14 @@
 .table-view .table-cell{
     -fx-border-color: rgba(7, 7, 7, 0.07);
     -fx-padding: 2 0 2 10px;
+    -fx-alignment: CENTER;
 }
+
 .table-row-cell:hover {
     -fx-background-color: rgba(0, 255, 94, 0.07);
     -fx-text-background-color: red;
 }
+
 .table-row-cell:odd {
     -fx-background-color: rgb(50, 52, 50);
     -fx-background-insets: 0, 0 0 1 0;
@@ -75,6 +78,7 @@
 .table-row-cell{
     -fx-text-background-color: white;
 }
+
 .table-row-cell:even {
     -fx-background-color: #43453f;
     -fx-background-insets: 0, 0 0 1 0;
