@@ -122,6 +122,12 @@ public class ClientUtilsImpl implements ClientUtils {
                     if(a.getCode() == ResponseCodes.UPDATE_QUESTION_NUMBER)
                     {
                         game.setQuestionsToEndGame(a.getDifficultySetting());
+                        game.setQuestionsToDisplayLeaderboard(a.getDifficultySetting()/2);
+                    }
+
+                    if(a.getCode() == ResponseCodes.END_GAME)
+                    {
+
                     }
 
                     if (currentSceneCtrl.getClass() == WaitingCtrl.class)
@@ -473,6 +479,12 @@ public class ClientUtilsImpl implements ClientUtils {
         guessConsumptionCtrl.getHalfTimeJoker().setDisable(bool);
         guessConsumptionCtrl.getHalfTimeJoker().setVisible(!bool);
         guessConsumptionCtrl.getHalfTimeText().setVisible(!bool);
+
+        //swaps visibility of communication Pane
+//        gameMCQCtrl.getCommTab().setVisible(!bool);
+//        estimationQuestionCtrl.getCommTab().setVisible(!bool);
+//        energyAlternativeQuestionCtrl.getCommTab().setVisible(!bool);
+//        guessConsumptionCtrl.getCommTab().setVisible(!bool);
     }
 
     public double getCoefficient() {

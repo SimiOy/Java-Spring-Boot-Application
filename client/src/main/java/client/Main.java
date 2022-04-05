@@ -61,11 +61,10 @@ public class Main extends Application {
         var multiPlayerMenu = FXML.load(MultiplayerMenuCtrl.class, "client", "scenes", "MultiplayerMenu.fxml");
         var usernamePopUp = FXML.load(UsernamePopUpCtrl.class, "client", "scenes", "UsernamePopUp.fxml");
         var kickedPopUp = FXML.load(KickPopUpCtrl.class, "client", "scenes", "KickedPopUp.fxml");
-        var adminHome = FXML.load(AdminHomeCtrl.class, "client", "scenes", "HomeAdmin.fxml");
+
         var activityAdmin = FXML.load(ActivityAdminCtrl.class, "client", "scenes", "ActivityAdmin.fxml");
         var editActivity = FXML.load(EditActivitiesCtrl.class, "client", "scenes", "EditActivity.fxml");
-        var questionAdmin = FXML.load(QuestionAdminCtrl.class, "client", "scenes", "QuestionAdmin.fxml");
-        var editQuestion = FXML.load(EditQuestionsCtrl.class, "client", "scenes", "EditQuestion.fxml");
+
         var addActivity = FXML.load(AddActivityCtrl.class, "client", "scenes", "AddActivity.fxml");
         var jokerPopUp = FXML.load(JokerPopUpCtrl.class, "client", "scenes", "jokerPopup.fxml");
 
@@ -86,6 +85,22 @@ public class Main extends Application {
                 .add(getClass().getResource("scenes/stylesheets/TempLeaderboard.css").toExternalForm());
         waiting.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Waiting.css").toExternalForm());
+        gameMCQ.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        gameMCQ.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        estimationQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        estimationQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        alternativeQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        alternativeQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        guessMultipleChoiceQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        guessMultipleChoiceQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
         waiting.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         kickedPopUp.getValue().getStylesheets().
@@ -94,13 +109,14 @@ public class Main extends Application {
                 add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         jokerPopUp.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
-
+        gameOver.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameOver.css").toExternalForm());
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage, home, leaderboard, gameModeSelection, multiPlayerMenu,
                             estimationQuestion, gameMCQ, alternativeQuestion, guessMultipleChoiceQuestion,gameOver,
-                waiting, tempLeaderboard, usernamePopUp, kickedPopUp, adminHome,
-                editActivity, activityAdmin, questionAdmin, editQuestion, addActivity, jokerPopUp);
+                waiting, tempLeaderboard, usernamePopUp, kickedPopUp,
+                editActivity, activityAdmin, addActivity, jokerPopUp);
 
     }
 }

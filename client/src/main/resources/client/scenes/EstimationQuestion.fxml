@@ -1,73 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.questions.EstimationQuestionCtrl">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.questions.EstimationQuestionCtrl">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="submit" layoutX="589.0" layoutY="557.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
-      <TextField fx:id="answer" layoutX="395.0" layoutY="440.0" prefHeight="74.0" prefWidth="441.0" promptText="Fill in your guess here!" />
+      <AnchorPane layoutX="455.0" layoutY="594.0" prefHeight="98.0" prefWidth="354.0" style="-fx-background-color: white;" styleClass="roundedEdge">
+         <children>
+            <Pane fx:id="halfTimeJoker" layoutX="54.0" layoutY="7.0" onMouseClicked="#halfTimeForOthers" prefHeight="84.0" prefWidth="72.0" style="-fx-background-color: #ccffff;">
+               <children>
+                  <ImageView fx:id="hourglassImageView" fitHeight="43.0" fitWidth="48.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/hourglass.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="halfTimeText" layoutX="10.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hourglass" />
+               </children>
+               <styleClass>
+                  <String fx:value="roundedEdge" />
+                  <String fx:value="image-button" />
+               </styleClass>
+            </Pane>
+            <Pane fx:id="doublePointsJoker" layoutX="223.0" layoutY="7.0" onMouseClicked="#doublePoints" prefHeight="84.0" prefWidth="72.0" style="-fx-background-color: #ccffff;">
+               <children>
+                  <ImageView fx:id="doubleImageView" fitHeight="38.0" fitWidth="38.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/double.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="17.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="double" />
+               </children>
+               <styleClass>
+                  <String fx:value="roundedEdge" />
+                  <String fx:value="image-button" />
+               </styleClass>
+            </Pane>
+         </children></AnchorPane>
+      <Circle fill="WHITE" layoutX="467.0" layoutY="100.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="submit" layoutX="605.0" layoutY="539.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+      <TextField fx:id="answer" layoutX="411.0" layoutY="439.0" prefHeight="74.0" prefWidth="441.0" promptText="Fill in your guess here!" styleClass="roundedEdge" />
       <Button focusTraversable="false" layoutX="27.0" layoutY="650.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="43.0" prefWidth="110.0" text="Leave Game">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Text fx:id="scoreTxt" layoutX="31.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="63.5999755859375">
+      <ProgressBar fx:id="pb" layoutX="500.0" layoutY="84.0" prefHeight="32.0" prefWidth="320.0" progress="0.0" styleClass="roundedEdge" />
+      <Text fx:id="activityText" fill="WHITE" layoutX="472.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="320.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="nQuestionsTxt" layoutX="1218.0" layoutY="697.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" wrappingWidth="48.39996337890625">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="questionTxt" layoutX="472.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some question?" textAlignment="CENTER">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Text>
-      <ProgressBar fx:id="pb" layoutX="472.0" layoutY="90.0" prefHeight="20.0" prefWidth="320.0" progress="0.0" />
-      <Text fx:id="activityText" layoutX="472.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="320.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="439.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰" wrappingWidth="33.0">
+      <Text layoutX="454.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰" wrappingWidth="33.0">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="answerPopUp" layoutX="472.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="286.2333984375">
+      <Text fx:id="answerPopUp" fill="WHITE" layoutX="472.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="286.2333984375">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label fx:id="messageTxt3" layoutX="13.0" layoutY="188.0" />
-      <Label fx:id="messageTxt2" layoutX="13.0" layoutY="257.0" />
-      <Label fx:id="messageTxt1" layoutX="13.0" layoutY="325.0" />
-      <MenuButton fx:id="emotesMenu" layoutX="1172.0" layoutY="40.0" mnemonicParsing="false" text="emotes">
+      <MenuButton fx:id="emotesMenu" layoutX="1172.0" layoutY="40.0" mnemonicParsing="false" styleClass="button" text="emotes">
         <items>
         </items>
       </MenuButton>
-      <Circle fx:id="doublePointsJoker" fill="DODGERBLUE" layoutX="494.0" layoutY="628.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="754.0" layoutY="628.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="449.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
-      <Text fx:id="halfTimeText" layoutX="705.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />
-      <Pane layoutX="506.0" layoutY="215.0" prefHeight="170.0" prefWidth="220.0" style="-fx-background-color: ffffff;">
+      <Pane layoutX="513.0" layoutY="214.0" prefHeight="183.0" prefWidth="237.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
          <children>
-            <ImageView fx:id="bigImageView" fitHeight="160.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="bigImageView" fitHeight="160.0" fitWidth="210.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
+      <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: 000000;" styleClass="roundedEdge">
+         <children>
+            <Label fx:id="messageTxt3" layoutX="15.0" layoutY="175.0" />
+            <Label fx:id="messageTxt2" layoutX="15.0" layoutY="105.0" />
+            <Label fx:id="messageTxt1" layoutX="15.0" layoutY="35.0" />
+         </children>
+      </Pane>
+      <StackPane layoutX="260.0" layoutY="26.0" prefHeight="54.0" prefWidth="780.0">
+         <children>
+            <Label fx:id="questionTxt" textFill="WHITE" StackPane.alignment="CENTER">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <Text fx:id="scoreTxt" fill="WHITE" layoutX="27.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="nQuestionsTxt" fill="WHITE" layoutX="1177.0" layoutY="669.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" textAlignment="CENTER" wrappingWidth="61.99993896484375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

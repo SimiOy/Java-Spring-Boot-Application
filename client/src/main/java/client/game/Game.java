@@ -1,5 +1,7 @@
 package client.game;
 
+import commons.Lobby;
+
 public interface Game {
     void instantiateCommonLobby();
 
@@ -24,4 +26,10 @@ public interface Game {
     void setQuestionsToEndGame(Integer value);
 
     Integer getQuestionsToDisplayLeaderboard();
+
+    void setQuestionsToDisplayLeaderboard(Integer value);
+
+    void restartLobby(Lobby lobby);
+
+    void killGameThreads();
 }

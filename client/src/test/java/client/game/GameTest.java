@@ -48,8 +48,8 @@ class GameTest {
      */
     void defineMethodsForServer(){
         List<Lobby> lobbies = new ArrayList<>();
-        lobbies.add(new Lobby("lobby-1"));
-        lobbies.add(new Lobby("lobby-2"));
+        lobbies.add(new Lobby("lobby-1", false));
+        lobbies.add(new Lobby("lobby-2", false));
         when(server.getAllLobbies()).thenReturn(lobbies);
     }
 
@@ -60,7 +60,7 @@ class GameTest {
      */
     void defineMethodsForClientData(){
         Player player = new Player("playerName");
-        Lobby lobby = new Lobby("SINGLE_PLAYER");
+        Lobby lobby = new Lobby("SINGLE_PLAYER", true);
         lobby.addPlayerToLobby(player);
         when(clientData.getClientPlayer()).thenReturn(player);
         when(clientData.getClientLobby()).thenReturn(lobby);
@@ -70,7 +70,7 @@ class GameTest {
     void instantiateCommonLobbyAllLobbiesRetrieved() {
         game.instantiateCommonLobby();
         verify(server).getAllLobbies();
-        verify(server).addLobby(new Lobby("COMMON"));
+        verify(server).addLobby(new Lobby("COMMON", false));
     }
 
 

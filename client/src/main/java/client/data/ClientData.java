@@ -57,4 +57,6 @@ public interface ClientData {
     GameType getGameType();
 
     void setGameType(GameType gameType);
+
+    Lobby getLastLobby();
 }

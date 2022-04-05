@@ -29,6 +29,12 @@ public class WebsocketMessage {
 
     private Integer difficultySetting;
 
+    private Boolean killLobby;
+
+    public Boolean getKillLobby() {
+        return killLobby;
+    }
+
     public JokerType getJokerType() {
         return jokerType;
     }
@@ -154,11 +160,13 @@ public class WebsocketMessage {
         this.lobbyToken = lobbyToken;
     }
 
-    public WebsocketMessage(ResponseCodes code, String lobbyToken, Player player, Boolean isPlayerHost){
+    public WebsocketMessage(ResponseCodes code, String lobbyToken, Player player, Boolean isPlayerHost,
+                            Boolean killLobby){
         this.code = code;
         this.player = player;
         this.lobbyToken = lobbyToken;
         this.isPlayerHost = isPlayerHost;
+        this.killLobby = killLobby;
     }
 
     /**
