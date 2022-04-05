@@ -174,6 +174,8 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         Random random = new Random();
         correctAnswer = random.nextInt(3);
 
+        List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
+
         switch (correctAnswer)
         {
             case 0:
