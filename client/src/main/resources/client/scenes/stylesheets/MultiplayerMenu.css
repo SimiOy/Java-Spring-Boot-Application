@@ -21,7 +21,7 @@
     -fx-border:5px 5px;
     -fx-border-radius: 3px;
     -fx-text-fill: #ffffff;
-    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-background-color: rgba(0, 0, 0, 0.6);
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,2,3,0;
 }
@@ -32,7 +32,7 @@
     -fx-border:5px 5px;
     -fx-border-radius: 3px;
     -fx-text-fill: #fff;
-    -fx-background-color: #222222;
+    -fx-background-color: rgba(0, 0, 0, 0.18);
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,2,3,0;
 }
@@ -53,11 +53,11 @@
 }
 
 .tab-header-area .tab:selected {
-    -fx-background-color: #1f1f1f;
+    -fx-background-color: #605f5f;
 }
 
 .tab-header-background {
-    -fx-background-color: #131313;
+    -fx-background-color: #605f5f;
     -fx-background-radius: 20 20 0 0;
 }
 
@@ -88,6 +88,6 @@
 }
 
 .paneBG {
-    -fx-background-color: #131313;
+    -fx-background-color: #605f5f;
     -fx-background-radius: 0 0 20 20;
 }
