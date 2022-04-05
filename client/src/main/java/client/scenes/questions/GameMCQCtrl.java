@@ -133,10 +133,8 @@ public class GameMCQCtrl implements JokerPowerUps {
     public void resetUI(Question question)
     {
         scoreTxt.setText("Score: " + clientData.getClientScore());
-
         doublePoints = false;
         jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
-
         revealedAnswer = -1;
 
         answer1.setToggleGroup(radioGroup);

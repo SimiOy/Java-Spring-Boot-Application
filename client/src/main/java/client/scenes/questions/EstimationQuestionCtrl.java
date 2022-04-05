@@ -228,8 +228,6 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         }
     }
 
-    //TODO: Right now the points are calculated using simple if -
-    // statements, but we should probably do this with a math formula
     public void addPoints()
     {
         Long pointsToAdd = 0L;

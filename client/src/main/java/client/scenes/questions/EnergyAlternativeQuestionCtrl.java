@@ -36,7 +36,6 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     private final MainCtrl mainCtrl;
     private final Emotes emotes;
     private final Game game;
-
     @FXML
     private Text scoreTxt;
     @FXML
@@ -47,9 +46,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     private Label insteadOfText;
     @FXML
     private Text actualWH1, actualWH2, actualWH3;
-
     final ToggleGroup radioGroup = new ToggleGroup();
-
     @FXML
     private RadioButton answer1;
     @FXML
@@ -141,10 +138,8 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
      */
     private void resetUI(Question question) {
         scoreTxt.setText("Score: " + clientData.getClientScore());
-
         doublePoints = false;
         jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
-
         revealedAnswer = -1;
 
         answer1.setToggleGroup(radioGroup);
@@ -184,7 +179,6 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         if(answer3.isSelected()) answer3.setSelected(false);
 
         client.startTimer(pb,this, ENERGY_ALTERNATIVE_QUESTION);
-
         List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
 
         switch (correctAnswer)

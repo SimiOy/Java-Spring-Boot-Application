@@ -124,8 +124,6 @@ public class GameImpl implements Game{
             @Override
             public void run() {
                 try{
-                    //TODO: add timer progress bar / UI text with counter depleting until the start of the game
-
                     server.send("/app/nextQuestion",
                             new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
                                     mainLobby.getToken(), clientData.getClientPointer()));
@@ -291,7 +289,6 @@ public class GameImpl implements Game{
      * with the same players of the old one
      * 3) Lobby was a private lobby, in which case queue up the player in a private lobby
      * with the same players of the old one
-     * TODO: figure out how to reset multiplayer lobbies
      * @param lobby
      */
     public void restartLobby(Lobby lobby) {

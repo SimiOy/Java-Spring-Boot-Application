@@ -349,7 +349,6 @@ public class WaitingCtrl implements Initializable{
      * Method called on event handler,
      * whenever a row from the table view is selected
      * This method stores the information about the selected player
-     * TODO: highlight the row somehow
      */
     private void updateSelectedPlayer()
     {
