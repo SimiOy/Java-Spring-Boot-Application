@@ -25,6 +25,9 @@ public class Lobby {
     @Column(name = "isPublic")
     public Boolean isPublic;
 
+    @Column(name = "isSingleplayer")
+    public Boolean isSingleplayer;
+
     @Column(name = "isStarted")
     public Boolean isStarted;
 
@@ -49,13 +52,14 @@ public class Lobby {
      * hostId remains null, as there is no host of a public lobby
      * @param token
      */
-    public Lobby(String token) {
+    public Lobby(String token, boolean singlePlayer) {
         this.token = token;
         this.isPublic = true;
         this.playerIds = new ArrayList<>();
         this.playersInLobby = new ArrayList<>();
         this.hostId = null;
         this.isStarted = false;
+        this.isSingleplayer = singlePlayer;
     }
 
     /**
@@ -71,6 +75,7 @@ public class Lobby {
         this.playersInLobby = new ArrayList<>();
         this.isPublic = false;
         this.isStarted = false;
+        this.isSingleplayer = false;
     }
 
     public void addPlayerToLobby(Player player)
@@ -130,6 +135,22 @@ public class Lobby {
 
     public void setIsStarted(Boolean started) {
         isStarted = started;
+    }
+
+    public Boolean getSingleplayer() {
+        return isSingleplayer;
+    }
+
+    public void setSingleplayer(Boolean singleplayer) {
+        isSingleplayer = singleplayer;
+    }
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
     }
 
     @Override

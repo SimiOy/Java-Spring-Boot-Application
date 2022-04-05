@@ -50,7 +50,7 @@ class LobbyControllerTest {
 
     @BeforeEach
     void setup(){
-        publicLobby = new Lobby("public");
+        publicLobby = new Lobby("public", false);
         privateLobby = new Lobby("private", 1);
         lobbyController.clear();
         repo = new TestLobbyRepository();
@@ -188,7 +188,7 @@ class LobbyControllerTest {
         Lobby newLobby = new Lobby("private", 2);
         Player player = new Player();
         newLobby.addPlayerToLobby(player);
-        WebsocketMessage wsm = new WebsocketMessage(UPDATE_HOST, newLobby.getToken(), player, false);
+        WebsocketMessage wsm = new WebsocketMessage(UPDATE_HOST, newLobby.getToken(), player, false, true);
         repo.save(newLobby);
         assertNotEquals(sut.getLobbyByToken(sut.leaveLobby(wsm).getLobbyToken()), newLobby);
     }

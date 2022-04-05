@@ -124,6 +124,11 @@ public class ClientUtilsImpl implements ClientUtils {
                         game.setQuestionsToEndGame(a.getDifficultySetting());
                     }
 
+                    if(a.getCode() == ResponseCodes.END_GAME)
+                    {
+
+                    }
+
                     if (currentSceneCtrl.getClass() == WaitingCtrl.class)
                         ((WaitingCtrl) currentSceneCtrl).refresh();
                 }

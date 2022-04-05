@@ -23,7 +23,7 @@ class WebsocketMessageTest {
         wsm3 = new WebsocketMessage("testMessage", "testToken");
         wsm4 = new WebsocketMessage(DOUBLE_POINTS, "someToken", "someName");
         player = new Player("arda");
-        wsm5 = new WebsocketMessage(START_GAME, "someToken", player, true);
+        wsm5 = new WebsocketMessage(START_GAME, "someToken", player, true, false);
         wsm6 = new WebsocketMessage(LOBBY_UPDATED, "someToken", "someNewToken");
         wsm7 = new WebsocketMessage(NEXT_QUESTION, "someToken", 1L);
         question = new Question();
@@ -61,7 +61,7 @@ class WebsocketMessageTest {
 
     @Test
     public void setPlayer() {
-        WebsocketMessage wsm = new WebsocketMessage(END_GAME, "someToken", null, true);
+        WebsocketMessage wsm = new WebsocketMessage(END_GAME, "someToken", null, true, false);
         wsm.setPlayer(player);
         assertEquals(player, wsm.getPlayer());
 
