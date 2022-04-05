@@ -63,15 +63,6 @@
             </Pane>
          </children></AnchorPane>
       <Circle fill="WHITE" layoutX="467.0" layoutY="100.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
-      <AnchorPane layoutX="1141.0" layoutY="620.0" prefHeight="74.0" prefWidth="117.0" style="-fx-background-color: white;" styleClass="roundedEdge">
-         <children>
-            <Text fx:id="nQuestionsTxt" layoutX="28.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" textAlignment="CENTER" wrappingWidth="61.99993896484375">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
       <Pane fx:id="answerTwoContainer" layoutX="557.0" layoutY="316.0" onMouseClicked="#answerTwoSelected" prefHeight="145.0" prefWidth="205.0" style="-fx-background-color: ffffff;">
          <children>
             <ImageView fx:id="imageView2" fitHeight="122.0" fitWidth="176.0" layoutX="15.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" />
@@ -128,25 +119,11 @@
          <font>
             <Font size="20.0" />
          </font></Text>
-      <AnchorPane layoutY="32.0" prefHeight="67.0" prefWidth="168.0" style="-fx-background-color: white;" styleClass="roundedEdge">
+      <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: 000000;" styleClass="roundedEdge">
          <children>
-            <Text fx:id="scoreTxt" layoutX="16.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-      <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
-         <children>
-            <Label fx:id="messageTxt3" layoutX="15.0" layoutY="165.0" />
-            <Label fx:id="messageTxt2" layoutX="15.0" layoutY="95.0" />
-            <Label fx:id="messageTxt1" layoutX="15.0" layoutY="25.0" />
-            <Label layoutX="23.0" layoutY="-7.0" prefHeight="43.0" prefWidth="88.0" text="MESSAGES" textAlignment="CENTER">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
+            <Label fx:id="messageTxt3" layoutX="15.0" layoutY="165.0" styleClass="roundedEdge" />
+            <Label fx:id="messageTxt2" layoutX="15.0" layoutY="95.0" styleClass="roundedEdge" />
+            <Label fx:id="messageTxt1" layoutX="15.0" layoutY="25.0" styleClass="roundedEdge" />
          </children>
       </Pane>
       <StackPane layoutX="250.0" layoutY="16.0" prefHeight="54.0" prefWidth="780.0">
@@ -158,5 +135,15 @@
             </Label>
          </children>
       </StackPane>
+      <Text fx:id="scoreTxt" fill="WHITE" layoutX="21.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="nQuestionsTxt" fill="WHITE" layoutX="1177.0" layoutY="651.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" textAlignment="CENTER" wrappingWidth="61.99993896484375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
