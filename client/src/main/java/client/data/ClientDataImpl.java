@@ -90,8 +90,8 @@ public class ClientDataImpl implements ClientData {
 
     public void setLobby(Lobby lobby)
     {
-        clientLobby = lobby;
         if(lobby != null){
+            clientLobby = lobby;
             lastLobby = clientLobby;
         }
     }

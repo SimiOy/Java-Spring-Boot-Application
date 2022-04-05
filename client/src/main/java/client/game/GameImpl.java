@@ -103,7 +103,6 @@ public class GameImpl implements Game{
 
         Lobby mainLobby = new Lobby(lobbyCode, true);
         server.addLobby(mainLobby);
-        clientData.setLobby(mainLobby);
         clientData.setPointer(clientData.getClientPlayer().getId());
         clientData.setClientScore(0);
         clientData.setQuestionCounter(0);
@@ -112,7 +111,8 @@ public class GameImpl implements Game{
         clientData.setAsHost(true);
         clientData.setGameType(GameType.SINGLEPLAYER);
         client.swapEmoteJokerUsability(true);
-        server.addMeToLobby(clientData.getClientLobby().getToken(),clientData.getClientPlayer());
+        clientData.setLobby(mainLobby);
+        server.addMeToLobby(mainLobby.getToken(), clientData.getClientPlayer());
 
         //add delay until game starts
         singleplayerThread = new Thread(new Runnable() {
@@ -123,7 +123,7 @@ public class GameImpl implements Game{
 
                     server.send("/app/nextQuestion",
                             new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
-                                    clientData.getClientLobby().getToken(), clientData.getClientPointer()));
+                                    mainLobby.getToken(), clientData.getClientPointer()));
 
                     client.startSyncCountdown();
                     Thread.sleep(3000);
