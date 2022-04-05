@@ -39,6 +39,7 @@
     -fx-text-fill: #fff;
     -fx-font-size: 20px;
     -fx-border-width: 0 0 18 0;
+    -fx-alignment: CENTER;
 }
 
 .table-row-cell:hover {

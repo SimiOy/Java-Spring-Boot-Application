@@ -7,21 +7,21 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.menus.WaitingCtrl">
    <children>
-      <TableView fx:id="tableView" focusTraversable="false" layoutX="150.0" layoutY="100.0" prefHeight="475.0" prefWidth="520.0" styleClass="table">
-         <columns>
-            <TableColumn fx:id="avatarColumn" prefWidth="180.0" resizable="false">
-               <cellFactory>
-                  <FormattedTableCellFactory alignment="center">
-                  </FormattedTableCellFactory>
-               </cellFactory>
-            </TableColumn>
-            <TableColumn fx:id="usernameColumn" prefWidth="340.0" resizable="false">
-               <cellFactory>
-                  <FormattedTableCellFactory alignment="center">
-                  </FormattedTableCellFactory>
-               </cellFactory>
-            </TableColumn>
-         </columns>
+      <TableView fx:id="tableView" focusTraversable="false" layoutX="176.0" layoutY="175.0" prefHeight="390.0" prefWidth="303.0" styleClass="table">
+        <columns>
+          <TableColumn fx:id="avatarColumn" prefWidth="120.0" resizable="false" text="Avatar">
+           <cellFactory>
+              <FormattedTableCellFactory alignment="center">
+              </FormattedTableCellFactory>
+           </cellFactory>
+          </TableColumn>
+          <TableColumn fx:id="usernameColumn" prefWidth="180.0" resizable="false" text="Username">
+           <cellFactory>
+              <FormattedTableCellFactory alignment="center">
+              </FormattedTableCellFactory>
+           </cellFactory>
+           </TableColumn>
+        </columns>
       </TableView>
       <Text fx:id="countDownLabel" fill="WHITE" layoutX="565.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-section" text="Currently Waiting..." wrappingWidth="240">
          <font>
@@ -33,7 +33,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Pane layoutX="950.0" layoutY="275.0" prefHeight="145.0" prefWidth="248.0" styleClass="pane">
+      <Pane layoutX="681.0" layoutY="275.0" prefHeight="145.0" prefWidth="248.0" styleClass="pane">
          <children>
             <Text layoutX="98.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Tip" text="Tip" textAlignment="CENTER" wrappingWidth="40.3720703125">
                <font>

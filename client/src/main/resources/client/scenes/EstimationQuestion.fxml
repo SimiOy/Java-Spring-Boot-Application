@@ -56,15 +56,6 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <AnchorPane layoutX="1141.0" layoutY="620.0" prefHeight="74.0" prefWidth="117.0" style="-fx-background-color: white;" styleClass="roundedEdge">
-         <children>
-            <Text fx:id="nQuestionsTxt" layoutX="28.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" textAlignment="CENTER" wrappingWidth="61.99993896484375">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
       <ProgressBar fx:id="pb" layoutX="500.0" layoutY="84.0" prefHeight="32.0" prefWidth="320.0" progress="0.0" styleClass="roundedEdge" />
       <Text fx:id="activityText" fill="WHITE" layoutX="472.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="320.0">
          <font>
@@ -90,16 +81,11 @@
             <ImageView fx:id="bigImageView" fitHeight="160.0" fitWidth="210.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
+      <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: 000000;" styleClass="roundedEdge">
          <children>
             <Label fx:id="messageTxt3" layoutX="15.0" layoutY="175.0" />
             <Label fx:id="messageTxt2" layoutX="15.0" layoutY="105.0" />
             <Label fx:id="messageTxt1" layoutX="15.0" layoutY="35.0" />
-            <Label layoutX="23.0" layoutY="-7.0" prefHeight="43.0" prefWidth="88.0" text="MESSAGES" textAlignment="CENTER">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
       <StackPane layoutX="260.0" layoutY="26.0" prefHeight="54.0" prefWidth="780.0">
@@ -111,14 +97,15 @@
             </Label>
          </children>
       </StackPane>
-      <AnchorPane layoutY="32.0" prefHeight="67.0" prefWidth="168.0" style="-fx-background-color: white;" styleClass="roundedEdge">
-         <children>
-            <Text fx:id="scoreTxt" layoutX="16.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
+      <Text fx:id="scoreTxt" fill="WHITE" layoutX="27.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " textAlignment="CENTER" wrappingWidth="127.59994506835938">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="nQuestionsTxt" fill="WHITE" layoutX="1177.0" layoutY="669.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-/20" textAlignment="CENTER" wrappingWidth="61.99993896484375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

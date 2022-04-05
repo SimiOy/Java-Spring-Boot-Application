@@ -36,7 +36,6 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     private final MainCtrl mainCtrl;
     private final Emotes emotes;
     private final Game game;
-
     @FXML
     private Text scoreTxt;
     @FXML
@@ -47,9 +46,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     private Label insteadOfText;
     @FXML
     private Text actualWH1, actualWH2, actualWH3;
-
     final ToggleGroup radioGroup = new ToggleGroup();
-
     @FXML
     private RadioButton answer1;
     @FXML
@@ -119,6 +116,7 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     public void load() {
         if(client.isInLobby()) {
             setUpEmoteMenu();
+            nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
@@ -140,10 +138,8 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
      */
     private void resetUI(Question question) {
         scoreTxt.setText("Score: " + clientData.getClientScore());
-        nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
         doublePoints = false;
         jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
-
         revealedAnswer = -1;
 
         answer1.setToggleGroup(radioGroup);
@@ -183,7 +179,6 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
         if(answer3.isSelected()) answer3.setSelected(false);
 
         client.startTimer(pb,this, ENERGY_ALTERNATIVE_QUESTION);
-
         List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
 
         switch (correctAnswer)
@@ -394,30 +389,36 @@ public class EnergyAlternativeQuestionCtrl implements JokerPowerUps {
     public void setMessageTxt1(String message) {
         messageTxt1.setText(message);
         if(!(message.equals(""))){
-            messageTxt1.setStyle("-fx-background-color: darkgray; -fx-padding: 10px");
+            messageTxt1.setStyle("-fx-background-color: white; -fx-padding: 10px");
+            messageTxt1.getStyleClass().add("roundedEdge");
         }
         else{
             messageTxt1.setStyle("-fx-background-color: none; -fx-padding: 0px");
+            messageTxt1.getStyleClass().remove("roundedEdge");
         }
     }
 
     public void setMessageTxt2(String message) {
         messageTxt2.setText(message);
         if(!(message.equals(""))){
-            messageTxt2.setStyle("-fx-background-color: darkgray; -fx-padding: 10px");
+            messageTxt2.setStyle("-fx-background-color: white; -fx-padding: 10px");
+            messageTxt2.getStyleClass().add("roundedEdge");
         }
         else{
             messageTxt2.setStyle("-fx-background-color: none; -fx-padding: 0px");
+            messageTxt2.getStyleClass().remove("roundedEdge");
         }
     }
 
     public void setMessageTxt3(String message) {
         messageTxt3.setText(message);
         if(!(message.equals(""))){
-            messageTxt3.setStyle("-fx-background-color: darkgray; -fx-padding: 10px");
+            messageTxt3.setStyle("-fx-background-color: white; -fx-padding: 10px");
+            messageTxt3.getStyleClass().add("roundedEdge");
         }
         else{
             messageTxt3.setStyle("-fx-background-color: none; -fx-padding: 0px");
+            messageTxt3.getStyleClass().remove("roundedEdge");
         }
     }
 

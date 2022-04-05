@@ -68,6 +68,6 @@ public class GameModeSelectionCtrl {
     }
 
     public void admin(){
-        mainCtrl.showAdminHome();
+        mainCtrl.showAdminActivities();
     }
 }

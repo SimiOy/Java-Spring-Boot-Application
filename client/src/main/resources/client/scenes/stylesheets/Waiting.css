@@ -64,10 +64,9 @@
 }
 
 .table-view .table-cell{
-    -fx-border-color: #727171;
-    -fx-text-fill: #fff;
-    -fx-font-size: 20px;
-    -fx-border-width: 0 0 18 0;
+    -fx-border-color: rgba(7, 7, 7, 0.07);
+    -fx-padding: 2 0 2 10px;
+    -fx-alignment: CENTER;
 }
 
 .table-row-cell:hover {
@@ -78,32 +77,43 @@
 }
 
 .table-row-cell:odd {
-    -fx-background-color: #727171;
+    -fx-background-color: rgb(50, 52, 50);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-text-fill: #fff;
     -fx-font-size: 20px;
+}
+
+.table-row-cell{
+    -fx-text-background-color: white;
 }
 
 .table-row-cell:even {
-    -fx-background-color: #727171;
+    -fx-background-color: #43453f;
     -fx-background-insets: 0, 0 0 1 0;
-    -fx-text-fill: #fff;
-    -fx-font-size: 20px;
+    -fx-padding: 0.0em;
 }
 
-.table-view *.scroll-bar:horizontal *.increment-button,
-.table-view *.scroll-bar:horizontal *.decrement-button {
-    -fx-background-color: null;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
 }
 
-.table-view *.scroll-bar:horizontal *.increment-arrow,
-.table-view *.scroll-bar:horizontal *.decrement-arrow {
-    -fx-background-color: null;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-shape: null;
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
 }
+
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, #1dbbdd44, #93f9b944);
+}
+
+

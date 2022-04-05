@@ -480,10 +480,10 @@ public class ClientUtilsImpl implements ClientUtils {
         guessConsumptionCtrl.getHalfTimeText().setVisible(!bool);
 
         //swaps visibility of communication Pane
-        gameMCQCtrl.getCommTab().setVisible(!bool);
-        estimationQuestionCtrl.getCommTab().setVisible(!bool);
-        energyAlternativeQuestionCtrl.getCommTab().setVisible(!bool);
-        guessConsumptionCtrl.getCommTab().setVisible(!bool);
+//        gameMCQCtrl.getCommTab().setVisible(!bool);
+//        estimationQuestionCtrl.getCommTab().setVisible(!bool);
+//        energyAlternativeQuestionCtrl.getCommTab().setVisible(!bool);
+//        guessConsumptionCtrl.getCommTab().setVisible(!bool);
     }
 
     public double getCoefficient() {
