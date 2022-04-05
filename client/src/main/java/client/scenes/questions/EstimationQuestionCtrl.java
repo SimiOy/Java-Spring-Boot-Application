@@ -24,11 +24,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import static constants.QuestionTypes.ESTIMATION_QUESTION;
-import static javafx.scene.paint.Color.rgb;
 
 public class EstimationQuestionCtrl implements JokerPowerUps{
 
@@ -53,7 +52,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     private Text nQuestionsTxt;
 
     @FXML
-    private Text questionTxt;
+    private Label questionTxt;
 
     @FXML
     private Text activityText;
@@ -68,19 +67,27 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     private Button submit;
 
     @FXML
-    private Circle doublePointsJoker;
+    private Pane doublePointsJoker;
 
     @FXML
-    private Circle halfTimeJoker;
+    private Pane halfTimeJoker;
     @FXML
     private Text halfTimeText;
+
+    @FXML
+    private ImageView hourglassImageView;
+    @FXML
+    private ImageView doubleImageView;
 
     private Long submittedAnswer;
     private Long correctAnswer;
 
     @FXML
     private MenuButton emotesMenu;
-    
+
+    @FXML
+    private Pane commTab;
+
     @FXML
     private Label messageTxt1;
     @FXML
@@ -109,17 +116,17 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
+        hourglassImageView.setImage(new Image("/images/hourglass.png"));
+        doubleImageView.setImage(new Image("/images/double.png"));
     }
 
     public void resetUI(Question question)
     {
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
-
         doublePoints = false;
-
         jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, null);
-
+        submit.setDisable(false);
 
         Activity polledActivity = server.getActivityByID(question.getFoundActivities().get(0)).get();
         correctAnswer = polledActivity.getEnergyConsumption();
@@ -250,7 +257,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         }
         doublePoints = false;
         clientData.setClientScore((int) (clientData.getClientScore() + pointsToAdd * progress));
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
 
         clientData.getClientPlayer().score = clientData.getClientScore();
         server.send("/app/updateScore", new WebsocketMessage(ResponseCodes.SCORE_UPDATED,
@@ -276,7 +283,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
             doublePointsJoker.setDisable(true);
-            doublePointsJoker.setFill(rgb(235,235,228));
+            doublePointsJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }
@@ -285,7 +292,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     public void halfTimeForOthers() {
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)) {
             halfTimeJoker.setDisable(true);
-            halfTimeJoker.setFill(rgb(235,235,228));
+            halfTimeJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
@@ -367,11 +374,15 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         }
     }
 
-    public Circle getHalfTimeJoker() {
+    public Pane getHalfTimeJoker() {
         return halfTimeJoker;
     }
 
     public Text getHalfTimeText() {
         return halfTimeText;
+    }
+
+    public Pane getCommTab() {
+        return commTab;
     }
 }

@@ -86,6 +86,22 @@ public class Main extends Application {
                 .add(getClass().getResource("scenes/stylesheets/TempLeaderboard.css").toExternalForm());
         waiting.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Waiting.css").toExternalForm());
+        gameMCQ.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        gameMCQ.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        estimationQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        estimationQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        alternativeQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        alternativeQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
+        guessMultipleChoiceQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        guessMultipleChoiceQuestion.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameElements.css").toExternalForm());
         waiting.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         kickedPopUp.getValue().getStylesheets().
@@ -94,7 +110,6 @@ public class Main extends Application {
                 add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         jokerPopUp.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
-
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage, home, leaderboard, gameModeSelection, multiPlayerMenu,
