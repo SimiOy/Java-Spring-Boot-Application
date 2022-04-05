@@ -9,12 +9,9 @@ import client.utils.ServerUtils;
 import commons.WebsocketMessage;
 import constants.JokerType;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import org.springframework.messaging.simp.stomp.StompSession;
 
 import javax.inject.Inject;
-
-import static javafx.scene.paint.Color.rgb;
 
 /**
  * Class where the client interacts with the server through websockets
