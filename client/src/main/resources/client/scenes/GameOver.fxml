@@ -21,7 +21,7 @@
       </TableView>
       <Button layoutX="14.0" layoutY="340.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="45.0" prefWidth="50.0" text="Leave Game" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="535.0" layoutY="340.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="45.0" prefWidth="50.0" text="Play Again!" textAlignment="CENTER" wrapText="true" />
-      <Text layoutX="164.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You placed" wrappingWidth="141.33673095703125">
+      <Text layoutX="164.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over" wrappingWidth="141.33673095703125">
          <font>
             <Font size="28.0" />
          </font>
