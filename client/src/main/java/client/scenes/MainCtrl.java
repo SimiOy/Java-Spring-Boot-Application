@@ -133,6 +133,7 @@ public class MainCtrl extends Application {
                            Pair<JokerPopUpCtrl, Parent> jokerPopUpCtrlParentPair) {
 
         this.primaryStage = primaryStage;
+        primaryStage.setResizable(false);
 
 
         this.waitingCtrl = waiting.getKey();
