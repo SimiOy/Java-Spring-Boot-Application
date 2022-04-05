@@ -115,6 +115,7 @@ public class GameImpl implements Game{
         clientData.setAsHost(true);
         clientData.setGameType(GameType.SINGLEPLAYER);
         client.swapEmoteJokerUsability(true);
+        clientData.setLobby(mainLobby);
         server.addMeToLobby(clientData.getClientLobby().getToken(),clientData.getClientPlayer());
         jokerUtils.registerForJokerUpdates();
 

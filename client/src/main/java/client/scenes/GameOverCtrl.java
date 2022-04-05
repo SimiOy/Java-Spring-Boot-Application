@@ -127,17 +127,13 @@ public class GameOverCtrl {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    //give time for all clients to poll the server to update their leaderboard
-                    loadLeaderboard();
-                    //then remove the player
-                    //without this sleepthe client that connects last will be
-                    // missing information on the final table
-                    Thread.sleep(2000);
+                //give time for all clients to poll the server to update their leaderboard
+                loadLeaderboard();
+                //then remove the player
+                //without this sleepthe client that connects last will be
+                // missing information on the final table
+//                    Thread.sleep(2000);
 //                    removePlayerFromLobby();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         });
         thread.start();
