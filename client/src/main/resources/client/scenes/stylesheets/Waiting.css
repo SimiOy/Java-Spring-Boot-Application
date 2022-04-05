@@ -35,8 +35,20 @@
     -fx-background-color: transparent;
 }
 
-.table-view .column-header {
+.table-view .filler{
+    -fx-background-radius: 0.0 30.0 0.0 0.0;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
     -fx-background-color: linear-gradient(to bottom, #00a6d6, #00cdff);
+    -fx-background-radius: 10px 10px 0px 0px;
+
+}
+
+.table-view .column-header{
+
+    -fx-background-color: transparent;
 }
 
 .table-view .table-cell{

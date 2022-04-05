@@ -167,6 +167,7 @@ public class LobbyController {
             Lobby lobbyToTerminate = found.get();
             lobbyToTerminate.setIsStarted(false);
             questionProvider.clearAllQuestionsFromLobby(lobbyToTerminate.getToken());
+            questionProvider.clearAllActivitiesFromLobby(lobbyToTerminate.getToken());
             repository.save(lobbyToTerminate);
         }
         return new WebsocketMessage(ResponseCodes.END_GAME, message.getLobbyToken());

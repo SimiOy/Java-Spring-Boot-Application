@@ -55,9 +55,9 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Circle fx:id="joker1" fill="DODGERBLUE" layoutX="537.0" layoutY="630.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="doublePointsJoker" fill="DODGERBLUE" layoutX="537.0" layoutY="630.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="492.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
-      <Circle fx:id="joker2" fill="DODGERBLUE" layoutX="667.0" layoutY="630.0" onMouseClicked="#eliminateRandomWrongAnswer" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="eliminateAnswerJoker" fill="DODGERBLUE" layoutX="667.0" layoutY="630.0" onMouseClicked="#eliminateRandomWrongAnswer" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="614.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminate an answer❌" />
       <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="797.0" layoutY="630.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text fx:id="halfTimeText" layoutX="742.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />

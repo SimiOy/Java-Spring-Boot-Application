@@ -60,7 +60,7 @@
         <items>
         </items>
       </MenuButton>
-      <Circle fx:id="joker1" fill="DODGERBLUE" layoutX="494.0" layoutY="628.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="doublePointsJoker" fill="DODGERBLUE" layoutX="494.0" layoutY="628.0" onMouseClicked="#doublePoints" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="halfTimeJoker" fill="DODGERBLUE" layoutX="754.0" layoutY="628.0" onMouseClicked="#halfTimeForOthers" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="449.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Double Points💰" />
       <Text fx:id="halfTimeText" layoutX="705.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Half time of others⏰" />

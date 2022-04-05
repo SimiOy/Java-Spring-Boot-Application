@@ -413,7 +413,8 @@ public class ClientUtilsImpl implements ClientUtils {
      */
     public void updateMessages(String text, String lobbyToken){
         Platform.runLater(() -> {
-            if(!lobbyToken.equals(clientData.getClientLobby().getToken())){
+            if(clientData.getClientLobby() == null ||
+                    !lobbyToken.equals(clientData.getClientLobby().getToken())){
                 return;
             }
             gameMCQCtrl.setMessageTxt3(gameMCQCtrl.getMessageTxt2().getText());

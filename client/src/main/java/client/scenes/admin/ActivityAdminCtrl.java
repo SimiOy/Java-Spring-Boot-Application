@@ -78,4 +78,8 @@ public class ActivityAdminCtrl {
     public void home(){
         mainCtrl.showGameModeSelection();
     }
+
+    public void add(){
+        mainCtrl.showAddActivity();
+    }
 }

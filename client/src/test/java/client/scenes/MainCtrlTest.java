@@ -31,7 +31,7 @@ public class MainCtrlTest {
     void initialize() {
         try {
             sut.initialize(null, null, null, null, null, null, null, null, null, null,
-                    null, null, null, null, null, null, null, null, null);
+                    null, null, null, null, null, null, null, null, null, null, null);
         } catch (Exception e){
             assert true;
         }

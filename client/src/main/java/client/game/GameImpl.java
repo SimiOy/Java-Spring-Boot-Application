@@ -2,6 +2,7 @@ package client.game;
 
 import client.data.ClientData;
 import client.emotes.Emotes;
+import client.joker.JokerUtils;
 import client.scenes.MainCtrl;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
@@ -24,7 +25,8 @@ public class GameImpl implements Game{
     private final ClientUtils client;
     private final ClientData clientData;
     private final MainCtrl mainCtrl;
-    private  final Emotes emotes;
+    private final Emotes emotes;
+    private final JokerUtils jokerUtils;
 
     private Thread singleplayerThread;
     private Thread multiplayerThread;
@@ -34,12 +36,14 @@ public class GameImpl implements Game{
     private Integer questionsToDisplayLeaderboard = 10;
 
     @Inject
-    public GameImpl(ServerUtils server, ClientUtils client, ClientData clientData, MainCtrl mainCtrl, Emotes emotes) {
+    public GameImpl(ServerUtils server, ClientUtils client, ClientData clientData, MainCtrl mainCtrl, Emotes emotes,
+                    JokerUtils jokerUtils) {
         this.server = server;
         this.client = client;
         this.clientData = clientData;
         this.mainCtrl = mainCtrl;
         this.emotes = emotes;
+        this.jokerUtils = jokerUtils;
     }
 
     /**
@@ -111,8 +115,8 @@ public class GameImpl implements Game{
         clientData.setAsHost(true);
         clientData.setGameType(GameType.SINGLEPLAYER);
         client.swapEmoteJokerUsability(true);
-        clientData.setLobby(mainLobby);
-        server.addMeToLobby(mainLobby.getToken(), clientData.getClientPlayer());
+        server.addMeToLobby(clientData.getClientLobby().getToken(),clientData.getClientPlayer());
+        jokerUtils.registerForJokerUpdates();
 
         //add delay until game starts
         singleplayerThread = new Thread(new Runnable() {
@@ -222,9 +226,9 @@ public class GameImpl implements Game{
     }
 
     public void leaveLobby() {
+        emotes.sendDisconnect();
         //kill ongoing timers
         client.killTimer();
-
         server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
                 clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(), true));
 

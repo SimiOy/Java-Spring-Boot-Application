@@ -68,7 +68,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     private Button submit;
 
     @FXML
-    private Circle joker1;
+    private Circle doublePointsJoker;
 
     @FXML
     private Circle halfTimeJoker;
@@ -117,20 +117,8 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/" + game.getQuestionsToEndGame());
 
         doublePoints = false;
-        halfTimeJoker.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
-        joker1.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
 
-        submit.setDisable(false);
-
-        if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS))
-            joker1.setFill(rgb(30,144,255));
-        else
-            joker1.setFill(rgb(235,235,228));
-
-        if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
-            halfTimeJoker.setFill(rgb(30,144,255));
-        else
-            halfTimeJoker.setFill(rgb(235,235,228));
+        jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, null);
 
 
         Activity polledActivity = server.getActivityByID(question.getFoundActivities().get(0)).get();
@@ -287,8 +275,8 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
     public void doublePoints() {
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
-            joker1.setDisable(true);
-            joker1.setFill(rgb(235,235,228));
+            doublePointsJoker.setDisable(true);
+            doublePointsJoker.setFill(rgb(235,235,228));
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }
@@ -302,6 +290,7 @@ public class EstimationQuestionCtrl implements JokerPowerUps{
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             jokerUtils.sendJoker();
+            emotes.sendJokerUsed();
         }
     }
     /**
