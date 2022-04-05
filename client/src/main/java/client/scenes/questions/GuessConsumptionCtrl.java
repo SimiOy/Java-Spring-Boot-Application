@@ -383,9 +383,11 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         messageTxt1.setText(message);
         if(!(message.equals(""))){
             messageTxt1.setStyle("-fx-background-color: white; -fx-padding: 10px");
+            messageTxt1.getStyleClass().add("roundedEdge");
         }
         else{
             messageTxt1.setStyle("-fx-background-color: none; -fx-padding: 0px");
+            messageTxt1.getStyleClass().remove("roundedEdge");
         }
     }
 
@@ -393,9 +395,11 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         messageTxt2.setText(message);
         if(!(message.equals(""))){
             messageTxt2.setStyle("-fx-background-color: white; -fx-padding: 10px");
+            messageTxt2.getStyleClass().add("roundedEdge");
         }
         else{
             messageTxt2.setStyle("-fx-background-color: none; -fx-padding: 0px");
+            messageTxt2.getStyleClass().remove("roundedEdge");
         }
     }
 
@@ -403,9 +407,11 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         messageTxt3.setText(message);
         if(!(message.equals(""))){
             messageTxt3.setStyle("-fx-background-color: white; -fx-padding: 10px");
+            messageTxt3.getStyleClass().add("roundedEdge");
         }
         else{
             messageTxt3.setStyle("-fx-background-color: none; -fx-padding: 0px");
+            messageTxt3.getStyleClass().remove("roundedEdge");
         }
     }
 

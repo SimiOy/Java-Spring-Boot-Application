@@ -109,6 +109,8 @@ public class Main extends Application {
                 add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
         jokerPopUp.getValue().getStylesheets()
                 .add(getClass().getResource("scenes/stylesheets/Button.css").toExternalForm());
+        gameOver.getValue().getStylesheets()
+                .add(getClass().getResource("scenes/stylesheets/GameOver.css").toExternalForm());
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage, home, leaderboard, gameModeSelection, multiPlayerMenu,
