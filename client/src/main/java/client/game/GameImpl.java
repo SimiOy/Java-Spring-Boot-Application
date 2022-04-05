@@ -282,6 +282,10 @@ public class GameImpl implements Game{
         return questionsToDisplayLeaderboard;
     }
 
+    public void setQuestionsToDisplayLeaderboard(Integer questionsToDisplayLeaderboard) {
+        this.questionsToDisplayLeaderboard = questionsToDisplayLeaderboard;
+    }
+
     /**
      * There's three cases:
      * 1) Lobby was singleplayer, in which case start again

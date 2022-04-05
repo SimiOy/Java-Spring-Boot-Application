@@ -122,6 +122,7 @@ public class ClientUtilsImpl implements ClientUtils {
                     if(a.getCode() == ResponseCodes.UPDATE_QUESTION_NUMBER)
                     {
                         game.setQuestionsToEndGame(a.getDifficultySetting());
+                        game.setQuestionsToDisplayLeaderboard(a.getDifficultySetting()/2);
                     }
 
                     if(a.getCode() == ResponseCodes.END_GAME)

@@ -34,7 +34,7 @@ public class Lobby {
     @Column(name = "hostId")
     public Integer hostId;
 
-    @Column(name = "listOfPlayers")
+    @Column(name = "listOfPlayers", length = 10000)
     public ArrayList<Long> playerIds;
 
     //might delete later
