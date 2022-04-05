@@ -83,9 +83,9 @@
       </Pane>
       <Pane fx:id="commTab" layoutX="14.0" layoutY="158.0" prefHeight="230.0" prefWidth="134.0" style="-fx-background-color: 000000;" styleClass="roundedEdge">
          <children>
-            <Label fx:id="messageTxt3" layoutX="15.0" layoutY="175.0" styleClass="roundedEdge" />
-            <Label fx:id="messageTxt2" layoutX="15.0" layoutY="105.0" styleClass="roundedEdge" />
-            <Label fx:id="messageTxt1" layoutX="15.0" layoutY="35.0" styleClass="roundedEdge" />
+            <Label fx:id="messageTxt3" layoutX="15.0" layoutY="175.0" />
+            <Label fx:id="messageTxt2" layoutX="15.0" layoutY="105.0" />
+            <Label fx:id="messageTxt1" layoutX="15.0" layoutY="35.0" />
          </children>
       </Pane>
       <StackPane layoutX="260.0" layoutY="26.0" prefHeight="54.0" prefWidth="780.0">
