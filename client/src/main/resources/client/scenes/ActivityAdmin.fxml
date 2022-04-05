@@ -10,5 +10,6 @@
         <Text fx:id="text" layoutX="100.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double click on the activity you want to edit/delete" wrappingWidth="494.4"/>
         <ListView fx:id="activityList" layoutX="50.0" layoutY="55.0" prefHeight="630.0" prefWidth="1050.0" />
         <Button focusTraversable="false" layoutX="1120.0" layoutY="650.0" mnemonicParsing="false" onAction="#home" prefHeight="26.0" prefWidth="107.0" styleClass="button1" text="home" />
+        <Button focusTraversable="false" layoutX="1120.0" layoutY="100.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="107.0" styleClass="button1" text="add" />
     </children>
 </AnchorPane>

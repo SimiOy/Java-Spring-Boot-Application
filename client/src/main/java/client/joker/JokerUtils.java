@@ -8,12 +8,10 @@ import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import commons.WebsocketMessage;
 import constants.JokerType;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Pane;
 import org.springframework.messaging.simp.stomp.StompSession;
 
 import javax.inject.Inject;
-
-import static javafx.scene.paint.Color.rgb;
 
 /**
  * Class where the client interacts with the server through websockets
@@ -115,27 +113,39 @@ public class JokerUtils {
      * First and second parameter are always valid, the third one could be null
      * for the EstimationQuestion scene, in which case we just return
      */
-    public void resetJokerUI(Circle halfTime, Circle doublePoints, Circle eliminateAnswer)
+    public void resetJokerUI(Pane  halfTimeJoker, Pane doublePointsJoker, Pane eliminateAnswerJoker)
     {
-        halfTime.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
-        doublePoints.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
+        halfTimeJoker.setDisable(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY));
+        doublePointsJoker.setDisable(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS));
+        if(eliminateAnswerJoker != null){
+            eliminateAnswerJoker.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
+        }
 
-        if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS))
-            doublePoints.setFill(rgb(30,144,255));
-        else
-            doublePoints.setFill(rgb(235,235,228));
-
-        if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY))
-            halfTime.setFill(rgb(30,144,255));
-        else
-            halfTime.setFill(rgb(235,235,228));
-
-        if(eliminateAnswer == null) return;
-        eliminateAnswer.setDisable(clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS));
-        if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS))
-            eliminateAnswer.setFill(rgb(30,144,255));
-        else
-            eliminateAnswer.setFill(rgb(235,235,228));
+        if(clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)){
+            halfTimeJoker.setStyle("-fx-background-color: gray");
+            halfTimeJoker.getStyleClass().remove("image-button");
+        }
+        else {
+            halfTimeJoker.setStyle("-fx-background-color: #ccffff");
+            halfTimeJoker.getStyleClass().add("image-button");
+        }
+        if(clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)){
+            doublePointsJoker.setStyle("-fx-background-color: gray");
+            doublePointsJoker.getStyleClass().remove("image-button");
+        }
+        else {
+            doublePointsJoker.setStyle("-fx-background-color: #ccffff");
+            doublePointsJoker.getStyleClass().add("image-button");
+        }
+        if(eliminateAnswerJoker != null) {
+            if (clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)) {
+                eliminateAnswerJoker.setStyle("-fx-background-color: gray");
+                eliminateAnswerJoker.getStyleClass().remove("image-button");
+            } else {
+                eliminateAnswerJoker.setStyle("-fx-background-color: #ccffff");
+                eliminateAnswerJoker.getStyleClass().add("image-button");
+            }
+        }
     }
 
     /**

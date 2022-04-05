@@ -19,7 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import javax.inject.Inject;
@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Random;
 
 import static constants.QuestionTypes.GUESS_X;
-import static javafx.scene.paint.Color.rgb;
 
 public class GuessConsumptionCtrl implements JokerPowerUps {
 
@@ -50,7 +49,7 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
     private Text nQuestionsTxt;
 
     @FXML
-    private Text questionTxt;
+    private Label questionTxt;
 
     final ToggleGroup radioGroup = new ToggleGroup();
 
@@ -61,19 +60,21 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
     @FXML
     private RadioButton answer3;
     @FXML
-    private Circle doublePointsJoker;
+    private Pane doublePointsJoker;
     @FXML
-    private Circle eliminateAnswerJoker;
+    private Pane eliminateAnswerJoker;
     @FXML
-    private Circle halfTimeJoker;
+    private Pane halfTimeJoker;
     @FXML
     private Text halfTimeText;
 
     private int correctAnswer;
+    private int revealedAnswer;
 
     @FXML
     private MenuButton emotesMenu;
-
+    @FXML
+    private Pane commTab;
     @FXML
     private Label messageTxt1;
     @FXML
@@ -85,7 +86,26 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
     private ImageView imageView;
 
     @FXML
-    private Text activityText;
+    private Label activityText;
+
+    @FXML
+    private Pane answerOneContainer;
+    @FXML
+    private Pane answerTwoContainer;
+    @FXML
+    private Pane answerThreeContainer;
+    @FXML
+    private Label answerOneText;
+    @FXML
+    private Label answerTwoText;
+    @FXML
+    private Label answerThreeText;
+    @FXML
+    private ImageView hourglassImageView;
+    @FXML
+    private ImageView insightImageView;
+    @FXML
+    private ImageView doubleImageView;
 
     @Inject
     public GuessConsumptionCtrl(ServerUtils server, ClientUtils client, MainCtrl mainCtrl, ClientData clientData,
@@ -109,14 +129,19 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
             Question question = clientData.getClientQuestion();
             resetUI(question);
         }
+        hourglassImageView.setImage(new Image("/images/hourglass.png"));
+        insightImageView.setImage(new Image("/images/insight.png"));
+        doubleImageView.setImage(new Image("/images/double.png"));
     }
 
     public void resetUI(Question question)
     {
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
         nQuestionsTxt.setText(clientData.getQuestionCounter() + "/20");
         doublePoints = false;
         jokerUtils.resetJokerUI(halfTimeJoker, doublePointsJoker, eliminateAnswerJoker);
+
+        revealedAnswer = -1;
 
         answer1.setToggleGroup(radioGroup);
         answer2.setToggleGroup(radioGroup);
@@ -126,9 +151,16 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         answer2.setDisable(false);
         answer3.setDisable(false);
 
+        answerOneContainer.getStyleClass().add("image-button");
+        answerTwoContainer.getStyleClass().add("image-button");
+        answerThreeContainer.getStyleClass().add("image-button");
+
         answer1.setStyle(" -fx-background-color: transparent; ");
         answer2.setStyle(" -fx-background-color: transparent; ");
         answer3.setStyle(" -fx-background-color: transparent; ");
+        answerOneContainer.setStyle(" -fx-background-color: white; ");
+        answerTwoContainer.setStyle(" -fx-background-color: white; ");
+        answerThreeContainer.setStyle(" -fx-background-color: white; ");
 
 
         if(answer1.isSelected()) answer1.setSelected(false);
@@ -142,19 +174,21 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         Random random = new Random();
         correctAnswer = random.nextInt(3);
 
+        List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
+
         switch (correctAnswer)
         {
             case 0:
                 //correct answer is first one
-                randomizeFields(answer1,answer2,answer3,question);
+                randomizeFields(answerOneText, answerTwoText, answerThreeText,question);
                 break;
             case 1:
                 //correct answer is second one
-                randomizeFields(answer2,answer1,answer3,question);
+                randomizeFields(answerTwoText,answerOneText,answerThreeText,question);
                 break;
             case 2:
                 //correct answer is third one
-                randomizeFields(answer3,answer1,answer2,question);
+                randomizeFields(answerThreeText,answerOneText,answerTwoText,question);
                 break;
             default:
                 break;
@@ -166,12 +200,13 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         imageView.setImage(image);
     }
 
-    public void randomizeFields(RadioButton a, RadioButton b, RadioButton c, Question question)
+    public void randomizeFields(Label a, Label b, Label c, Question question)
     {
         List<Activity> list = server.getActivitiesFromIDs(question.getFoundActivities());
-        a.setText(String.valueOf(list.get(0).getEnergyConsumption()));
-        b.setText(String.valueOf(list.get(1).getEnergyConsumption()));
-        c.setText(String.valueOf(list.get(2).getEnergyConsumption()));
+
+        a.setText(String.valueOf(list.get(0).getEnergyConsumption()) + " Wh");
+        b.setText(String.valueOf(list.get(1).getEnergyConsumption()) + " Wh");
+        c.setText(String.valueOf(list.get(2).getEnergyConsumption()) + " Wh");
     }
 
     public void disableAnswers(){
@@ -232,27 +267,27 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
                     clientData.setClientScore(clientData.getClientScore() +
                             (int) (pointsToAdd* client.getCoefficient()));
                 }
-                answer1.setStyle(" -fx-background-color: green; ");
-                answer2.setStyle(" -fx-background-color: red; ");
-                answer3.setStyle(" -fx-background-color: red; ");
+                answerOneContainer.setStyle("-fx-background-color: green");
+                answerTwoContainer.setStyle("-fx-background-color: red");
+                answerThreeContainer.setStyle("-fx-background-color: red");
                 break;
             case 1:
                 if(answer2.equals(radioGroup.getSelectedToggle())){
                     clientData.setClientScore(clientData.getClientScore() +
                             (int) (pointsToAdd* client.getCoefficient()));
                 }
-                answer2.setStyle(" -fx-background-color: green; ");
-                answer1.setStyle(" -fx-background-color: red; ");
-                answer3.setStyle(" -fx-background-color: red; ");
+                answerTwoContainer.setStyle("-fx-background-color: green");
+                answerOneContainer.setStyle("-fx-background-color: red");
+                answerThreeContainer.setStyle("-fx-background-color: red");
                 break;
             case 2:
                 if(answer3.equals(radioGroup.getSelectedToggle())){
                     clientData.setClientScore(clientData.getClientScore() +
                             (int) (pointsToAdd* client.getCoefficient()));
                 }
-                answer3.setStyle(" -fx-background-color: green; ");
-                answer1.setStyle(" -fx-background-color: red; ");
-                answer2.setStyle(" -fx-background-color: red; ");
+                answerThreeContainer.setStyle("-fx-background-color: green");
+                answerOneContainer.setStyle("-fx-background-color: red");
+                answerTwoContainer.setStyle("-fx-background-color: red");
                 break;
             default:
                 break;
@@ -263,7 +298,7 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
                 leaveGame();
             }
         }
-        scoreTxt.setText("Score:" + clientData.getClientScore());
+        scoreTxt.setText("Score: " + clientData.getClientScore());
 
         clientData.getClientPlayer().score = clientData.getClientScore();
         server.send("/app/updateScore", new WebsocketMessage(ResponseCodes.SCORE_UPDATED,
@@ -278,23 +313,24 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
     public void eliminateRandomWrongAnswer(){
         if(!clientData.getUsedJokers().contains(JokerType.ELIMINATE_ANSWERS)) {
             clientData.addJoker(JokerType.ELIMINATE_ANSWERS);
-            eliminateAnswerJoker.setFill(rgb(235,235,228));
+            eliminateAnswerJoker.setStyle("-fx-background-color: gray");
             eliminateAnswerJoker.setDisable(true);
             int indexToRemove = new Random().nextInt(3);
             if (indexToRemove == correctAnswer) {
                 indexToRemove++;
             }
+            revealedAnswer = indexToRemove % 3;
             switch (indexToRemove % 3) {
                 case 0:
-                    answer1.setStyle(" -fx-background-color: red; ");
+                    answerOneContainer.setStyle(" -fx-background-color: red; ");
                     System.out.println("Disabled first answer");
                     break;
                 case 1:
-                    answer2.setStyle(" -fx-background-color: red; ");
+                    answerTwoContainer.setStyle(" -fx-background-color: red; ");
                     System.out.println("Disabled second answer");
                     break;
                 case 2:
-                    answer3.setStyle(" -fx-background-color: red; ");
+                    answerThreeContainer.setStyle(" -fx-background-color: red; ");
                     System.out.println("Disabled third answer");
                     break;
             }
@@ -393,7 +429,7 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         if(!clientData.getUsedJokers().contains(JokerType.DOUBLE_POINTS)) {
             doublePoints = true;
             doublePointsJoker.setDisable(true);
-            doublePointsJoker.setFill(rgb(235,235,228));
+            doublePointsJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.DOUBLE_POINTS);
         }
     }
@@ -402,7 +438,7 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
     public void halfTimeForOthers() {
         if(!clientData.getUsedJokers().contains(JokerType.HALF_TIME_FOR_ALL_LOBBY)) {
             halfTimeJoker.setDisable(true);
-            halfTimeJoker.setFill(rgb(235,235,228));
+            halfTimeJoker.setStyle("-fx-background-color: gray");
             clientData.addJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
             System.out.println("Time was halved");
             jokerUtils.setLobbyJoker(JokerType.HALF_TIME_FOR_ALL_LOBBY);
@@ -411,11 +447,36 @@ public class GuessConsumptionCtrl implements JokerPowerUps {
         }
     }
 
-    public Circle getHalfTimeJoker() {
+    public Pane getHalfTimeJoker() {
         return halfTimeJoker;
     }
 
     public Text getHalfTimeText() {
         return halfTimeText;
+    }
+
+    public void answerOneSelected(){
+        answer1.fire();
+        if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: gray");
+        if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: white");
+    }
+
+    public void answerTwoSelected(){
+        answer2.fire();
+        if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: gray");
+        if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: white");
+    }
+
+    public void answerThreeSelected(){
+        answer3.fire();
+        if(revealedAnswer != 0) answerOneContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 1) answerTwoContainer.setStyle("-fx-background-color: white");
+        if(revealedAnswer != 2) answerThreeContainer.setStyle("-fx-background-color: gray");
+    }
+
+    public Pane getCommTab() {
+        return commTab;
     }
 }

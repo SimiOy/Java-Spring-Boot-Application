@@ -148,7 +148,7 @@ public class LobbyController {
         if(lobby.getToken().equals("COMMON")) {
             lobby.setToken(RandomStringUtils.randomAlphabetic(5));
             repository.save(lobby);
-            repository.save(new Lobby(message.getLobbyToken()));
+            repository.save(new Lobby(message.getLobbyToken(), false));
         }
             return new WebsocketMessage(ResponseCodes.START_GAME, message.getLobbyToken(), lobby.getToken());
     }
@@ -167,6 +167,7 @@ public class LobbyController {
             Lobby lobbyToTerminate = found.get();
             lobbyToTerminate.setIsStarted(false);
             questionProvider.clearAllQuestionsFromLobby(lobbyToTerminate.getToken());
+            questionProvider.clearAllActivitiesFromLobby(lobbyToTerminate.getToken());
             repository.save(lobbyToTerminate);
         }
         return new WebsocketMessage(ResponseCodes.END_GAME, message.getLobbyToken());
@@ -207,6 +208,12 @@ public class LobbyController {
             }
 
             repository.save(currentLobby);
+
+            //kill redundant lobby
+            if(message.getKillLobby() && currentLobby.getPlayersInLobby().size() == 0) {
+                System.out.println("Deleting lobby with: " + currentLobby.getToken());
+                deleteLobby(currentLobby.id);
+            }
         }
 
         return new WebsocketMessage(ResponseCodes.LEAVE_LOBBY, message.getLobbyToken());

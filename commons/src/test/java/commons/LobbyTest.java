@@ -16,7 +16,7 @@ public class LobbyTest {
 
     @BeforeEach
     private void createLobby(){
-        lobby = new Lobby("arda");
+        lobby = new Lobby("arda", false);
         lobby1 = new Lobby("someToken", 1);
         lobby2 = new Lobby();
         player = new Player("arda");

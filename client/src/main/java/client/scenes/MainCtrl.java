@@ -98,6 +98,9 @@ public class MainCtrl extends Application {
     private EditQuestionsCtrl editQuestionsCtrl;
     private Scene editQuestion;
 
+    private AddActivityCtrl addActivityCtrl;
+    private Scene addActivity;
+
     private Stage incorrectUsernamePopUp;
 
     private Stage kickPopUp;
@@ -126,7 +129,9 @@ public class MainCtrl extends Application {
                            Pair<ActivityAdminCtrl, Parent> activityAdmin,
                            Pair<QuestionAdminCtrl, Parent> questionAdmin,
                            Pair<EditQuestionsCtrl, Parent> editQuestion,
+                           Pair<AddActivityCtrl, Parent> addActivity,
                            Pair<JokerPopUpCtrl, Parent> jokerPopUpCtrlParentPair) {
+
         this.primaryStage = primaryStage;
 
 
@@ -184,8 +189,12 @@ public class MainCtrl extends Application {
         this.editQuestionsCtrl = editQuestion.getKey();
         this.editQuestion = new Scene(editQuestion.getValue());
 
+        this.addActivityCtrl = addActivity.getKey();
+        this.addActivity = new Scene(addActivity.getValue());
+
         this.jokerPopUpCtrl = jokerPopUpCtrlParentPair.getKey();
         this.jokerPopUp = new Scene(jokerPopUpCtrlParentPair.getValue());
+
 
         primaryStage.setOnCloseRequest(e -> {
             if(client.isInLobby()){
@@ -248,6 +257,13 @@ public class MainCtrl extends Application {
         editActivitiesCtrl.load(act);
     }
 
+    public void showAddActivity(){
+        client.setCurrentSceneCtrl(activityAdminCtrl);
+        primaryStage.setTitle("AddActivityScreen");
+        primaryStage.setScene(addActivity);
+        addActivityCtrl.load();
+    }
+
     public void showAdminHome(){
         client.setCurrentSceneCtrl(adminHomeCtrl);
         primaryStage.setTitle("AdminHomeScreen");
@@ -298,13 +314,14 @@ public class MainCtrl extends Application {
 
     public void showGameOver(){
         client.setCurrentSceneCtrl(gameOverCtrl);
+        gameOverCtrl.load();
         primaryStage.setTitle("GameOver");
         primaryStage.setScene(gameOver);
-        gameOverCtrl.load();
     }
 
     public void showMultiplayerMenu(){
         client.setCurrentSceneCtrl(multiplayerMenuCtrl);
+        multiplayerMenuCtrl.load();
         primaryStage.setTitle("MultiplayerMenu");
         primaryStage.setScene(multiplayerMenu);
     }

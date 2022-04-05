@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DeleteDatabaseEntries {
+public class
+DeleteDatabaseEntries {
 
     /**
      * wipes all databases that don't need to be persistent

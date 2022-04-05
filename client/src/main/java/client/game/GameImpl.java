@@ -28,6 +28,9 @@ public class GameImpl implements Game{
     private final Emotes emotes;
     private final JokerUtils jokerUtils;
 
+    private Thread singleplayerThread;
+    private Thread multiplayerThread;
+
     private final String COMMON_CODE = "COMMON";
     private Integer questionsToEndGame = 20;
     private Integer questionsToDisplayLeaderboard = 10;
@@ -54,7 +57,7 @@ public class GameImpl implements Game{
 
         if(lobbies.size() == 0)
         {
-            Lobby mainLobby = new Lobby(COMMON_CODE);
+            Lobby mainLobby = new Lobby(COMMON_CODE, false);
             server.addLobby(mainLobby);
         }
         else
@@ -68,7 +71,7 @@ public class GameImpl implements Game{
 
             if(!commonLobbyExists)
             {
-                Lobby mainLobby = new Lobby(COMMON_CODE);
+                Lobby mainLobby = new Lobby(COMMON_CODE, false);
                 server.addLobby(mainLobby);
             }
         }
@@ -86,7 +89,6 @@ public class GameImpl implements Game{
         clientData.setAsHost(true);
 
         joinPrivateLobby(newLobby.getToken());
-
     }
 
     public boolean joinPrivateLobby(String token)
@@ -103,9 +105,8 @@ public class GameImpl implements Game{
                             clientData.getClientPlayer().getAvatarCode() +
                             RandomStringUtils.randomAlphabetic(5);
 
-        Lobby mainLobby = new Lobby(lobbyCode);
+        Lobby mainLobby = new Lobby(lobbyCode, true);
         server.addLobby(mainLobby);
-        clientData.setLobby(mainLobby);
         clientData.setPointer(clientData.getClientPlayer().getId());
         clientData.setClientScore(0);
         clientData.setQuestionCounter(0);
@@ -114,11 +115,12 @@ public class GameImpl implements Game{
         clientData.setAsHost(true);
         clientData.setGameType(GameType.SINGLEPLAYER);
         client.swapEmoteJokerUsability(true);
+        clientData.setLobby(mainLobby);
         server.addMeToLobby(clientData.getClientLobby().getToken(),clientData.getClientPlayer());
         jokerUtils.registerForJokerUpdates();
 
         //add delay until game starts
-        Thread thread = new Thread(new Runnable() {
+        singleplayerThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -126,7 +128,7 @@ public class GameImpl implements Game{
 
                     server.send("/app/nextQuestion",
                             new WebsocketMessage(ResponseCodes.NEXT_QUESTION,
-                                    clientData.getClientLobby().getToken(), clientData.getClientPointer()));
+                                    mainLobby.getToken(), clientData.getClientPointer()));
 
                     client.startSyncCountdown();
                     Thread.sleep(3000);
@@ -139,7 +141,7 @@ public class GameImpl implements Game{
                 }
             }
         });
-        thread.start();
+        singleplayerThread.start();
     }
 
     /**
@@ -184,7 +186,7 @@ public class GameImpl implements Game{
         clientData.setGameType(GameType.MULTIPLAYER);
         client.swapEmoteJokerUsability(false);
         //add delay until game starts
-        Thread thread = new Thread(new Runnable() {
+        multiplayerThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -199,7 +201,7 @@ public class GameImpl implements Game{
                 }
             }
         });
-        thread.start();
+        multiplayerThread.start();
     }
 
     /**
@@ -229,7 +231,7 @@ public class GameImpl implements Game{
         //kill ongoing timers
         client.killTimer();
         server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
-                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost()));
+                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(), true));
 
         //no more server polling for this client
         client.unsubscribeFromMessages();
@@ -261,6 +263,7 @@ public class GameImpl implements Game{
         client.unsubscribeFromMessages();
         client.killTimer();
         client.resetMessages();
+        killGameThreads();
         //uses the current lobby to load images, scores and names for the players
         mainCtrl.showGameOver();
         //only done after loading the leaderboard, because it's still needed there to determine which one to display
@@ -283,5 +286,41 @@ public class GameImpl implements Game{
 
     public void setQuestionsToDisplayLeaderboard(Integer questionsToDisplayLeaderboard) {
         this.questionsToDisplayLeaderboard = questionsToDisplayLeaderboard;
+    }
+
+    /**
+     * There's three cases:
+     * 1) Lobby was singleplayer, in which case start again
+     * 2) Lobby was a common lobby, in which case queue up the player in a common lobby
+     * with the same players of the old one
+     * 3) Lobby was a private lobby, in which case queue up the player in a private lobby
+     * with the same players of the old one
+     * TODO: figure out how to reset multiplayer lobbies
+     * @param lobby
+     */
+    public void restartLobby(Lobby lobby) {
+        client.registerQuestionCommunication();
+        client.registerLobbyCommunication();
+        client.registerMessageCommunication();
+        if(lobby.getSingleplayer()){
+            startSinglePlayer();
+        }else{
+            if(lobby.getPublic()){
+                instantiateCommonLobby();
+                joinPublicLobby();
+            }else{
+                joinPrivateLobby(lobby.getToken());
+            }
+        }
+    }
+
+    @Override
+    public void killGameThreads() {
+        if(singleplayerThread != null){
+            singleplayerThread.interrupt();
+        }
+        if(multiplayerThread != null){
+            multiplayerThread.interrupt();
+        }
     }
 }

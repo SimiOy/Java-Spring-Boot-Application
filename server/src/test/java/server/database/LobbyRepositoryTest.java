@@ -26,7 +26,7 @@ class LobbyRepositoryTest {
     @BeforeEach
     void initUseCase() {
         List<Lobby> lobbies = Arrays.asList(
-                new Lobby("PUBLIC"), new Lobby("PRIVATE", 0)
+                new Lobby("PUBLIC", false), new Lobby("PRIVATE", 0)
         );
         lobbyRepository.saveAll(lobbies);
     }

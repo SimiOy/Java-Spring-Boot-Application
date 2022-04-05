@@ -3,6 +3,7 @@ package client.scenes;
 import client.avatar.AvatarSupplier;
 import client.data.ClientData;
 import client.game.Game;
+import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
 import com.talanlabs.avatargenerator.Avatar;
@@ -37,6 +38,7 @@ import java.util.concurrent.Executors;
 
 public class GameOverCtrl {
 
+    private final ClientUtils client;
     private final ServerUtils server;
     private final MainCtrl mainCtrl;
     private final ClientData clientData;
@@ -58,52 +60,83 @@ public class GameOverCtrl {
     private TableColumn<Player, Integer> scoreColumn;
 
     @Inject
-    public GameOverCtrl(ServerUtils server, MainCtrl mainCtrl, ClientData clientData, Game game) {
+    public GameOverCtrl(ServerUtils server, MainCtrl mainCtrl, ClientData clientData, Game game, ClientUtils client) {
         this.mainCtrl = mainCtrl;
         this.server = server;
         this.clientData = clientData;
         this.game = game;
+        this.client = client;
     }
 
+    /**
+     * If the game was a public multiplayer or single-player we delete the previous lobby and join a new one
+     * There is no need to recycle the lobby.
+     * If the game is a private multiplayer lobby then we must recycle the lobby so that the lobby code is the same
+     */
     public void playAgain() {
-        mainCtrl.showGameModeSelection();
+        thread.interrupt();
+        if(clientData.getLastLobby().getSingleplayer() || clientData.getLastLobby().getPublic()) {
+            System.out.println("Attempting to restart public/single-player lobby");
+            //kill ongoing timers
+            client.killTimer();
+
+            if(clientData.getLastLobby().getSingleplayer()){
+                server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                        clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
+                        true));
+            }else{
+                server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                        clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
+                        false));
+            }
+
+
+            //no more server polling for this client
+            client.unsubscribeFromMessages();
+
+            client.resetMessages();
+
+            clientData.clearUnansweredQuestionCounter();
+
+            System.out.println("Left the lobby");
+
+            clientData.setAsHost(false);
+        }else{
+            System.out.println("Attempting to restart private lobby");
+            game.endGame();
+            server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
+                    clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost(),
+                    false));
+            client.killTimer();
+            client.resetMessages();
+            clientData.setClientScore(0);
+            clientData.setQuestionCounter(0);
+            clientData.clearUnansweredQuestionCounter();
+            mainCtrl.showWaiting();
+        }
+        game.restartLobby(clientData.getLastLobby());
+        System.out.println("Restarted the game!");
     }
 
     public void leaveGame() {
         thread.interrupt();
-        mainCtrl.showGameModeSelection();
-        //even though the remove player from lobby is called twice,
-        // it won't cause any changes if the player was already removed from the lobby
-        //this has to happen if the player decides to leave before the 2 seconds
-        //until calling the remove method are up
-        removePlayerFromLobby();
+        game.leaveLobby();
     }
 
     public void load() {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    //give time for all clients to poll the server to update their leaderboard
-                    loadLeaderboard();
-                    //then remove the player
-                    //without this sleepthe client that connects last will be
-                    // missing information on the final table
-                    Thread.sleep(2000);
-                    removePlayerFromLobby();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                //give time for all clients to poll the server to update their leaderboard
+                loadLeaderboard();
+                //then remove the player
+                //without this sleepthe client that connects last will be
+                // missing information on the final table
+//                    Thread.sleep(2000);
+//                    removePlayerFromLobby();
             }
         });
         thread.start();
-    }
-
-    private void removePlayerFromLobby()
-    {
-        server.send("/app/leaveLobby", new WebsocketMessage(ResponseCodes.LEAVE_LOBBY,
-                clientData.getClientLobby().getToken(), clientData.getClientPlayer(), clientData.getIsHost()));
-        System.out.println("Left the lobby");
     }
 
     private void loadLeaderboard()

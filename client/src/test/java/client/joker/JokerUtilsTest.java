@@ -35,7 +35,7 @@ class JokerUtilsTest {
      * for the ClientData class
      */
     private void defineMethodsForClientData() {
-        when(clientData.getClientLobby()).thenReturn(new Lobby("LOBBY"));
+        when(clientData.getClientLobby()).thenReturn(new Lobby("LOBBY", false));
         when(clientData.getClientPlayer()).thenReturn(new Player("PLAYER"));
     }
 

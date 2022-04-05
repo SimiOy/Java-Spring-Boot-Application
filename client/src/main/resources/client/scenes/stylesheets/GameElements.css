@@ -1,0 +1,17 @@
+.roundedEdge{
+    -fx-padding:5px 10px;
+    -fx-margin: 5px 0;
+    -fx-border:5px 5px;
+    -fx-border-radius: 3px;
+    -fx-text-fill: #000000;
+    -fx-background-color: #fff;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+}
+
+.shadow{
+    -fx-translate-y: -2;
+    -fx-background-insets: 20 10 15 80;
+    -fx-background-color: -fx-app-background;
+    -fx-effect: dropshadow(three-pass-box, grey, 10, 0, 0, 15);
+}
