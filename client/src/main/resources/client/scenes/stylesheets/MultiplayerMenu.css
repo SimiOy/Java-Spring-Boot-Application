@@ -44,7 +44,7 @@
 
 .tab-header-area .tab{
     -fx-background-radius: 20 20 20 20;
-    -fx-background-color: #000;
+    -fx-background-color: #605f5f;
 }
 
 .tab-header-area .tab-label{
@@ -53,7 +53,7 @@
 }
 
 .tab-header-area .tab:selected {
-    -fx-background-color: #605f5f;
+    -fx-background-color: #000;
 }
 
 .tab-header-background {
