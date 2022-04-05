@@ -40,6 +40,7 @@
 
 .table-view {
     -fx-background-color: transparent;
+    -fx-text-fill: #fff;
 }
 
 .table-view .filler{
@@ -48,13 +49,17 @@
 }
 
 .table-view .column-header-background {
-    -fx-background-color: linear-gradient(to bottom, #00a6d6, #00cdff);
     -fx-background-radius: 10px 10px 0px 0px;
+    -fx-background-color: #727171;
 
 }
 
-.table-view .column-header{
+.table-view .column-header .label{
+    -fx-text-fill: #fff;
+    -fx-font-size: 25px;
+}
 
+.table-view .column-header{
     -fx-background-color: transparent;
 }
 
@@ -65,14 +70,17 @@
 }
 
 .table-row-cell:hover {
-    -fx-background-color: rgba(0, 255, 94, 0.07);
+    -fx-background-color: #727171;
     -fx-text-background-color: red;
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
 }
 
 .table-row-cell:odd {
     -fx-background-color: rgb(50, 52, 50);
     -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em;
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
 }
 
 .table-row-cell{
