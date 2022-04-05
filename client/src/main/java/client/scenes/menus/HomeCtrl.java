@@ -184,4 +184,8 @@ public class HomeCtrl {
     public void decrementSeed(){
         avatarGenerator.decrementSeed();
     }
+
+    public void jokersPopup(){
+        mainCtrl.showJokerInfo();
+    }
 }

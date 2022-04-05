@@ -97,6 +97,7 @@ public class MainCtrl extends Application {
 
     private JokerPopUpCtrl jokerPopUpCtrl;
     private Scene jokerPopUp;
+    private Stage jokerPopUpStage;
 
     @Inject
     private ClientUtils client;
@@ -174,6 +175,7 @@ public class MainCtrl extends Application {
 
         this.jokerPopUpCtrl = jokerPopUpCtrlParentPair.getKey();
         this.jokerPopUp = new Scene(jokerPopUpCtrlParentPair.getValue());
+        this.jokerPopUpCtrl.load();
 
 
         primaryStage.setOnCloseRequest(e -> {
@@ -269,6 +271,18 @@ public class MainCtrl extends Application {
         primaryStage.setTitle("GameModeSelection");
         primaryStage.setScene(gameModeSelection);
         gameModeSelectionCtrl.load();
+    }
+
+    public void showJokerInfo(){
+        jokerPopUpStage = new Stage();
+        jokerPopUpStage.setScene(jokerPopUp);
+        jokerPopUpStage.setTitle("Joker Info");
+        jokerPopUpStage.initModality(Modality.APPLICATION_MODAL);
+        jokerPopUpStage.showAndWait();
+    }
+
+    public void closeJokerInfo(){
+        jokerPopUpStage.close();
     }
 
     public void showGameOver(){

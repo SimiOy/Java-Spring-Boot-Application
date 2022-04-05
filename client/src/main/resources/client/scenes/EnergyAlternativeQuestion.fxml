@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.questions.EnergyAlternativeQuestionCtrl">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.questions.EnergyAlternativeQuestionCtrl">
    <children>
       <Pane layoutX="564.0" layoutY="126.0" prefHeight="146.0" prefWidth="190.0" style="-fx-background-color: ffffff;" styleClass="roundedEdge">
          <children>

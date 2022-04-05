@@ -25,6 +25,7 @@ import client.game.Game;
 import client.game.GameImpl;
 import client.joker.JokerUtils;
 import client.scenes.GameOverCtrl;
+import client.scenes.JokerPopUpCtrl;
 import client.scenes.MainCtrl;
 import client.scenes.leaderboards.LeaderboardCtrl;
 import client.scenes.leaderboards.TempLeaderboardCtrl;
@@ -61,6 +62,7 @@ public class MyModule implements Module {
         binder.bind(EnergyAlternativeQuestionCtrl.class).in(Scopes.SINGLETON);
         binder.bind(JokerUtils.class).in(Scopes.SINGLETON);
         binder.bind(GuessConsumptionCtrl.class).in(Scopes.SINGLETON);
+        binder.bind(JokerPopUpCtrl.class).in(Scopes.SINGLETON);
 
         // Binding interfaces to concrete implementations
         binder.bind(ClientUtils.class).to(ClientUtilsImpl.class).in(Scopes.SINGLETON);
