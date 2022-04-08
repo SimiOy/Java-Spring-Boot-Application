@@ -26,9 +26,11 @@ This part will walk you through setting up the project. This set-up was performe
 
 0. Make sure you have added JavaFX to the project configurations.
 1. Download the oopp-activities-bank zip from the activity bank on GitLab. Unzip it and copy the json file at the bottom of the map, then add it under 'server/src/main/resources'.
-   It should now look like this: ![img.png](img.png)
+   It should now look like this: 
+![img.png](img.png)
 2. Now create a new directory at the same path named 'activitiesImages'. Copy into that directory the other folders contained in the activity bank map, these
-   are numbered 00 - 78. This should be the result: ![img_1.png](img_1.png)
+   are numbered 00 - 78. This should be the result: 
+![img_1.png](img_1.png)
 3. Last step: Create a new directory under 'client/src/main/resources/images' named 'avatar'.
 4. Now you should be good to go! Run the server and then the client, and the project should work! Try it yourself by running the following commands:
    - './gradlew bootRun' to run the server
