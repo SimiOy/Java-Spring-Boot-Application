@@ -27,6 +27,7 @@ public class Activity {
     private String title;
     @JsonProperty("consumption_in_wh")
     private Long energyConsumption;
+    @Column(length = 1000)
     private String source;
 
     public Activity() {

@@ -6,6 +6,8 @@ Add your own name (do not add the names for others!) to the section below.
 
 ## Description of project
 
+Play a quiz game about energy that will hopefully raise your energy awareness!
+
 ## Group members
 
 | Profile Picture                                                                                         | Name                    | Email                           |
@@ -19,6 +21,15 @@ Add your own name (do not add the names for others!) to the section below.
 
 
 ## How to run it
+
+This part will walk you through setting up the project. This set-up was performed on a Windows computer. 
+
+0. Make sure you have added JavaFX to the project configurations.
+1. Download the oopp-activities-bank zip from the activity bank on GitLab. Unzip it and copy the json file at the bottom of the map, then add it under 'server/main/resources'.
+   It should now look like this: ![img.png](img.png)
+2. Now create a new directory at the same path named 'activitiesImages'. Copy into that directory the other folders contained in the activity bank map, these
+   are numbered 00 - 78. This should be the result: ![img_1.png](img_1.png)
+3. Now you should be good to go! Run the server and then the client, and the project should work!
 
 ## How to contribute to it
 
