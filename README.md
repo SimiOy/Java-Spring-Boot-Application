@@ -39,3 +39,4 @@ This part will walk you through setting up the project. This set-up was performe
 ## How to contribute to it
 
 ## Copyright / License (opt.)
+   Project Done at TuDelft during the OOPP Course of the first year of the Computer Science Bachelor Programme
